@@ -156,7 +156,7 @@ const AboutPage = () => {
             {/* Hero Section with Typing Animation */}
             <div
                 ref={heroRef}
-                className={`relative overflow-hidden w-[80vw] h-[80vh] md:w-auto mx-auto my-20 shadow-lg shadow-blue-600/20 bg-blue-600/10 rounded-lg transform transition-all duration-1000 ${
+                className={`relative overflow-hidden w-[80vw] h-[70vh] flex flex-col justify-center items-center md:w-auto mx-auto my-20 shadow-lg shadow-blue-600/20 bg-blue-600/10 rounded-lg transform transition-all duration-1000 ${
                     showContent && heroInView
                         ? "translate-y-0 opacity-100"
                         : "translate-y-10 opacity-0"
