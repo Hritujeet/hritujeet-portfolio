@@ -249,7 +249,7 @@ const AboutPage = () => {
                                         : "translate-x-[-30px] opacity-0"
                                 }`}
                             >
-                                Through Dev Diaries, I share the real,
+                                Through this platform, I share the real,
                                 unfiltered experience of being a developer - the
                                 victories, the failures, the late-night
                                 debugging sessions, and those magical moments
