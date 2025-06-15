@@ -1,0 +1,99 @@
+.skeleton-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.skeleton {
+    background-color: #1a2230; /* Dark blue base */
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+            90deg,
+            rgba(20, 100, 200, 0) 0%,
+            rgba(40, 150, 255, 0.15) 50%,
+            rgba(20, 100, 200, 0) 100%
+    );
+    animation: shimmer 1.8s infinite;
+}
+
+/* Different skeleton types */
+.skeleton.circle {
+    border-radius: 50%;
+}
+
+.skeleton.text {
+    height: 12px;
+}
+
+.skeleton.title {
+    height: 24px;
+}
+
+.skeleton.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Blue variants optimized for dark theme */
+.skeleton.blue-dark {
+    background-color: #0f172a;
+}
+
+.skeleton.blue-dark::after {
+    background: linear-gradient(
+            90deg,
+            rgba(30, 100, 200, 0) 0%,
+            rgba(56, 132, 255, 0.2) 50%,
+            rgba(30, 100, 200, 0) 100%
+    );
+}
+
+.skeleton.blue-accent {
+    background-color: #1e293b;
+}
+
+.skeleton.blue-accent::after {
+    background: linear-gradient(
+            90deg,
+            rgba(14, 165, 233, 0) 0%,
+            rgba(14, 165, 233, 0.25) 50%,
+            rgba(14, 165, 233, 0) 100%
+    );
+    animation-duration: 2s;
+}
+
+/* Subtle blue for less prominent loading */
+.skeleton.blue-subtle {
+    background-color: #1a2230;
+}
+
+.skeleton.blue-subtle::after {
+    background: linear-gradient(
+            90deg,
+            rgba(100, 200, 255, 0) 0%,
+            rgba(100, 200, 255, 0.1) 50%,
+            rgba(100, 200, 255, 0) 100%
+    );
+}
