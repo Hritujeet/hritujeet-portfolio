@@ -43,7 +43,7 @@ const Navbar = () => {
             </nav>
             {/* Ham Burger */}
             <button
-                className="burger block md:hidden cursor-pointer py-1 px-3 rounded-md text-sm border border-blue-800/40 hover:bg-blue-800/60 duration-150"
+                className="burger block md:hidden cursor-pointer py-1 px-3 rounded-md text-sm border border-blue-800/40 hover:bg-blue-800/60 duration-150 z-50"
                 onClick={() => {
                     setisOpen(!isOpen);
                 }}
@@ -54,7 +54,7 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div
                 className={`right md:hidden ${
-                    isOpen ? "translate-0" : "-translate-x-full"
+                    isOpen ? "translate-0 overflow-hidden" : "-translate-x-full overflow-y"
                 } transition-all block absolute top-0 left-0 w-screen h-screen bg-gray-950`}
             >
                 <ul className="flex flex-col gap-4 justify-center items-center h-full w-full">
