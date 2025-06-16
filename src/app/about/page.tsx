@@ -156,7 +156,7 @@ const AboutPage = () => {
             {/* Hero Section with Typing Animation */}
             <div
                 ref={heroRef}
-                className={`relative overflow-hidden w-[80vw] mx-auto my-20 shadow-lg shadow-blue-600/20 bg-blue-600/10 rounded-lg transform transition-all duration-1000 ${
+                className={`relative overflow-hidden w-[80vw] h-[70vh] flex flex-col justify-center items-center md:w-auto mx-auto my-20 shadow-lg shadow-blue-600/20 bg-blue-600/10 rounded-lg transform transition-all duration-1000 ${
                     showContent && heroInView
                         ? "translate-y-0 opacity-100"
                         : "translate-y-10 opacity-0"
@@ -249,7 +249,7 @@ const AboutPage = () => {
                                         : "translate-x-[-30px] opacity-0"
                                 }`}
                             >
-                                Through Dev Diaries, I share the real,
+                                Through this platform, I share the real,
                                 unfiltered experience of being a developer - the
                                 victories, the failures, the late-night
                                 debugging sessions, and those magical moments

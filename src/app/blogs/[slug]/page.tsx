@@ -5,7 +5,7 @@ import React from 'react'
 const page = async ({params}: { params: { slug: string } }) => {
     const {slug} = await params
     return (
-        <div className='md:w-[70vw] lg:w-[60vw] xl:w-[50vw] sm:w-[80vw] w-[85vw] mx-auto'>
+        <div className='md:w-[75vw] lg:w-[65vw] xl:w-[55vw] sm:w-[85vw] w-[90vw] mx-auto'>
             <BlogPostSection slug={slug}/>
         </div>
     )

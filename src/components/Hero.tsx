@@ -29,7 +29,7 @@ const Hero = () => {
                     ease: [0.25, 0.46, 0.45, 0.94]
                 }}
             >
-                <h1 className="text-6xl md:text-7xl font-bold md:w-2/3 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-blue-300 pb-6">
+                <h1 className="text-4xl md:text-5xl font-bold md:w-2/3 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-blue-300 pb-6">
                     Building a bridge between ideas and{" "}
                     <motion.span 
                         className="text-blue-500"
@@ -48,7 +48,7 @@ const Hero = () => {
 
             {/* Description paragraph with fade up */}
             <motion.p 
-                className="md:w-2/3 text-base md:text-lg text-gray-400 leading-relaxed text"
+                className="md:w-2/3 text-sm md:text-base text-gray-400 leading-relaxed text"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 

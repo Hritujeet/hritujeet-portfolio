@@ -89,12 +89,12 @@ const BlogPostSection = ({slug}: { slug: string }) => {
                     width={1920}
                     height={600}
                     alt={post.title}
-                    className='w-full h-[50vh] md:h-[60vh] object-cover'
+                    className='w-full h-[70vh] md:h-[60vh] object-cover'
                 />
 
                 {/* Hero Content Overlay */}
                 <div className="absolute inset-0 z-20 flex items-end">
-                    <div className="max-w-4xl mx-auto px-4 pb-12 w-full">
+                    <div className="max-w-4xl mx-auto px-4 pb-12 w-full h-fit">
                         <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50">
                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                 <span
@@ -115,11 +115,11 @@ const BlogPostSection = ({slug}: { slug: string }) => {
                                 </span>
                             </div>
 
-                            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                                 {post.title}
                             </h1>
 
-                            <p className="text-slate-300 text-lg md:text-xl leading-relaxed">
+                            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
                                 {post.description}
                             </p>
                         </div>
