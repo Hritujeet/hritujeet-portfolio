@@ -54,7 +54,7 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div
                 className={`right md:hidden ${
-                    isOpen ? "translate-0 overflow-hidden" : "-translate-x-full overflow-y"
+                    isOpen ? "translate-0 overflow-hidden fixed" : "-translate-x-full overflow-y absolute"
                 } transition-all block absolute top-0 left-0 w-screen h-screen bg-gray-950`}
             >
                 <ul className="flex flex-col gap-4 justify-center items-center h-full w-full">
