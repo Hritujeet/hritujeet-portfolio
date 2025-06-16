@@ -119,7 +119,7 @@ const BlogPostSection = ({slug}: { slug: string }) => {
                                 {post.title}
                             </h1>
 
-                            <p className="text-slate-300 text-base md:text-lg leading-relaxed">
+                            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
                                 {post.description}
                             </p>
                         </div>
