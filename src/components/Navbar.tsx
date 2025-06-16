@@ -7,7 +7,7 @@ const Navbar = () => {
     const [isOpen, setisOpen] = useState(false);
     return (
         <header
-            className="flex drop-shadow-xl shadow-blue-400/40 backdrop-blur-lg justify-between items-center px-10 py-2 h-16 bg-transparent md:sticky md:top-0 text-gray-300 relative font-semibold z-50"
+            className="flex drop-shadow-xl shadow-blue-400/40 backdrop-blur-lg justify-between items-center px-10 py-2 h-14 bg-transparent md:sticky md:top-0 text-gray-300 relative font-semibold z-50"
             role="navigation"
         >
             <Link

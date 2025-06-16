@@ -31,7 +31,7 @@ const BlogItem = (props: Props) => {
         <div className="relative z-10 p-4 space-y-6">
             <div className="header relative overflow-hidden rounded-xl">
                 <Image 
-                    src={img}
+                    src={img.trimEnd()}
                     alt='blog-image' 
                     width={1000} 
                     height={1000} 
