@@ -10,7 +10,10 @@ const Navbar = () => {
             className="flex drop-shadow-xl shadow-blue-400/40 backdrop-blur-lg justify-between items-center px-10 py-2 h-16 bg-transparent md:sticky md:top-0 text-gray-300 relative font-semibold z-50"
             role="navigation"
         >
-            <Link href={"/"} className="left text-2xl md:text-3xl text-gray-300 font-bold">
+            <Link
+                href={"/"}
+                className="left text-2xl md:text-3xl text-gray-300 font-bold"
+            >
                 Hritujeet
             </Link>
             {/* Desktop Menu */}
@@ -54,13 +57,10 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div
                 className={`right md:hidden ${
-<<<<<<< HEAD
-                    isOpen ? "translate-0 overflow-hidden fixed" : "-translate-x-full overflow-y absolute"
+                    isOpen
+                        ? "translate-0 overflow-hidden fixed"
+                        : "-translate-x-full overflow-y absolute"
                 } transition-all block absolute top-0 left-0 w-screen h-screen bg-gray-950`}
-=======
-                    isOpen ? "translate-0 overflow-hidden" : "-translate-x-full overflow-y"
-                } transition-all block absolute top-0 left-0 right-0 bottom-0 w-screen h-screen bg-gray-950`}
->>>>>>> c42d4088dc3393e66e497242ba434f688c50f1e0
             >
                 <ul className="flex flex-col gap-4 justify-center items-center h-full w-full">
                     <li className="mb-6">
