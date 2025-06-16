@@ -55,7 +55,7 @@ const Navbar = () => {
             <div
                 className={`right md:hidden ${
                     isOpen ? "translate-0 overflow-hidden" : "-translate-x-full overflow-y"
-                } transition-all block absolute top-0 left-0 w-screen h-screen bg-gray-950`}
+                } transition-all block absolute top-0 left-0 right-0 bottom-0 w-screen h-screen bg-gray-950`}
             >
                 <ul className="flex flex-col gap-4 justify-center items-center h-full w-full">
                     <li className="mb-6">
