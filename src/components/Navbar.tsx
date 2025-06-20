@@ -1,4 +1,5 @@
 "use client";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
@@ -46,33 +47,23 @@ const Navbar = () => {
             </nav>
             {/* Ham Burger */}
             <button
-                className="burger block md:hidden cursor-pointer py-1 px-3 rounded-md text-sm border border-blue-800/40 hover:bg-blue-800/60 duration-150 z-50"
+                className={`burger block md:hidden cursor-pointer py-1 px-2 rounded-md text-sm border border-blue-800/40 hover:bg-blue-800/60 duration-150 z-50`}
                 onClick={() => {
                     setisOpen(!isOpen);
                 }}
             >
-                Menu
+                {isOpen ? <X /> : <Menu />}
             </button>
 
             {/* Mobile Menu */}
             <div
                 className={`right md:hidden ${
                     isOpen
-                        ? "translate-0 overflow-hidden fixed"
-                        : "-translate-x-full overflow-y absolute"
-                } transition-all block absolute top-0 left-0 w-screen h-screen bg-gray-950`}
+                        ? "translate-0 overflow-hidden"
+                        : "-translate-x-full overflow-y"
+                } transition-all top-0 fixed left-0 bottom-0 w-screen h-screen bg-gray-950`}
             >
                 <ul className="flex flex-col gap-4 justify-center items-center h-full w-full">
-                    <li className="mb-6">
-                        <button
-                            className="burger cursor-pointer py-1 px-3 rounded-md text-sm border border-blue-800/40 hover:bg-blue-800/60 hover:border-blue-800 duration-150"
-                            onClick={() => {
-                                setisOpen(!isOpen);
-                            }}
-                        >
-                            Close
-                        </button>
-                    </li>
                     <li className="hover:text-gray-300 duration-150">
                         <Link onClick={() => setisOpen(!open)} href={"/"}>
                             Home
