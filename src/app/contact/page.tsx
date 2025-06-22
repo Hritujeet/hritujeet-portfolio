@@ -1,5 +1,6 @@
 import React from "react";
 import {Mail, Phone, Github, Linkedin, Instagram, Twitter} from "lucide-react";
+import { Metadata } from "next";
 
 const page = () => {
     return (
@@ -92,5 +93,9 @@ const page = () => {
         </div>
     );
 };
-
+export const metadata: Metadata = {
+    title: "Contact | Hritujeet",
+    description: "Hey, there! I am Hritujeet, a web dev enthusiast as a teenage developer. I love to build things and share my knowledge with the world. Get in Touch with me for any queries or collaborations.",
+    keywords: "contact, web development, programming, blogs, tech trends, developer community, insights, Hritujeet Sharma, teenage developer, coding enthusiast, web dev, Next.js, React, JavaScript, tech blogs, software development, coding tutorials, personal blog, tech enthusiast, coding community, web design, frontend development, backend development, full-stack development, open source, tech education, coding resources, developer portfolio",
+};
 export default page;

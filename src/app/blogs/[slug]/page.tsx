@@ -12,6 +12,7 @@ const page = async ({params}: { params: { slug: string } }) => {
 }
 export const metadata: Metadata = {
     title: "Read Blogs | Hritujeet",
-    description: "Read blogs about web development, programming, and more."
+    description: "Read blogs about web development, programming, and more. Stay updated with the latest trends and insights in the tech world. Join our community of developers and enthusiasts.",
+    keywords: "react, nextjs, javascript, web development, programming, blogs, tech trends, developer community, insights",
 };
 export default page
