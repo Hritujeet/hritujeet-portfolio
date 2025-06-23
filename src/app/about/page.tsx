@@ -193,7 +193,7 @@ const AboutPage = () => {
                         }`}
                     >
                         <Link
-                            href={"/blogs/this-is-a-blog"}
+                            href={"/blogs"}
                             className="group/btn relative font-medium text-sm px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-600 hover:to-blue-600 text-white rounded-lg cursor-pointer duration-200 border border-blue-500/20 transform hover:scale-105 transition-all"
                         >
                             <span className="relative z-10 flex items-center gap-2">
