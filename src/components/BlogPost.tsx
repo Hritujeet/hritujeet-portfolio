@@ -94,8 +94,8 @@ const BlogPostSection = ({slug}: { slug: string }) => {
 
                 {/* Hero Content Overlay */}
                 <div className="absolute inset-0 z-20 flex items-end">
-                    <div className="max-w-4xl mx-auto px-4 pb-12 w-full h-fit">
-                        <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50">
+                    <div className="max-w-md mx-auto px-4 pb-12 w-full h-fit">
+                        <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-4 border border-slate-700/50">
                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                 <span
                                     className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium border border-blue-500/30">
@@ -128,10 +128,10 @@ const BlogPostSection = ({slug}: { slug: string }) => {
             </div>
 
             {/* Main Content */}
-            <article className="max-w-4xl mx-auto px-4 py-12">
+            <article className="max-w-md mx-auto px-4 py-12">
                 <div
                     className="bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden">
-                    <div className="p-8 md:p-12">
+                    <div className="p-4 md:p-8">
                         <div
                             className="blog-content"
                             dangerouslySetInnerHTML={{__html: post.content}}
