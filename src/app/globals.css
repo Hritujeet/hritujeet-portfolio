@@ -40,7 +40,7 @@
   }
 
   .blog-content a {
-    @apply text-primary underline hover:opacity-80 transition-opacity;
+    @apply text-white underline hover:opacity-80 transition-opacity;
   }
 
   .blog-content ul {
