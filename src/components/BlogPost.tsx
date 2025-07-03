@@ -79,22 +79,22 @@ const BlogPostSection = ({slug}: { slug: string }) => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-900">
+        <div className="min-h-screen">
             {/* Hero Section with Image */}
             <div className="relative">
                 <div
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900 z-10"></div>
+                    className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900 z-10"></div>
                 <Image
-                    src={post.img || bannerImg}
+                    src={post.img.trim() || bannerImg}
                     width={1920}
                     height={600}
                     alt={post.title}
-                    className='w-full h-[70vh] md:h-[60vh] object-cover'
+                    className='w-full min-h-[70vh] md:min-h-[60vh] rounded-md object-cover'
                 />
 
                 {/* Hero Content Overlay */}
-                <div className="absolute inset-0 z-20 flex items-end">
-                    <div className="max-w-[90vw] mx-auto px-4 pb-12 w-full h-fit">
+                <div className="absolute inset-0 z-20 flex items-end h-au">
+                    <div className="w-full md:max-w-[90vw] mx-auto px-4 pb-12 w-full h-fit">
                         <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50">
                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                 <span
@@ -128,9 +128,9 @@ const BlogPostSection = ({slug}: { slug: string }) => {
             </div>
 
             {/* Main Content */}
-            <article className="max-w-md mx-auto px-4 py-12">
+            <article className="w-full md:max-w-[90vw] mx-auto px-4 py-12">
                 <div
-                    className="bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden">
+                    className="bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden">
                     <div className="p-4 md:p-8">
                         <div
                             className="blog-content"

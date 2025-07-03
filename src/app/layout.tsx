@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import Query from "@/providers/Query";
 import Head from "next/head";
-import {usePathname} from "next/navigation";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",

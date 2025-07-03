@@ -2,10 +2,10 @@ import BlogPostSection from '@/components/BlogPost'
 import {Metadata} from 'next'
 import React from 'react'
 
-const page = async ({params}: { params: { slug: string } }) => {
-    const {slug} = await params
+const page = async ({params}: { params: Promise<{ slug: string }> }) => {
+    const { slug } = await params
     return (
-        <div className='md:w-[75vw] lg:w-[65vw] xl:w-[55vw] sm:w-[85vw] w-[90vw] mx-auto'>
+        <div className='md:w-[80vw] lg:w-[70vw] xl:w-[55vw] sm:w-[85vw] w-full mx-auto my-10'>
             <BlogPostSection slug={slug}/>
         </div>
     )
