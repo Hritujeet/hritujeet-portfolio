@@ -94,7 +94,7 @@ const BlogPostSection = ({slug}: { slug: string }) => {
 
                 {/* Hero Content Overlay */}
                 <div className="absolute inset-0 z-20 flex items-end">
-                    <div className="max-w-4xl mx-auto px-4 pb-12 w-full h-fit">
+                    <div className="max-w-[80vw] mx-auto px-4 pb-12 w-full h-fit">
                         <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50">
                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                 <span
