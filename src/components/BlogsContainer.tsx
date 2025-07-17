@@ -88,8 +88,8 @@ const BlogsContainer = () => {
         return (
             <div className="w-[85vw] mx-auto flex justify-center items-center py-20">
                 <div className="text-center">
-                    <h3 className="text-3xl font-semibold text-gray-400 mb-2">No Posts Yet</h3>
-                    <p className="text-gray-500">Check back later for new content!</p>
+                    <h3 className="text-3xl font-semibold mb-2">No Posts Yet</h3>
+                    <p>Check back later for new content!</p>
                 </div>
             </div>
         );

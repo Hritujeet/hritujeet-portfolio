@@ -7,7 +7,7 @@ const Hero = () => {
         <div className="my-14 space-y-6">
             {/* Badge with fade in from left */}
             <motion.div 
-                className="special bg-blue-950 w-fit py-1 px-4 rounded-full border border-blue-900 text-sm font-semibold text-white"
+                className="special w-fit py-1 px-4 rounded-full border text-sm font-semibold"
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ 
@@ -29,10 +29,9 @@ const Hero = () => {
                     ease: [0.25, 0.46, 0.45, 0.94]
                 }}
             >
-                <h1 className="text-4xl md:text-5xl font-bold md:w-2/3 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-blue-300 pb-6">
+                <h1 className="text-4xl md:text-5xl font-bold md:w-2/3 tracking-tight pb-6">
                     Building a bridge between ideas and{" "}
                     <motion.span 
-                        className="text-blue-500"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ 
@@ -48,7 +47,7 @@ const Hero = () => {
 
             {/* Description paragraph with fade up */}
             <motion.p 
-                className="md:w-2/3 text-sm md:text-base text-gray-400 leading-relaxed text"
+                className="md:w-2/3 text-sm md:text-base leading-relaxed text"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
@@ -59,7 +58,7 @@ const Hero = () => {
             >
                 I&apos;m{" "}
                 <motion.strong 
-                    className="text-blue-400 font-bold"
+                    className="font-bold"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ 

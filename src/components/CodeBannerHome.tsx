@@ -85,14 +85,14 @@ const Intro = () => {
     return (
         <div className="my-5">
             <motion.div 
-                className="relative w-full max-w-4xl h-64 sm:h-80 md:h-96 bg-gradient-to-br from-blue-950 via-gray-900 to-blue-950 rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-blue-900/30"
+                className="relative w-full max-w-4xl h-64 sm:h-80 md:h-96 bg-gradient-to-br rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
             >
                 {/* Animated Background Layers */}
                 <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-transparent to-gray-800/10"
+                    className="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-transparent"
                     variants={backgroundVariants}
                     animate={{
                         backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
@@ -122,7 +122,7 @@ const Intro = () => {
 
                 {/* Top Left Code Block */}
                 <motion.div 
-                    className="hidden sm:block absolute top-2 sm:top-4 left-2 sm:left-6 bg-gray-900/98 border border-blue-700/40 rounded-md sm:rounded-lg p-2 sm:p-4 backdrop-blur-sm shadow-xl"
+                    className="hidden sm:block absolute top-2 sm:top-4 left-2 sm:left-6 border rounded-md sm:rounded-lg p-2 sm:p-4 backdrop-blur-sm shadow-xl"
                     variants={codeBlockVariants}
                     whileHover={{ 
                         scale: 1.05, 
@@ -132,28 +132,28 @@ const Intro = () => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <motion.div 
-                        className="text-xs font-mono text-gray-300"
+                        className="text-xs font-mono"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.5, duration: 0.5 }}
                     >
-                        <span className="text-purple-400">const</span>{" "}
-                        <span className="text-blue-300">Portfolio</span>{" "}
-                        <span className="text-white">=</span>{" "}
-                        <span className="text-yellow-400">()</span>{" "}
-                        <span className="text-white">=&gt;</span>{" "}
-                        <span className="text-yellow-400">{"{"}</span>
+                        <span>const</span>{" "}
+                        <span>Portfolio</span>{" "}
+                        <span>=</span>{" "}
+                        <span>()</span>{" "}
+                        <span>=&gt;</span>{" "}
+                        <span>{"{"}</span>
                         <br />
-                        <span className="text-green-400 ml-2">return</span>{" "}
-                        <span className="text-red-400">&lt;App /&gt;</span>
+                        <span className="ml-2">return</span>{" "}
+                        <span>&lt;App /&gt;</span>
                         <br />
-                        <span className="text-yellow-400">{"}"}</span>
+                        <span>{"}"}</span>
                     </motion.div>
                 </motion.div>
 
                 {/* Top Right Code Block */}
                 <motion.div
-                    className="hidden md:block absolute top-2 md:top-8 right-2 md:right-6 bg-gray-900/98 border border-blue-600/40 rounded-md md:rounded-lg p-2 md:p-4 backdrop-blur-sm shadow-xl"
+                    className="hidden md:block absolute top-2 md:top-8 right-2 md:right-6 border rounded-md md:rounded-lg p-2 md:p-4 backdrop-blur-sm shadow-xl"
                     variants={codeBlockVariants}
                     whileHover={{ 
                         scale: 1.05, 
@@ -163,24 +163,24 @@ const Intro = () => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <motion.div 
-                        className="text-xs font-mono text-gray-300"
+                        className="text-xs font-mono"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.7, duration: 0.5 }}
                     >
-                        <span className="text-blue-400">import</span>{" "}
-                        <span className="text-white">React</span>{" "}
-                        <span className="text-blue-400">from</span>{" "}
-                        <span className="text-green-400">&#39;react&#39;</span>
+                        <span>import</span>{" "}
+                        <span>React</span>{" "}
+                        <span>from</span>{" "}
+                        <span>&#39;react&#39;</span>
                         <br />
-                        <span className="text-blue-400">import</span>{" "}
-                        <span className="text-white">{"{ useState }"}</span>
+                        <span>import</span>{" "}
+                        <span>{"{ useState }"}</span>
                     </motion.div>
                 </motion.div>
 
                 {/* Bottom Left Code Block */}
                 <motion.div
-                    className="hidden md:block absolute bottom-2 md:bottom-8 left-2 md:left-8 bg-gray-900/98 border border-blue-500/40 rounded-md md:rounded-lg p-2 md:p-4 backdrop-blur-sm shadow-xl"
+                    className="hidden md:block absolute bottom-2 md:bottom-8 left-2 md:left-8 border rounded-md md:rounded-lg p-2 md:p-4 backdrop-blur-sm shadow-xl"
                     variants={codeBlockVariants}
                     whileHover={{ 
                         scale: 1.05, 
@@ -190,27 +190,27 @@ const Intro = () => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <motion.div 
-                        className="text-xs font-mono text-gray-300"
+                        className="text-xs font-mono"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1.9, duration: 0.5 }}
                     >
-                        <span className="text-cyan-400">useEffect</span>
-                        <span className="text-yellow-400">(()</span>{" "}
-                        <span className="text-white">=&gt;</span>{" "}
-                        <span className="text-yellow-400">{"{"}</span>
+                        <span>useEffect</span>
+                        <span>(()</span>{" "}
+                        <span>=&gt;</span>{" "}
+                        <span>{"{"}</span>
                         <br />
-                        <span className="text-gray-500 ml-2 hidden lg:inline">
+                        <span className="ml-2 hidden lg:inline">
                             {/*// Magic happens here*/}
                         </span>
                         <br className="hidden lg:block" />
-                        <span className="text-yellow-400">{"}"}, [])</span>
+                        <span>{"}"}, [])</span>
                     </motion.div>
                 </motion.div>
 
                 {/* Bottom Right Code Block */}
                 <motion.div
-                    className="absolute bottom-2 sm:bottom-6 right-2 sm:right-8 bg-gray-900/98 border border-blue-400/40 rounded-md sm:rounded-lg p-2 sm:p-4 backdrop-blur-sm shadow-xl"
+                    className="absolute bottom-2 sm:bottom-6 right-2 sm:right-8 border rounded-md sm:rounded-lg p-2 sm:p-4 backdrop-blur-sm shadow-xl"
                     variants={codeBlockVariants}
                     whileHover={{ 
                         scale: 1.05, 
@@ -220,31 +220,31 @@ const Intro = () => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <motion.div 
-                        className="text-xs font-mono text-gray-300"
+                        className="text-xs font-mono"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 2.1, duration: 0.5 }}
                     >
-                        <span className="text-red-400">&lt;div</span>{" "}
+                        <span>&lt;div</span>{" "}
                         <span className="hidden sm:inline">
-                            <span className="text-yellow-400">className</span>
-                            <span className="text-white">=</span>
-                            <span className="text-green-400">&#34;flex&#34;</span>
+                            <span>className</span>
+                            <span>=</span>
+                            <span>&#34;flex&#34;</span>
                         </span>
-                        <span className="text-red-400">&gt;</span>
+                        <span>&gt;</span>
                         <br className="hidden sm:block" />
-                        <span className="text-gray-400 ml-2 hidden sm:inline">
+                        <span className="ml-2 hidden sm:inline">
                             &lt;Component /&gt;
                         </span>
                         <br className="hidden sm:block" />
-                        <span className="text-red-400 sm:hidden">/&gt;</span>
-                        <span className="text-red-400 hidden sm:inline">&lt;/div&gt;</span>
+                        <span className="sm:hidden">/&gt;</span>
+                        <span className="hidden sm:inline">&lt;/div&gt;</span>
                     </motion.div>
                 </motion.div>
 
                 {/* Central Code Block - Hero Animation */}
                 <motion.div 
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-950/95 border-2 border-blue-600/60 rounded-lg sm:rounded-xl p-3 sm:p-6 backdrop-blur-md shadow-2xl ring-1 ring-blue-500/20 max-w-[280px] sm:max-w-none"
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 rounded-lg sm:rounded-xl p-3 sm:p-6 backdrop-blur-md shadow-2xl ring-1 max-w-[280px] sm:max-w-none"
                     variants={centralBlockVariants}
                     whileHover={{ 
                         scale: 1.02,
@@ -267,58 +267,58 @@ const Intro = () => {
                     }}
                 >
                     <motion.div 
-                        className="text-xs sm:text-sm font-mono text-gray-300"
+                        className="text-xs sm:text-sm font-mono"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 2.3, duration: 0.8 }}
                     >
                         <div className="flex gap-1 sm:gap-2 mb-2 sm:mb-3">
                             <motion.div 
-                                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500"
+                                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full"
                                 animate={{ scale: [1, 1.2, 1] }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0 }}
                             />
                             <motion.div 
-                                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500"
+                                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full"
                                 animate={{ scale: [1, 1.2, 1] }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
                             />
                             <motion.div 
-                                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500"
+                                className="w-2 h-2 sm:w-3 sm:h-3 rounded-full"
                                 animate={{ scale: [1, 1.2, 1] }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                             />
                         </div>
                         <div className="space-y-1">
                             <div>
-                                <span className="text-purple-400">function</span>{" "}
-                                <span className="text-blue-300">
+                                <span>function</span>{" "}
+                                <span>
                                     GetDev<span className="hidden sm:inline">eloper</span>
                                 </span>
-                                <span className="text-yellow-400">(req, res)</span>{" "}
-                                <span className="text-yellow-400">{"{"}</span>
+                                <span>(req, res)</span>{" "}
+                                <span>{"{"}</span>
                             </div>
                             <div className="ml-2 sm:ml-4">
-                                <span className="text-green-400">return</span>{" "}
+                                <span>return</span>{" "}
                                 <div className="ml-2 sm:ml-4">
-                                    <span className="text-blue-400">res</span>
-                                    <span className="text-white">.</span>
-                                    <span className="text-yellow-400">status</span>
-                                    <span className="text-white">(</span>
-                                    <span className="text-purple-400">200</span>
-                                    <span className="text-white">).</span>
-                                    <span className="text-yellow-400">json</span>
-                                    <span className="text-white">(</span>
+                                    <span>res</span>
+                                    <span>.</span>
+                                    <span>status</span>
+                                    <span>(</span>
+                                    <span>200</span>
+                                    <span>).</span>
+                                    <span>json</span>
+                                    <span>(</span>
                                     <div className="inline sm:block">
-                                        <span className="text-green-400">
+                                        <span>
                                             &#39;Building<span className="hidden xs:inline"> the future</span>&#39;
                                         </span>
                                     </div>
-                                    <span className="text-white">)</span>
+                                    <span>)</span>
                                 </div>
                             </div>
                             <div>
-                                <span className="text-yellow-400">{"}"}</span>
+                                <span>{"}"}</span>
                             </div>
                         </div>
                     </motion.div>
@@ -326,7 +326,7 @@ const Intro = () => {
 
                 {/* Decorative Icons with Animation */}
                 <motion.div 
-                    className="absolute top-8 sm:top-12 left-12 sm:left-20 text-blue-400"
+                    className="absolute top-8 sm:top-12 left-12 sm:left-20"
                     variants={iconVariants}
                     animate={{ 
                         rotate: 360,
@@ -349,7 +349,7 @@ const Intro = () => {
                 </motion.div>
 
                 <motion.div 
-                    className="absolute top-12 sm:top-20 right-12 sm:right-20 text-blue-300"
+                    className="absolute top-12 sm:top-20 right-12 sm:right-20"
                     variants={iconVariants}
                     animate={{ 
                         y: [0, -10, 0],
@@ -375,7 +375,7 @@ const Intro = () => {
 
                 {/* Final animated overlay */}
                 <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-blue-950/20 via-transparent to-gray-900/10"
+                    className="absolute inset-0 bg-gradient-to-t from-blue-950/20 via-transparent"
                     animate={{
                         opacity: [0.3, 0.5, 0.3]
                     }}

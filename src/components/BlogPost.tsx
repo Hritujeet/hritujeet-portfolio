@@ -41,16 +41,16 @@ const BlogPostSection = ({slug}: { slug: string }) => {
 
     if (isPending) {
         return (
-            <div className="min-h-screen bg-slate-900 px-4 py-8">
+            <div className="min-h-screen px-4 py-8">
                 <div className="max-w-4xl mx-auto">
                     <div className="flex flex-col gap-6">
-                        <div className="h-8 bg-slate-800 rounded-lg animate-pulse"></div>
-                        <div className="h-6 bg-slate-800 rounded-lg w-3/4 animate-pulse"></div>
-                        <div className="h-64 bg-slate-800 rounded-xl animate-pulse"></div>
+                        <div className="h-8 rounded-lg animate-pulse"></div>
+                        <div className="h-6 rounded-lg w-3/4 animate-pulse"></div>
+                        <div className="h-64 rounded-xl animate-pulse"></div>
                         <div className="space-y-4">
-                            <div className="h-4 bg-slate-800 rounded animate-pulse"></div>
-                            <div className="h-4 bg-slate-800 rounded animate-pulse"></div>
-                            <div className="h-4 bg-slate-800 rounded w-2/3 animate-pulse"></div>
+                            <div className="h-4 rounded animate-pulse"></div>
+                            <div className="h-4 rounded animate-pulse"></div>
+                            <div className="h-4 rounded w-2/3 animate-pulse"></div>
                         </div>
                     </div>
                 </div>
@@ -60,17 +60,17 @@ const BlogPostSection = ({slug}: { slug: string }) => {
 
     if (!post) {
         return (
-            <div className="min-h-screen bg-slate-900 flex flex-col justify-center items-center text-center px-4">
-                <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-12 border border-slate-700">
+            <div className="min-h-screen flex flex-col justify-center items-center text-center px-4">
+                <div className="backdrop-blur-sm rounded-2xl p-12 border">
                     <div
-                        className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                   d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
-                    <h1 className="text-3xl font-bold text-white mb-3">Post Not Found</h1>
-                    <p className="text-slate-400 text-lg">The blog post you&#39;re looking for doesn&#39;t exist or has
+                    <h1 className="text-3xl font-bold mb-3">Post Not Found</h1>
+                    <p className="text-lg">The blog post you&#39;re looking for doesn&#39;t exist or has
                         been
                         moved.</p>
                 </div>
@@ -82,8 +82,7 @@ const BlogPostSection = ({slug}: { slug: string }) => {
         <div className="min-h-screen">
             {/* Hero Section with Image */}
             <div className="relative">
-                <div
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/50 to-gray-900 z-10"></div>
+                <div className="absolute inset-0 z-10"></div>
                 <Image
                     src={post.img.trim() || bannerImg}
                     width={1920}
@@ -95,10 +94,10 @@ const BlogPostSection = ({slug}: { slug: string }) => {
                 {/* Hero Content Overlay */}
                 <div className="absolute inset-0 z-20 flex items-end h-au">
                     <div className="w-full md:max-w-[90vw] mx-auto px-4 pb-12 w-full h-fit">
-                        <div className="bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50">
+                        <div className="backdrop-blur-md rounded-2xl p-8 border">
                             <div className="flex flex-wrap items-center gap-4 mb-4">
                                 <span
-                                    className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium border border-blue-500/30">
+                                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium border">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -106,7 +105,7 @@ const BlogPostSection = ({slug}: { slug: string }) => {
                                     {calculateReadingTime(post.content)} min read
                                 </span>
                                 <span
-                                    className="inline-flex items-center gap-2 px-3 py-1 bg-slate-700/50 text-slate-300 rounded-full text-sm font-medium border border-slate-600/50">
+                                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium border">
                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                                               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -115,11 +114,11 @@ const BlogPostSection = ({slug}: { slug: string }) => {
                                 </span>
                             </div>
 
-                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                            <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
                                 {post.title}
                             </h1>
 
-                            <p className="text-slate-300 text-sm md:text-base leading-relaxed">
+                            <p className="text-sm md:text-base leading-relaxed">
                                 {post.description}
                             </p>
                         </div>
@@ -130,7 +129,7 @@ const BlogPostSection = ({slug}: { slug: string }) => {
             {/* Main Content */}
             <article className="w-full md:max-w-[90vw] mx-auto px-4 py-12">
                 <div
-                    className="bg-gray-900/60 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden">
+                    className="backdrop-blur-sm rounded-2xl border overflow-hidden">
                     <div className="p-4 md:p-8">
                         <div
                             className="blog-content"

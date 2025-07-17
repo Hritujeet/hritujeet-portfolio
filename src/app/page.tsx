@@ -14,7 +14,7 @@ export default function Home() {
             </div>
             <HomeAbout />
             <div className="my-10">
-                <h1 className="my-10 text-4xl font-bold text-blue-500 text-center">
+                <h1 className="my-10 text-4xl font-bold text-center">
                     Featured Posts
                 </h1>
                 <Featured />
