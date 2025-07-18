@@ -1,4 +1,3 @@
-import Intro from "@/components/CodeBannerHome";
 import CTA from "@/components/CTA";
 import Featured from "@/components/Featured";
 import Hero from "@/components/Hero";
@@ -7,10 +6,9 @@ import { Metadata } from "next";
 
 export default function Home() {
     return (
-        <section className="w-[90vw] mx-auto space-y-8">
-            <div className="mx-auto w-[80vw]">
+        <section className="container px-8 sm:px-16 md:px-20 lg:px-32 xl:px-40 mx-auto space-y-8">
+            <div className="mx-auto w-full">
                 <Hero />
-                <Intro />
             </div>
             <HomeAbout />
             <div className="my-10">
@@ -25,6 +23,8 @@ export default function Home() {
 }
 export const metadata: Metadata = {
     title: "Home | Hritujeet",
-    description: "Hey, there! I am Hritujeet, a web dev enthusiast as a teenage developer. I love to build things and share my knowledge with the world.",
-    keywords: "web development, programming, blogs, tech trends, developer community, insights, Hritujeet Sharma, teenage developer, coding enthusiast, web dev, Next.js, React, JavaScript, tech blogs, software development, coding tutorials, personal blog, tech enthusiast, coding community, web design, frontend development, backend development, full-stack development, open source, tech education, coding resources, developer portfolio"
+    description:
+        "Hey, there! I am Hritujeet, a web dev enthusiast as a teenage developer. I love to build things and share my knowledge with the world.",
+    keywords:
+        "web development, programming, blogs, tech trends, developer community, insights, Hritujeet Sharma, teenage developer, coding enthusiast, web dev, Next.js, React, JavaScript, tech blogs, software development, coding tutorials, personal blog, tech enthusiast, coding community, web design, frontend development, backend development, full-stack development, open source, tech education, coding resources, developer portfolio",
 };

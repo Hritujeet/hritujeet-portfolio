@@ -37,7 +37,7 @@ export default function RootLayout({
             <body>
                 <Query>
                     <Navbar />
-                    <NextTopLoader />
+                    <NextTopLoader color="green" height={1.5} showSpinner={false}/>
                     {children}
                     <Footer />
                 </Query>
