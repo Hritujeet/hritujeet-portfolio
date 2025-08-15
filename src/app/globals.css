@@ -1,2 +1,56 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.btn {
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  box-shadow: none;
+  text-transform: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #2563eb;
+  color: white;
+  border: 1px solid #2563eb;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.btn-secondary {
+  background-color: #f3f4f6;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #6b7280;
+  color: #374151;
+}
+
+.btn-outline:hover {
+  background-color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.btn:focus,
+.btn:active {
+  transform: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}
+
+.btn-circle,
+.btn-square {
+  border-radius: 6px;
+}
