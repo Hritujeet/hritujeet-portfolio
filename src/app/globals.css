@@ -1,156 +1,42 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* Base button styles with shadcn aesthetic */
+/* Minimal shadcn-style overrides
 .btn {
-  @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
-  height: 2.25rem;
-  padding: 0 1rem;
-  border: 1px solid transparent;
+  border-radius: 0.375rem; /* 6px instead of DaisyUI's default */
   text-transform: none;
+  font-weight: 500;
+  transition: all 0.15s ease;
   box-shadow: none;
 }
 
-/* Primary button - shadcn default style */
-.btn-primary {
-  @apply bg-primary text-primary-foreground hover:bg-primary/90;
-  background-color: hsl(222.2 84% 4.9%);
-  color: hsl(210 40% 98%);
-}
-
-.btn-primary:hover {
-  background-color: hsl(222.2 84% 4.9% / 0.9);
-}
-
-/* Secondary button - shadcn secondary style */
-.btn-secondary {
-  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
-  background-color: hsl(210 40% 96%);
-  color: hsl(222.2 84% 4.9%);
-}
-
-.btn-secondary:hover {
-  background-color: hsl(210 40% 96% / 0.8);
-}
-
-/* Outline button - shadcn outline style */
-.btn-outline {
-  @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
-  background-color: transparent;
-  border-color: hsl(214.3 31.8% 91.4%);
-  color: hsl(222.2 84% 4.9%);
-}
-
-.btn-outline:hover {
-  background-color: hsl(210 40% 96%);
-  color: hsl(222.2 84% 4.9%);
-}
-
-/* Ghost button - shadcn ghost style */
-.btn-ghost {
-  @apply hover:bg-accent hover:text-accent-foreground;
-  background-color: transparent;
-  color: hsl(222.2 84% 4.9%);
-  border: none;
-}
-
-.btn-ghost:hover {
-  background-color: hsl(210 40% 96%);
-}
-
-/* Destructive button - shadcn destructive style */
-.btn-error {
-  @apply bg-destructive text-destructive-foreground hover:bg-destructive/90;
-  background-color: hsl(0 84.2% 60.2%);
-  color: hsl(210 40% 98%);
-}
-
-.btn-error:hover {
-  background-color: hsl(0 84.2% 60.2% / 0.9);
-}
-
-/* Size variants */
-.btn-sm {
-  height: 2rem;
-  padding: 0 0.75rem;
-  font-size: 0.875rem;
-}
-
-.btn-lg {
-  height: 2.75rem;
-  padding: 0 2rem;
-  font-size: 1rem;
-}
-
-.btn-xs {
-  height: 1.75rem;
-  padding: 0 0.5rem;
-  font-size: 0.75rem;
-}
-
-/* Icon buttons */
-.btn-square,
-.btn-circle {
-  padding: 0;
-  width: 2.25rem;
-  height: 2.25rem;
-  border-radius: 0.375rem;
-}
-
-.btn-circle {
-  border-radius: 50%;
-}
-
-/* Focus states with shadcn ring */
+/* Clean up focus states */
 .btn:focus-visible {
-  outline: none;
-  ring: 2px solid hsl(222.2 84% 4.9%);
-  ring-offset: 2px;
-  ring-offset-color: hsl(0 0% 100%);
+  outline: 2px solid hsl(var(--p));
+  outline-offset: 2px;
+  box-shadow: none;
 }
 
-/* Loading state */
-.btn.loading {
-  color: transparent;
-}
-
-.btn.loading::before {
-  content: "";
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid transparent;
-  border-top: 2px solid currentColor;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* Disabled state */
-.btn:disabled,
-.btn.btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Link button */
-.btn-link {
-  @apply underline-offset-4 hover:underline text-primary;
-  background: transparent;
-  border: none;
-  height: auto;
-  padding: 0;
-  color: hsl(222.2 84% 4.9%);
-}
-
-/* Remove DaisyUI's default animations */
+/* Remove DaisyUI's weird active transforms */
 .btn:active:hover,
 .btn:active:focus {
   animation: none;
   transform: none;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+/* Subtle hover improvements */
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary:hover {
+  opacity: 0.8;
+}
+
+.btn-outline:hover {
+  background-color: hsl(var(--b2));
+}
+
+.btn-ghost:hover {
+  background-color: hsl(var(--b2));
 }
