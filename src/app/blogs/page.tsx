@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import React from "react";
 import { prisma } from "../../../utils/db";
 import { formatDate } from "../../../utils/utils";
+import Link from "next/link";
 
 const page = async () => {
     const blogs = await prisma.blogPost.findMany({});
@@ -28,12 +29,12 @@ const page = async () => {
                                 <span className="text-xs opacity-60">
                                     {formatDate(blog.createdAt.toString())}
                                 </span>
-                                <a
+                                <Link
                                     href={`/blogs/${blog.slug}`}
-                                    className="btn btn-primary btn-sm"
+                                    className="btn btn-accent btn-sm"
                                 >
                                     Read More
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

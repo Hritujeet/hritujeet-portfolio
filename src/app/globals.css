@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.btn{
+    @apply shadow-none rounded-md
+}

@@ -3,6 +3,7 @@ import { useBlogs } from "@/hooks/useBlogs";
 import React from "react";
 import { formatDate } from "../../utils/utils";
 import { BlogPost } from "@prisma/client";
+import Link from "next/link";
 
 const BlogsContainer = () => {
     const { data, isPending, isError } = useBlogs();
@@ -60,12 +61,12 @@ const BlogsContainer = () => {
                             <span className="text-xs opacity-60">
                                 {formatDate(blog.createdAt.toString())}
                             </span>
-                            <a
+                            <Link
                                 href={`/blogs/${blog.slug}`}
-                                className="btn btn-primary btn-sm"
+                                className="btn btn-accent btn-sm"
                             >
                                 Read More
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
