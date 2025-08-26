@@ -23,7 +23,7 @@ export default function RootLayout({
         pathname.split("?")[0]
     }`;
     return (
-        <html lang="en">
+        <html lang="en" data-theme="forest">
             <Head>
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href={canonicalUrl} />
