@@ -13,6 +13,7 @@
     "@prisma/client": "^6.9.0",
     "@prisma/extension-accelerate": "^2.0.2",
     "@tanstack/react-query": "^5.80.7",
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.515.0",
     "motion": "^12.18.1",
     "next": "15.3.3",

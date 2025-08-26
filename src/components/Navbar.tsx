@@ -12,16 +12,13 @@ const Navbar = () => {
             <div className="navbar-end hidden sm:flex">
                 <ul className="flex justify-center items-center gap-4 lg:gap-6">
                     <li className="hover:text-accent duration-150">
-                        <Link href={"/"}>Home</Link>
-                    </li>
-                    <li className="hover:text-accent duration-150">
                         <Link href={"/blogs"}>Blogs</Link>
                     </li>
                     <li className="hover:text-accent duration-150">
-                        <Link href={"/about"}>About</Link>
+                        <Link href={"/projects"}>Projects</Link>
                     </li>
                     <li className="hover:text-accent duration-150">
-                        <Link href={"/contact"}>Contact</Link>
+                        <Link href={"/about"}>Profile</Link>
                     </li>
                     <li>
                         <Link

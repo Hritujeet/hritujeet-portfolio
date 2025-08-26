@@ -5,7 +5,11 @@ import { formatDate } from "../../../utils/utils";
 import Link from "next/link";
 
 const page = async () => {
-    const blogs = await prisma.blogPost.findMany({});
+    const blogs = await prisma.blogPost.findMany({
+        orderBy: {
+            createdAt: "desc"
+        }
+    });
 
     return (
         <div className="container mx-auto">
@@ -25,7 +29,7 @@ const page = async () => {
                         <div className="card-body">
                             <h2 className="card-title">{blog.title}</h2>
                             <p>{blog.description}</p>
-                            <div className="card-actions justify-end">
+                            <div className="card-actions justify-end items-center">
                                 <span className="text-xs opacity-60">
                                     {formatDate(blog.createdAt.toString())}
                                 </span>

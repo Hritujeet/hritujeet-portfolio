@@ -126,6 +126,7 @@ exports.Prisma.BlogPostScalarFieldEnum = {
   img: 'img',
   slug: 'slug',
   description: 'description',
+  views: 'views',
   content: 'content',
   createdAt: 'createdAt'
 };
@@ -137,7 +138,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
   link: 'link',
   techStack: 'techStack',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updateAt: 'updateAt'
 };
 
 exports.Prisma.SortOrder = {
