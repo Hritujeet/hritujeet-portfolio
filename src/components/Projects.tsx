@@ -2,7 +2,7 @@
 import React from "react";
 import { useProjects } from "@/hooks/useProjects"
 import { motion } from "framer-motion"
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 type Project = {
     id: string;

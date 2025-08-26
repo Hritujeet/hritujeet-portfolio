@@ -26,7 +26,15 @@ const Footer = () => {
                                 href="/blogs"
                                 className="duration-150 hover:text-accent"
                             >
-                                Blog
+                                Blogs
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="/blogs"
+                                className="duration-150 hover:text-accent"
+                            >
+                                Projects
                             </Link>
                         </li>
                         <li>

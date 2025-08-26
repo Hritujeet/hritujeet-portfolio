@@ -3,7 +3,7 @@ import React from "react";
 
 const CTA = () => {
     return (
-        <div className="card bg-base-200 w-full py-8">
+        <div className="card bg-accent/10 w-full py-8">
             <div className="card-body items-center text-center gap-8">
                 <h2 className="card-title text-5xl font-semibold">
                     Let&#39;s Talk
