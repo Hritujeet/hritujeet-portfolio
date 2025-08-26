@@ -1,1 +1,11 @@
+<<<<<<< HEAD
 @import "tailwindcss"
+=======
+@import "tailwindcss";
+@plugin "daisyui";
+
+.btn{
+    @apply shadow-none rounded-md
+}
+@plugin "daisyui";
+>>>>>>> 8b1656c938774513a7bcbac2eaa3090f269515b4
