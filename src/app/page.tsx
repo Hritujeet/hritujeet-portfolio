@@ -11,7 +11,7 @@ export default function Home() {
                 <Hero />
             </div>
             <HomeAbout />
-            <div className="my-10">
+            <div className="my-10 space-y-20">
                 <h1 className="my-10 text-4xl font-bold text-center">
                     Featured Posts
                 </h1>
