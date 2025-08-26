@@ -3,7 +3,7 @@ import React from "react";
 
 const Navbar = () => {
     return (
-        <div className="navbar bg-base-100 shadow-sm px-6">
+        <div className="navbar bg-base-100/80 shadow-sm px-6 sticky top-0 z-30 backdrop-blur-lg">
             <div className="navbar-start">
                 <Link href={"/"} className="text-2xl font-bold tracking-tight">
                     Hritujeet
@@ -53,18 +53,15 @@ const Navbar = () => {
                             />{" "}
                         </svg>
                     </div>
-                    <ul className="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-lg border border-t-transparent dark:border-white/5 gap-2">
-                        <li>
-                            <Link href={"/"}>Home</Link>
-                        </li>
-                        <li>
+                    <ul className="menu dropdown-content bg-accent rounded-box z-1 mt-3 w-52 p-2 shadow-lg gap-2">
+                        <li className="text-black hover:text-slate-900 duration-150">
                             <Link href={"/blogs"}>Blogs</Link>
                         </li>
-                        <li>
-                            <Link href={"/about"}>About</Link>
+                        <li className="text-black hover:text-slate-900 duration-150">
+                            <Link href={"/projects"}>Projects</Link>
                         </li>
-                        <li>
-                            <Link href={"/contact"}>Contact</Link>
+                        <li className="text-black hover:text-slate-900 duration-150">
+                            <Link href={"/about"}>Profile</Link>
                         </li>
                         <li>
                             <Link
