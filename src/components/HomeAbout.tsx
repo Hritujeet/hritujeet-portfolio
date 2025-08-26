@@ -3,7 +3,7 @@ import React from "react";
 const HomeAbout = () => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center justify-center gap-4">
-            <div className="card bg-accent text-accent-content w-auto p-4 transition-all duration-300 hover:scale-105 hover:-rotate-5">
+            <div className="card cursor-defualt bg-accent text-accent-content w-auto p-4 transition-all duration-300 hover:scale-105 hover:-rotate-5">
                 <div className="card-body">
                     <h2 className="card-title text-3xl font-semibold tracking-tight">Passionate Coder</h2>
                     <p className="font-medium">
@@ -12,7 +12,7 @@ const HomeAbout = () => {
                     </p>
                 </div>
             </div>
-            <div className="card bg-accent text-accent-content w-auto p-4 transition-all duration-300 hover:scale-105">
+            <div className="card cursor-defualt bg-accent text-accent-content w-auto p-4 transition-all duration-300 hover:scale-105">
                 <div className="card-body">
                     <h2 className="card-title text-3xl font-semibold tracking-tight">Web Developer</h2>
                     <p className="font-medium">
@@ -20,7 +20,7 @@ const HomeAbout = () => {
                     </p>
                 </div>
             </div>
-            <div className="card bg-accent text-accent-content w-auto p-4 transition-all duration-300 hover:scale-105 hover:rotate-5">
+            <div className="card cursor-defualt bg-accent text-accent-content w-auto p-4 transition-all duration-300 hover:scale-105 hover:rotate-5">
                 <div className="card-body">
                     <h2 className="card-title text-3xl font-semibold tracking-tight">Aspiring Entrepreneur</h2>
                     <p className="font-medium">

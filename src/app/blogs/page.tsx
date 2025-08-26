@@ -16,7 +16,7 @@ const page = async () => {
             <h1 className="text-5xl font-bold my-10 text-center">
                 Read <span className="text-accent">Blogs</span>
             </h1>
-            <div className="px-10 sm:px-12 md:px-16 lg:px-32 xl:px-40 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="px-8 sm:px-12 md:px-16 lg:px-32 xl:px-40 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {blogs.map((blog, idx) => (
                     <div key={blog.slug} className="card bg-base-100 shadow-xl">
                         <figure>

@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 export default function Home() {
     return (
-        <section className="container px-8 sm:px-16 md:px-20 lg:px-32 xl:px-40 mx-auto space-y-8">
+        <section className="container px-6 sm:px-12 md:px-16 lg:px-24 xl:px-32 mx-auto space-y-8">
             <div className="mx-auto w-full">
                 <Hero />
             </div>
