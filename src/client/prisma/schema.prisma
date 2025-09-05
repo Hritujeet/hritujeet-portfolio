@@ -15,14 +15,15 @@ datasource db {
 }
 
 model BlogPost {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   title       String
   img         String
-  slug        String   @unique
+  slug        String    @unique
   description String
   views       Int
   content     String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
+  Comment     Comment[]
 
   @@index([id, slug])
 }
@@ -35,4 +36,24 @@ model Project {
   techStack  String[]
   createdAt  DateTime @default(now())
   updateAt   DateTime @updatedAt
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  userClerkId String
+  blogPost    BlogPost @relation(fields: [blogPostId], references: [id])
+  blogPostId  String
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Contact {
+  id        String @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  query     String
+  createdAt String
+  updatedAt String
 }

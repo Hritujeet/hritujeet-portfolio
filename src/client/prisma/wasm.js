@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.14.0
- * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
+ * Prisma Client JS version: 6.15.0
+ * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
  */
 Prisma.prismaVersion = {
-  client: "6.14.0",
-  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
+  client: "6.15.0",
+  engine: "85179d7826409ee107a6ba334b5e305ae3fba9fb"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -141,6 +141,25 @@ exports.Prisma.ProjectScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  userClerkId: 'userClerkId',
+  blogPostId: 'blogPostId',
+  content: 'content',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  query: 'query',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -154,7 +173,9 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   BlogPost: 'BlogPost',
-  Project: 'Project'
+  Project: 'Project',
+  Comment: 'Comment',
+  Contact: 'Contact'
 };
 
 /**
