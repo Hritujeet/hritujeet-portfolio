@@ -1,7 +1,10 @@
+import { SignedIn } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 import React from "react";
 
-const Navbar = () => {
+const Navbar = async () => {
+    const user = await currentUser();
     return (
         <div className="navbar bg-base-100/80 shadow-sm px-6 sticky top-0 z-30 backdrop-blur-lg">
             <div className="navbar-start">
@@ -25,9 +28,22 @@ const Navbar = () => {
                             href={"https://github.com/Hritujeet"}
                             className="btn btn-soft btn-accent btn-sm md:btn-md"
                         >
-                            Github
+                            Github Profile
                         </Link>
                     </li>
+                    <SignedIn>
+                        {user?.emailAddresses[0].emailAddress ==
+                            process.env.ADMIN && (
+                            <li>
+                                <Link
+                                    href={"/dashboard"}
+                                    className="btn btn-accent btn-sm md:btn-md"
+                                >
+                                    Admin
+                                </Link>
+                            </li>
+                        )}
+                    </SignedIn>
                 </ul>
             </div>
             <div className="navbar-end sm:hidden">

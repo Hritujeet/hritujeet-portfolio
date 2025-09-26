@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link"; // Import Link for Next.js navigation
 import { Menu, X, LogOut, Globe, Plus } from "lucide-react"; // Example icons
+import { SignOutButton } from "@clerk/nextjs";
 
 // Dummy link data (replace hrefs with your actual routes)
 const mainLinks = [
@@ -48,17 +49,12 @@ const SidebarContent = () => (
             ))}
 
             {/* Sign Out Button (using a button for action, not navigation) */}
-            <button
-                className="btn btn-error btn-ghost w-full justify-start"
-                onClick={() => {
-                    // Add your sign-out logic here (e.g., calling an API, clearing session)
-                    console.log("Signing out user...");
-                    // router.push('/login'); // Example: redirect to login page
-                }}
-            >
-                <LogOut className="h-5 w-5 mr-2" />
-                Sign Out
-            </button>
+            <SignOutButton redirectUrl="/sign-in">
+                <span className="btn btn-error btn-ghost w-full justify-start">
+                    <LogOut className="h-5 w-5 mr-2" />
+                    Sign Out
+                </span>
+            </SignOutButton>
         </div>
     </aside>
 );
