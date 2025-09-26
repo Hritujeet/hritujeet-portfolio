@@ -4,8 +4,8 @@ import { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { prisma } from "../../../../utils/db";
 import { calculateReadingTime, formatDate } from "../../../../utils/utils";
+import { prisma } from "../../../../../utils/db";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
