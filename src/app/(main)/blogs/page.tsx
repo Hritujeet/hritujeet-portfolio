@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 import React from "react";
-import { prisma } from "../../../utils/db";
-import { formatDate } from "../../../utils/utils";
+import { prisma } from "../../../../utils/db";
+import { formatDate } from "../../../../utils/utils";
 import Link from "next/link";
 
 const page = async () => {
     const blogs = await prisma.blogPost.findMany({
         orderBy: {
-            createdAt: "desc"
-        }
+            createdAt: "desc",
+        },
     });
 
     return (
