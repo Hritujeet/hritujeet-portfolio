@@ -35,12 +35,12 @@ const SidebarContent = () => (
         </ul>
 
         {/* Bottom Section: Go to Site & Sign Out */}
-        <div className="border-t border-base-300 pt-4">
+        <div className="border-t border-base-300 pt-4 space-y-2">
             {bottomLinks.map((item) => (
                 <Link
                     key={item.href}
                     href={item.href}
-                    className="btn btn-ghost w-full justify-start mb-2"
+                    className="btn btn-accent btn-ghost w-full justify-start"
                 >
                     <item.icon className="h-5 w-5 mr-2" />
                     {item.label}
