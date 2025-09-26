@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
@@ -37,7 +37,11 @@ export default function RootLayout({
             <body>
                 <Query>
                     <Navbar />
-                    <NextTopLoader color="green" height={1.5} showSpinner={false}/>
+                    <NextTopLoader
+                        color="green"
+                        height={1.5}
+                        showSpinner={false}
+                    />
                     {children}
                     <Footer />
                 </Query>
