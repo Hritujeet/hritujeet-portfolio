@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import AdminLayout from "@/components/admin/sidebar-layout-provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
     title: "Curiosity AI",
@@ -15,7 +16,9 @@ export default function RootLayout({
     return (
         <html lang="en" data-theme="forest">
             <body>
-                <AdminLayout>{children}</AdminLayout>
+                <ClerkProvider>
+                    <AdminLayout>{children}</AdminLayout>
+                </ClerkProvider>
             </body>
         </html>
     );

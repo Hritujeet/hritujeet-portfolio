@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import Query from "@/providers/Query";
 import Head from "next/head";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
     title: "Hritujeet | Portfolio",
@@ -35,16 +36,18 @@ export default function RootLayout({
                 <meta property="og:type" content="website" />
             </Head>
             <body>
-                <Query>
-                    <Navbar />
-                    <NextTopLoader
-                        color="green"
-                        height={1.5}
-                        showSpinner={false}
-                    />
-                    {children}
-                    <Footer />
-                </Query>
+                <ClerkProvider>
+                    <Query>
+                        <Navbar />
+                        <NextTopLoader
+                            color="green"
+                            height={1.5}
+                            showSpinner={false}
+                        />
+                        {children}
+                        <Footer />
+                    </Query>
+                </ClerkProvider>
             </body>
         </html>
     );
