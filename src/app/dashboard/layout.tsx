@@ -4,6 +4,7 @@ import AdminLayout from "@/components/admin/sidebar-layout-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
     title: "Hritujeet's Admin Dashboard",
@@ -16,17 +17,14 @@ export default async function RootLayout({
 }>) {
     const user = await currentUser();
 
-    if (
-        !user ||
-        user.emailAddresses.length <= 0 ||
-        !user.emailAddresses[0] 
-    ) {
+    if (!user || user.emailAddresses.length <= 0 || !user.emailAddresses[0]) {
         return notFound();
     }
     return (
         <html lang="en" data-theme="forest">
             <body>
                 <ClerkProvider>
+                    <Toaster />
                     <AdminLayout>{children}</AdminLayout>
                 </ClerkProvider>
             </body>

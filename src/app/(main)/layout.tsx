@@ -6,7 +6,7 @@ import NextTopLoader from "nextjs-toploader";
 import Query from "@/providers/Query";
 import Head from "next/head";
 import { ClerkProvider } from "@clerk/nextjs";
-
+import { Toaster } from "sonner";
 export const metadata: Metadata = {
     title: "Hritujeet | Portfolio",
     description:
@@ -39,6 +39,7 @@ export default function RootLayout({
                 <ClerkProvider>
                     <Query>
                         <Navbar />
+                        <Toaster />
                         <NextTopLoader
                             color="green"
                             height={1.5}

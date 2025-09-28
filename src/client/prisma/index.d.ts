@@ -249,8 +249,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.15.0
-   * Query Engine version: 85179d7826409ee107a6ba334b5e305ae3fba9fb
+   * Prisma Client JS version: 6.16.2
+   * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
    */
   export type PrismaVersion = {
     client: string
@@ -1028,6 +1028,10 @@ export namespace Prisma {
       timeout?: number
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
+    /**
+     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+     */
+    adapter?: runtime.SqlDriverAdapterFactory | null
     /**
      * Global configuration for omitting model fields by default.
      * 
@@ -4406,8 +4410,8 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     query: string | null
-    createdAt: string | null
-    updatedAt: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ContactMaxAggregateOutputType = {
@@ -4416,8 +4420,8 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     query: string | null
-    createdAt: string | null
-    updatedAt: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ContactCountAggregateOutputType = {
@@ -4541,8 +4545,8 @@ export namespace Prisma {
     email: string
     phone: string
     query: string
-    createdAt: string
-    updatedAt: string
+    createdAt: Date
+    updatedAt: Date
     _count: ContactCountAggregateOutputType | null
     _min: ContactMinAggregateOutputType | null
     _max: ContactMaxAggregateOutputType | null
@@ -4613,8 +4617,8 @@ export namespace Prisma {
       email: string
       phone: string
       query: string
-      createdAt: string
-      updatedAt: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["contact"]>
     composites: {}
   }
@@ -5043,8 +5047,8 @@ export namespace Prisma {
     readonly email: FieldRef<"Contact", 'String'>
     readonly phone: FieldRef<"Contact", 'String'>
     readonly query: FieldRef<"Contact", 'String'>
-    readonly createdAt: FieldRef<"Contact", 'String'>
-    readonly updatedAt: FieldRef<"Contact", 'String'>
+    readonly createdAt: FieldRef<"Contact", 'DateTime'>
+    readonly updatedAt: FieldRef<"Contact", 'DateTime'>
   }
     
 
@@ -5760,8 +5764,8 @@ export namespace Prisma {
     email?: StringFilter<"Contact"> | string
     phone?: StringFilter<"Contact"> | string
     query?: StringFilter<"Contact"> | string
-    createdAt?: StringFilter<"Contact"> | string
-    updatedAt?: StringFilter<"Contact"> | string
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeFilter<"Contact"> | Date | string
   }
 
   export type ContactOrderByWithRelationInput = {
@@ -5783,8 +5787,8 @@ export namespace Prisma {
     email?: StringFilter<"Contact"> | string
     phone?: StringFilter<"Contact"> | string
     query?: StringFilter<"Contact"> | string
-    createdAt?: StringFilter<"Contact"> | string
-    updatedAt?: StringFilter<"Contact"> | string
+    createdAt?: DateTimeFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeFilter<"Contact"> | Date | string
   }, "id">
 
   export type ContactOrderByWithAggregationInput = {
@@ -5809,8 +5813,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Contact"> | string
     phone?: StringWithAggregatesFilter<"Contact"> | string
     query?: StringWithAggregatesFilter<"Contact"> | string
-    createdAt?: StringWithAggregatesFilter<"Contact"> | string
-    updatedAt?: StringWithAggregatesFilter<"Contact"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
   }
 
   export type BlogPostCreateInput = {
@@ -5819,7 +5823,7 @@ export namespace Prisma {
     img: string
     slug: string
     description: string
-    views: number
+    views?: number
     content: string
     createdAt?: Date | string
     Comment?: CommentCreateNestedManyWithoutBlogPostInput
@@ -5831,7 +5835,7 @@ export namespace Prisma {
     img: string
     slug: string
     description: string
-    views: number
+    views?: number
     content: string
     createdAt?: Date | string
     Comment?: CommentUncheckedCreateNestedManyWithoutBlogPostInput
@@ -5867,7 +5871,7 @@ export namespace Prisma {
     img: string
     slug: string
     description: string
-    views: number
+    views?: number
     content: string
     createdAt?: Date | string
   }
@@ -6032,8 +6036,8 @@ export namespace Prisma {
     email: string
     phone: string
     query: string
-    createdAt: string
-    updatedAt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ContactUncheckedCreateInput = {
@@ -6042,8 +6046,8 @@ export namespace Prisma {
     email: string
     phone: string
     query: string
-    createdAt: string
-    updatedAt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ContactUpdateInput = {
@@ -6052,8 +6056,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     query?: StringFieldUpdateOperationsInput | string
-    createdAt?: StringFieldUpdateOperationsInput | string
-    updatedAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContactUncheckedUpdateInput = {
@@ -6062,8 +6066,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     query?: StringFieldUpdateOperationsInput | string
-    createdAt?: StringFieldUpdateOperationsInput | string
-    updatedAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContactCreateManyInput = {
@@ -6072,8 +6076,8 @@ export namespace Prisma {
     email: string
     phone: string
     query: string
-    createdAt: string
-    updatedAt: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ContactUpdateManyMutationInput = {
@@ -6082,8 +6086,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     query?: StringFieldUpdateOperationsInput | string
-    createdAt?: StringFieldUpdateOperationsInput | string
-    updatedAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContactUncheckedUpdateManyInput = {
@@ -6092,8 +6096,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
     query?: StringFieldUpdateOperationsInput | string
-    createdAt?: StringFieldUpdateOperationsInput | string
-    updatedAt?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6565,7 +6569,7 @@ export namespace Prisma {
     img: string
     slug: string
     description: string
-    views: number
+    views?: number
     content: string
     createdAt?: Date | string
   }
@@ -6576,7 +6580,7 @@ export namespace Prisma {
     img: string
     slug: string
     description: string
-    views: number
+    views?: number
     content: string
     createdAt?: Date | string
   }

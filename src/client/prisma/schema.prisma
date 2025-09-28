@@ -20,7 +20,7 @@ model BlogPost {
   img         String
   slug        String    @unique
   description String
-  views       Int
+  views       Int       @default(0)
   content     String
   createdAt   DateTime  @default(now())
   Comment     Comment[]
@@ -49,11 +49,11 @@ model Comment {
 }
 
 model Contact {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   name      String
   email     String
   phone     String
   query     String
-  createdAt String
-  updatedAt String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
