@@ -38,7 +38,7 @@ const Navbar = async () => {
                                 </li>
                                 <li>
                                     <SignOutButton redirectUrl="/sign-in">
-                                        <span className="btn btn-error btn-ghost w-full justify-start">
+                                        <span className="btn btn-error w-full justify-start">
                                             <LogOut className="h-5 w-5 mr-2" />
                                             Sign Out
                                         </span>

@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { prisma } from "../../../../../utils/db";
 import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
@@ -212,7 +213,14 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             </div>
 
             <div className="flex flex-col max-w-5xl mx-auto gap-4 mt-10 mb-5">
-                <PostComment postId={blog?.id} />
+                <SignedIn>
+                    <PostComment postId={blog?.id} />
+                </SignedIn>
+                <SignedOut>
+                    <h1 className="text-3xl font-bold text-white/50 text-center">
+                        Sign In to Post Comment
+                    </h1>
+                </SignedOut>
                 <CommentsContainer postId={blog?.id} />
             </div>
         </section>
