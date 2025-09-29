@@ -1,5 +1,6 @@
-import { SignedIn } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
+import { LogOut } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -23,27 +24,47 @@ const Navbar = async () => {
                     <li className="hover:text-accent duration-150">
                         <Link href={"/about"}>Profile</Link>
                     </li>
-                    <li>
-                        <Link
-                            href={"https://github.com/Hritujeet"}
-                            className="btn btn-soft btn-accent btn-sm md:btn-md"
-                        >
-                            Github Profile
-                        </Link>
-                    </li>
                     <SignedIn>
                         {user?.emailAddresses[0].emailAddress ==
                             process.env.ADMIN && (
-                            <li>
-                                <Link
-                                    href={"/dashboard"}
-                                    className="btn btn-accent btn-sm md:btn-md"
-                                >
-                                    Admin
-                                </Link>
-                            </li>
+                            <>
+                                <li>
+                                    <Link
+                                        href={"/dashboard"}
+                                        className="btn btn-accent btn-sm md:btn-md"
+                                    >
+                                        Admin
+                                    </Link>
+                                </li>
+                                <li>
+                                    <SignOutButton redirectUrl="/sign-in">
+                                        <span className="btn btn-error btn-ghost w-full justify-start">
+                                            <LogOut className="h-5 w-5 mr-2" />
+                                            Sign Out
+                                        </span>
+                                    </SignOutButton>
+                                </li>
+                            </>
                         )}
                     </SignedIn>
+                    <SignedOut>
+                        <li>
+                            <Link
+                                href={"/sign-in"}
+                                className="btn btn-accent btn-sm md:btn-md"
+                            >
+                                Sign In
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                href={"/sign-up"}
+                                className="btn btn-accent btn-soft btn-sm md:btn-md"
+                            >
+                                Sign Up
+                            </Link>
+                        </li>
+                    </SignedOut>
                 </ul>
             </div>
             <div className="navbar-end sm:hidden">
@@ -78,14 +99,6 @@ const Navbar = async () => {
                         </li>
                         <li className="text-black hover:text-slate-900 duration-150">
                             <Link href={"/about"}>Profile</Link>
-                        </li>
-                        <li>
-                            <Link
-                                href={"https://github.com/Hritujeet"}
-                                className="btn btn-soft btn-accent"
-                            >
-                                Github
-                            </Link>
                         </li>
                     </ul>
                 </div>

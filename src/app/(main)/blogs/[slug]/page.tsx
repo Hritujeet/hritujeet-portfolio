@@ -6,13 +6,15 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
 import { prisma } from "../../../../../utils/db";
+import PostComment from "@/components/PostComment";
+import CommentsContainer from "@/components/CommentsContainer";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
     const blog = await prisma.blogPost.findUnique({
         where: { slug },
     });
-    
+
     return (
         <section className="px-4 sm:px-6 lg:px-8 xl:px-12 py-12 sm:py-16 bg-base-100">
             <div className="max-w-4xl mx-auto">
@@ -56,12 +58,14 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                 )}
                             </time>
                             <span className="text-xs mt-1">
-                                {calculateReadingTime(blog?.content || "")} min read
+                                {calculateReadingTime(blog?.content || "")} min
+                                read
                             </span>
                         </div>
                     </div>
                     <div className="card-body p-6 sm:p-8 lg:p-12">
-                        <article className="prose prose-lg max-w-none 
+                        <article
+                            className="prose prose-lg max-w-none 
                             prose-headings:font-bold prose-headings:text-base-content prose-headings:tracking-tight
                             prose-p:text-base-content prose-p:leading-relaxed prose-p:text-lg prose-p:mb-6
                             prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
@@ -72,11 +76,20 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                             prose-li:text-base-content prose-li:leading-relaxed prose-li:mb-2
                             prose-table:text-base-content
                             prose-th:font-semibold prose-th:text-base-content
-                            prose-td:text-base-content">
+                            prose-td:text-base-content"
+                        >
                             <ReactMarkdown
                                 components={{
-                                    code({ node, inline, className, children, ...props }) {
-                                        const match = /language-(\w+)/.exec(className || '');
+                                    code({
+                                        node,
+                                        inline,
+                                        className,
+                                        children,
+                                        ...props
+                                    }) {
+                                        const match = /language-(\w+)/.exec(
+                                            className || ""
+                                        );
                                         return !inline && match ? (
                                             <SyntaxHighlighter
                                                 style={tomorrow}
@@ -85,10 +98,16 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                                 className="rounded-lg !my-6"
                                                 {...props}
                                             >
-                                                {String(children).replace(/\n$/, '')}
+                                                {String(children).replace(
+                                                    /\n$/,
+                                                    ""
+                                                )}
                                             </SyntaxHighlighter>
                                         ) : (
-                                            <code className={`${className} bg-base-200 px-2 py-1 rounded font-mono text-sm font-medium`} {...props}>
+                                            <code
+                                                className={`${className} bg-base-200 px-2 py-1 rounded font-mono text-sm font-medium`}
+                                                {...props}
+                                            >
                                                 {children}
                                             </code>
                                         );
@@ -144,8 +163,8 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                         </li>
                                     ),
                                     a: ({ href, children }) => (
-                                        <a 
-                                            href={href} 
+                                        <a
+                                            href={href}
                                             className="text-primary hover:text-primary-focus font-medium no-underline hover:underline transition-colors duration-200"
                                             target="_blank"
                                             rel="noopener noreferrer"
@@ -158,7 +177,9 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                             {children}
                                         </blockquote>
                                     ),
-                                    hr: () => <hr className="my-12 border-base-300" />,
+                                    hr: () => (
+                                        <hr className="my-12 border-base-300" />
+                                    ),
                                     table: ({ children }) => (
                                         <div className="overflow-x-auto my-8">
                                             <table className="table table-zebra w-full">
@@ -188,6 +209,11 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                         </article>
                     </div>
                 </div>
+            </div>
+
+            <div className="flex flex-col max-w-5xl mx-auto gap-4 mt-10 mb-5">
+                <PostComment postId={blog?.id} />
+                <CommentsContainer postId={blog?.id} />
             </div>
         </section>
     );
