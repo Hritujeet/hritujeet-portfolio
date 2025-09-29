@@ -24,7 +24,7 @@ export default async function RootLayout({
         <html lang="en" data-theme="forest">
             <body>
                 <ClerkProvider>
-                    <Toaster />
+                    <Toaster theme="dark" />
                     <AdminLayout>{children}</AdminLayout>
                 </ClerkProvider>
             </body>

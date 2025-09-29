@@ -39,7 +39,7 @@ export default function RootLayout({
                 <ClerkProvider>
                     <Query>
                         <Navbar />
-                        <Toaster />
+                        <Toaster theme="dark"/>
                         <NextTopLoader
                             color="green"
                             height={1.5}
