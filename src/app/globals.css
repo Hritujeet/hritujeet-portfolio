@@ -110,6 +110,7 @@
     @apply transition-all duration-200;
     border-radius: var(--radius-field);
     border: 1px solid oklch(22% 0.008 285.885);
+    outline: none;
 }
 
 .input:focus,
@@ -117,7 +118,8 @@
 .select:focus {
     box-shadow: var(--focus-ring);
     border-color: oklch(70% 0.19 148.958);
-}
+    outline: none;
+}   
 
 .badge {
     border-radius: var(--radius-badge);

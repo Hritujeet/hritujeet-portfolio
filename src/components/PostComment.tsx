@@ -13,7 +13,7 @@ const PostComment = ({postId}:{postId: string}) => {
   }
 
   return (
-    <div className='bg-base-300 p-4 rounded-lg'>
+    <div className='bg-base-200 p-4 rounded-lg'>
       <div className='flex flex-col gap-3'>
         <textarea 
           className='textarea textarea-bordered w-full min-h-24 resize-none'

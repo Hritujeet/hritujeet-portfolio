@@ -1,13 +1,13 @@
 // @ts-nocheck
-import Image from "next/image";
+import CommentsContainer from "@/components/CommentsContainer";
+import PostComment from "@/components/PostComment";
 import { Metadata } from "next";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { prisma } from "../../../../../utils/db";
-import PostComment from "@/components/PostComment";
-import CommentsContainer from "@/components/CommentsContainer";
+import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
@@ -39,7 +39,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </div>
 
                 {/* Blog Content Container */}
-                <div className="card shadow-sm">
+                <div className="card transition-none! hover:scale-100! bg-base-100 shadow-sm">
                     <div className="flex items-center justify-between gap-4 p-6 sm:p-8 mb-8 border-b border-base-200">
                         <div className="flex items-center gap-3">
                             <div>
@@ -65,9 +65,9 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                     </div>
                     <div className="card-body p-6 sm:p-8 lg:p-12">
                         <article
-                            className="prose prose-lg max-w-none 
+                            className="prose max-w-none 
                             prose-headings:font-bold prose-headings:text-base-content prose-headings:tracking-tight
-                            prose-p:text-base-content prose-p:leading-relaxed prose-p:text-lg prose-p:mb-6
+                            prose-p:text-base-content prose-p:leading-relaxed prose-p:text-base prose-p:mb-6
                             prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
                             prose-strong:text-base-content prose-strong:font-semibold
                             prose-code:text-base-content prose-code:font-mono prose-code:text-sm
@@ -92,10 +92,10 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                         );
                                         return !inline && match ? (
                                             <SyntaxHighlighter
-                                                style={tomorrow}
+                                                style={oneDark}
                                                 language={match[1]}
                                                 PreTag="div"
-                                                className="rounded-lg !my-6"
+                                                className="rounded-lg !my-6 !bg-foreground"
                                                 {...props}
                                             >
                                                 {String(children).replace(
@@ -143,17 +143,17 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                         </h6>
                                     ),
                                     p: ({ children }) => (
-                                        <p className="mb-6 leading-relaxed text-base-content text-lg font-normal">
+                                        <p className="mb-6 leading-relaxed text-base-content font-normal">
                                             {children}
                                         </p>
                                     ),
                                     ul: ({ children }) => (
-                                        <ul className="list-disc list-inside mb-6 space-y-3 text-base-content text-lg pl-2 flex flex-col gap-2">
+                                        <ul className="list-disc list-inside mb-6 space-y-3 text-base-content pl-2 flex flex-col gap-2">
                                             {children}
                                         </ul>
                                     ),
                                     ol: ({ children }) => (
-                                        <ol className="list-decimal list-inside mb-6 space-y-3 text-base-content text-lg pl-2 flex flex-col gap-2">
+                                        <ol className="list-decimal list-inside mb-6 space-y-3 text-base-content pl-2 flex flex-col gap-2">
                                             {children}
                                         </ol>
                                     ),
@@ -173,7 +173,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                         </a>
                                     ),
                                     blockquote: ({ children }) => (
-                                        <blockquote className="border-l-4 border-primary bg-base-200 p-6 my-8 rounded-r-lg font-medium text-lg italic">
+                                        <blockquote className="border-l-4 border-primary bg-base-200 p-6 my-8 rounded-r-lg font-medium italic">
                                             {children}
                                         </blockquote>
                                     ),
