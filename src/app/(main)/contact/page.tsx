@@ -4,11 +4,11 @@ import {
     Linkedin,
     Mail,
     Phone,
-    Twitter
+    Twitter,
 } from "lucide-react";
 import type { Metadata } from "next";
 import { prisma } from "../../../../utils/db";
-import SubmitButton from "./submit-button";
+import ContactForm from "./ContactForm";
 
 type ContactItem = {
     icon: React.ReactElement;
@@ -143,115 +143,7 @@ const ContactPage = () => {
                     </section>
 
                     {/* Column 2: Send Message & Form */}
-                    <section className="order-1 lg:order-2">
-                        <div className="p-8 space-y-8 h-full">
-                            <h2 className="text-3xl font-bold mb-4">
-                                Send a Message
-                            </h2>
-                            <p className="opacity-80 mb-6 text-lg">
-                                If you prefer, fill out the form below. I'm keen
-                                to hear about your projects, discuss web
-                                development trends, or talk about opportunities!
-                            </p>
-
-                            <form
-                                className="space-y-6"
-                                action={async (data: FormData) => {
-                                    "use server";
-                                    const name = data.get("name");
-                                    const email = data.get("email");
-                                    const phone = data.get("phone");
-                                    const query = data.get("message");
-
-                                    try {
-                                        const newContact =
-                                            await prisma.contact.create({
-                                                data: {
-                                                    name: name as string,
-                                                    email: email as string,
-                                                    phone: phone as string,
-                                                    query: query as string,
-                                                },
-                                            });
-                                    } catch (error) {
-                                        if (error instanceof Error) {
-                                            console.log(error);
-                                        }
-                                    }
-                                }}
-                                method="POST"
-                            >
-                                {/* Name Input */}
-                                <div className="form-control">
-                                    <label htmlFor="name" className="label">
-                                        <span className="label-text">
-                                            Your Name
-                                        </span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        placeholder="Enter your name"
-                                        className="input border shadow-none w-full"
-                                        required
-                                    />
-                                </div>
-
-                                {/* Email Input */}
-                                <div className="form-control">
-                                    <label htmlFor="email" className="label">
-                                        <span className="label-text">
-                                            Your Email
-                                        </span>
-                                    </label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        placeholder="example@email.com"
-                                        className="input border shadow-none w-full"
-                                        required
-                                    />
-                                </div>
-
-                                {/* Phone Input */}
-                                <div className="form-control">
-                                    <label htmlFor="email" className="label">
-                                        <span className="label-text">
-                                            Your Phone Number
-                                        </span>
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        id="phpne"
-                                        name="phone"
-                                        placeholder="90xxx xxxxx (IN)"
-                                        className="input border shadow-none w-full"
-                                        required
-                                    />
-                                </div>
-
-                                {/* Message Textarea */}
-                                <div className="form-control">
-                                    <label htmlFor="message" className="label">
-                                        <span className="label-text">
-                                            Message
-                                        </span>
-                                    </label>
-                                    <textarea
-                                        id="message"
-                                        name="message"
-                                        placeholder="Tell me about your project or idea..."
-                                        className="textarea border shadow-none h-24 w-full"
-                                        required
-                                    ></textarea>
-                                </div>
-
-                                <SubmitButton />
-                            </form>
-                        </div>
-                    </section>
+                    <ContactForm />
                 </div>
             </div>
         </div>
