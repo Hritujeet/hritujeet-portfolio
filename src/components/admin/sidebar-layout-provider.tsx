@@ -15,9 +15,12 @@ const SidebarContent = () => (
     // Sidebar container, always visible on large screens, scrollable
     <aside className="w-80 min-h-full bg-base-200 p-4 flex flex-col">
         {/* Title Section */}
-        <h1 className="text-xl font-bold py-4 px-3 mb-4 border-b border-base-300">
-            Hritujeet's Admin Dashboard
-        </h1>
+        <Link
+            href={"/dashboard"}
+            className="text-xl font-bold py-4 px-3 mb-4 border-b border-base-300"
+        >
+            Admin Dashboard
+        </Link>
 
         {/* Main Navigation Menu */}
         <ul className="menu flex-grow">
