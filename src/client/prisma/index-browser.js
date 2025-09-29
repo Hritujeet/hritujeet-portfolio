@@ -144,6 +144,7 @@ exports.Prisma.ProjectScalarFieldEnum = {
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   userClerkId: 'userClerkId',
+  userImg: 'userImg',
   blogPostId: 'blogPostId',
   content: 'content',
   createdAt: 'createdAt',

@@ -41,6 +41,7 @@ model Project {
 model Comment {
   id          String   @id @default(uuid())
   userClerkId String
+  userImg     String
   blogPost    BlogPost @relation(fields: [blogPostId], references: [id])
   blogPostId  String
   content     String
