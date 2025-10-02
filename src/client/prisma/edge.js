@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.2
- * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+ * Prisma Client JS version: 6.14.0
+ * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
  */
 Prisma.prismaVersion = {
-  client: "6.16.2",
-  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
+  client: "6.14.0",
+  engine: "717184b7b35ea05dfa71a3236b7af656013e1e49"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -161,7 +161,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\Web\\NextJS\\hritujeet-portfolio\\src\\client\\prisma",
+      "value": "E:\\Coding\\Web\\NextJS\\hritujeet-portfolio\\src\\client\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -175,7 +175,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\Web\\NextJS\\hritujeet-portfolio\\prisma\\schema.prisma",
+    "sourceFilePath": "E:\\Coding\\Web\\NextJS\\hritujeet-portfolio\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -183,12 +183,13 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
-  "clientVersion": "6.16.2",
-  "engineVersion": "1c57fdcd7e44b29b9313256c76699e91c3ac3c43",
+  "clientVersion": "6.14.0",
+  "engineVersion": "717184b7b35ea05dfa71a3236b7af656013e1e49",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -199,7 +200,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/client/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel BlogPost {\n  id          String    @id @default(uuid())\n  title       String\n  img         String\n  slug        String    @unique\n  description String\n  views       Int       @default(0)\n  content     String\n  createdAt   DateTime  @default(now())\n  Comment     Comment[]\n\n  @@index([id, slug])\n}\n\nmodel Project {\n  id         String   @id @default(uuid())\n  title      String\n  decription String\n  link       String\n  techStack  String[]\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt\n}\n\nmodel Comment {\n  id          String   @id @default(uuid())\n  userClerkId String\n  userImg     String\n  blogPost    BlogPost @relation(fields: [blogPostId], references: [id])\n  blogPostId  String\n  content     String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Contact {\n  id        String   @id @default(uuid())\n  name      String\n  email     String\n  phone     String\n  query     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
   "inlineSchemaHash": "b1e8222fc2e5a4c638fc09ca37e633f26d8bab735be1c5e134ba1e47e0e0b216",
-  "copyEngine": false
+  "copyEngine": true
 }
 config.dirname = '/'
 
