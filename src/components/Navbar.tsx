@@ -100,6 +100,47 @@ const Navbar = async () => {
                         <li className="text-black hover:text-slate-900 duration-150">
                             <Link href={"/about"}>Profile</Link>
                         </li>
+                        <SignedIn>
+                            {user?.emailAddresses[0].emailAddress ==
+                                process.env.ADMIN && (
+                                <>
+                                    <li>
+                                        <Link
+                                            href={"/dashboard"}
+                                            className="btn btn-accent btn-sm md:btn-md"
+                                        >
+                                            Admin
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <SignOutButton redirectUrl="/sign-in">
+                                            <span className="btn btn-error w-full justify-start">
+                                                <LogOut className="h-5 w-5 mr-2" />
+                                                Sign Out
+                                            </span>
+                                        </SignOutButton>
+                                    </li>
+                                </>
+                            )}
+                        </SignedIn>
+                        <SignedOut>
+                            <li>
+                                <Link
+                                    href={"/sign-in"}
+                                    className="btn btn-accent btn-soft btn-sm md:btn-md"
+                                >
+                                    Sign In
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href={"/sign-up"}
+                                    className="btn btn-accent btn-soft btn-sm md:btn-md"
+                                >
+                                    Sign Up
+                                </Link>
+                            </li>
+                        </SignedOut>
                     </ul>
                 </div>
             </div>

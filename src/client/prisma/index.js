@@ -190,7 +190,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -201,7 +200,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/client/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel BlogPost {\n  id          String    @id @default(uuid())\n  title       String\n  img         String\n  slug        String    @unique\n  description String\n  views       Int       @default(0)\n  content     String\n  createdAt   DateTime  @default(now())\n  Comment     Comment[]\n\n  @@index([id, slug])\n}\n\nmodel Project {\n  id         String   @id @default(uuid())\n  title      String\n  decription String\n  link       String\n  techStack  String[]\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt\n}\n\nmodel Comment {\n  id          String   @id @default(uuid())\n  userClerkId String\n  userImg     String\n  blogPost    BlogPost @relation(fields: [blogPostId], references: [id])\n  blogPostId  String\n  content     String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Contact {\n  id        String   @id @default(uuid())\n  name      String\n  email     String\n  phone     String\n  query     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
   "inlineSchemaHash": "b1e8222fc2e5a4c638fc09ca37e633f26d8bab735be1c5e134ba1e47e0e0b216",
-  "copyEngine": true
+  "copyEngine": false
 }
 
 const fs = require('fs')
@@ -238,9 +237,3 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-// file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "src/client/prisma/query_engine-windows.dll.node")
-// file annotations for bundling tools to include these files
-path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "src/client/prisma/schema.prisma")
