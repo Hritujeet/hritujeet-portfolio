@@ -2,7 +2,6 @@ import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 const Navbar = async () => {
     const user = await currentUser();
@@ -36,16 +35,16 @@ const Navbar = async () => {
                                         Admin
                                     </Link>
                                 </li>
-                                <li>
-                                    <SignOutButton redirectUrl="/sign-in">
-                                        <span className="btn btn-error w-full justify-start">
-                                            <LogOut className="h-5 w-5 mr-2" />
-                                            Sign Out
-                                        </span>
-                                    </SignOutButton>
-                                </li>
                             </>
                         )}
+                        <li>
+                            <SignOutButton redirectUrl="/sign-in">
+                                <span className="btn btn-error w-full justify-start">
+                                    <LogOut className="h-5 w-5 mr-2" />
+                                    Sign Out
+                                </span>
+                            </SignOutButton>
+                        </li>
                     </SignedIn>
                     <SignedOut>
                         <li>
@@ -112,16 +111,16 @@ const Navbar = async () => {
                                             Admin
                                         </Link>
                                     </li>
-                                    <li>
-                                        <SignOutButton redirectUrl="/sign-in">
-                                            <span className="btn btn-error w-full justify-start">
-                                                <LogOut className="h-5 w-5 mr-2" />
-                                                Sign Out
-                                            </span>
-                                        </SignOutButton>
-                                    </li>
                                 </>
                             )}
+                            <li>
+                                <SignOutButton redirectUrl="/sign-in">
+                                    <span className="btn btn-error w-full justify-start">
+                                        <LogOut className="h-5 w-5 mr-2" />
+                                        Sign Out
+                                    </span>
+                                </SignOutButton>
+                            </li>
                         </SignedIn>
                         <SignedOut>
                             <li>
