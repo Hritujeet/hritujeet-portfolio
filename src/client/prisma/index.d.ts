@@ -249,8 +249,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.14.0
-   * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
+   * Prisma Client JS version: 6.18.0
+   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
    */
   export type PrismaVersion = {
     client: string
@@ -263,6 +263,7 @@ export namespace Prisma {
    */
 
 
+  export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -1028,6 +1029,10 @@ export namespace Prisma {
       timeout?: number
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
+    /**
+     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
+     */
+    adapter?: runtime.SqlDriverAdapterFactory | null
     /**
      * Global configuration for omitting model fields by default.
      * 
@@ -3333,6 +3338,7 @@ export namespace Prisma {
     id: string | null
     userClerkId: string | null
     userImg: string | null
+    user: string | null
     blogPostId: string | null
     content: string | null
     createdAt: Date | null
@@ -3343,6 +3349,7 @@ export namespace Prisma {
     id: string | null
     userClerkId: string | null
     userImg: string | null
+    user: string | null
     blogPostId: string | null
     content: string | null
     createdAt: Date | null
@@ -3353,6 +3360,7 @@ export namespace Prisma {
     id: number
     userClerkId: number
     userImg: number
+    user: number
     blogPostId: number
     content: number
     createdAt: number
@@ -3365,6 +3373,7 @@ export namespace Prisma {
     id?: true
     userClerkId?: true
     userImg?: true
+    user?: true
     blogPostId?: true
     content?: true
     createdAt?: true
@@ -3375,6 +3384,7 @@ export namespace Prisma {
     id?: true
     userClerkId?: true
     userImg?: true
+    user?: true
     blogPostId?: true
     content?: true
     createdAt?: true
@@ -3385,6 +3395,7 @@ export namespace Prisma {
     id?: true
     userClerkId?: true
     userImg?: true
+    user?: true
     blogPostId?: true
     content?: true
     createdAt?: true
@@ -3468,6 +3479,7 @@ export namespace Prisma {
     id: string
     userClerkId: string
     userImg: string
+    user: string
     blogPostId: string
     content: string
     createdAt: Date
@@ -3495,6 +3507,7 @@ export namespace Prisma {
     id?: boolean
     userClerkId?: boolean
     userImg?: boolean
+    user?: boolean
     blogPostId?: boolean
     content?: boolean
     createdAt?: boolean
@@ -3506,6 +3519,7 @@ export namespace Prisma {
     id?: boolean
     userClerkId?: boolean
     userImg?: boolean
+    user?: boolean
     blogPostId?: boolean
     content?: boolean
     createdAt?: boolean
@@ -3517,6 +3531,7 @@ export namespace Prisma {
     id?: boolean
     userClerkId?: boolean
     userImg?: boolean
+    user?: boolean
     blogPostId?: boolean
     content?: boolean
     createdAt?: boolean
@@ -3528,13 +3543,14 @@ export namespace Prisma {
     id?: boolean
     userClerkId?: boolean
     userImg?: boolean
+    user?: boolean
     blogPostId?: boolean
     content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userClerkId" | "userImg" | "blogPostId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userClerkId" | "userImg" | "user" | "blogPostId" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     blogPost?: boolean | BlogPostDefaultArgs<ExtArgs>
   }
@@ -3554,6 +3570,7 @@ export namespace Prisma {
       id: string
       userClerkId: string
       userImg: string
+      user: string
       blogPostId: string
       content: string
       createdAt: Date
@@ -3985,6 +4002,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Comment", 'String'>
     readonly userClerkId: FieldRef<"Comment", 'String'>
     readonly userImg: FieldRef<"Comment", 'String'>
+    readonly user: FieldRef<"Comment", 'String'>
     readonly blogPostId: FieldRef<"Comment", 'String'>
     readonly content: FieldRef<"Comment", 'String'>
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
@@ -5469,6 +5487,7 @@ export namespace Prisma {
     id: 'id',
     userClerkId: 'userClerkId',
     userImg: 'userImg',
+    user: 'user',
     blogPostId: 'blogPostId',
     content: 'content',
     createdAt: 'createdAt',
@@ -5712,6 +5731,7 @@ export namespace Prisma {
     id?: StringFilter<"Comment"> | string
     userClerkId?: StringFilter<"Comment"> | string
     userImg?: StringFilter<"Comment"> | string
+    user?: StringFilter<"Comment"> | string
     blogPostId?: StringFilter<"Comment"> | string
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
@@ -5723,6 +5743,7 @@ export namespace Prisma {
     id?: SortOrder
     userClerkId?: SortOrder
     userImg?: SortOrder
+    user?: SortOrder
     blogPostId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
@@ -5737,6 +5758,7 @@ export namespace Prisma {
     NOT?: CommentWhereInput | CommentWhereInput[]
     userClerkId?: StringFilter<"Comment"> | string
     userImg?: StringFilter<"Comment"> | string
+    user?: StringFilter<"Comment"> | string
     blogPostId?: StringFilter<"Comment"> | string
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
@@ -5748,6 +5770,7 @@ export namespace Prisma {
     id?: SortOrder
     userClerkId?: SortOrder
     userImg?: SortOrder
+    user?: SortOrder
     blogPostId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
@@ -5764,6 +5787,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Comment"> | string
     userClerkId?: StringWithAggregatesFilter<"Comment"> | string
     userImg?: StringWithAggregatesFilter<"Comment"> | string
+    user?: StringWithAggregatesFilter<"Comment"> | string
     blogPostId?: StringWithAggregatesFilter<"Comment"> | string
     content?: StringWithAggregatesFilter<"Comment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
@@ -5987,6 +6011,7 @@ export namespace Prisma {
     id?: string
     userClerkId: string
     userImg: string
+    user: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5997,6 +6022,7 @@ export namespace Prisma {
     id?: string
     userClerkId: string
     userImg: string
+    user: string
     blogPostId: string
     content: string
     createdAt?: Date | string
@@ -6007,6 +6033,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6017,6 +6044,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     blogPostId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6027,6 +6055,7 @@ export namespace Prisma {
     id?: string
     userClerkId: string
     userImg: string
+    user: string
     blogPostId: string
     content: string
     createdAt?: Date | string
@@ -6037,6 +6066,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6046,6 +6076,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     blogPostId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6303,6 +6334,7 @@ export namespace Prisma {
     id?: SortOrder
     userClerkId?: SortOrder
     userImg?: SortOrder
+    user?: SortOrder
     blogPostId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
@@ -6313,6 +6345,7 @@ export namespace Prisma {
     id?: SortOrder
     userClerkId?: SortOrder
     userImg?: SortOrder
+    user?: SortOrder
     blogPostId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
@@ -6323,6 +6356,7 @@ export namespace Prisma {
     id?: SortOrder
     userClerkId?: SortOrder
     userImg?: SortOrder
+    user?: SortOrder
     blogPostId?: SortOrder
     content?: SortOrder
     createdAt?: SortOrder
@@ -6538,6 +6572,7 @@ export namespace Prisma {
     id?: string
     userClerkId: string
     userImg: string
+    user: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6547,6 +6582,7 @@ export namespace Prisma {
     id?: string
     userClerkId: string
     userImg: string
+    user: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6585,6 +6621,7 @@ export namespace Prisma {
     id?: StringFilter<"Comment"> | string
     userClerkId?: StringFilter<"Comment"> | string
     userImg?: StringFilter<"Comment"> | string
+    user?: StringFilter<"Comment"> | string
     blogPostId?: StringFilter<"Comment"> | string
     content?: StringFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
@@ -6655,6 +6692,7 @@ export namespace Prisma {
     id?: string
     userClerkId: string
     userImg: string
+    user: string
     content: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6664,6 +6702,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6673,6 +6712,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6682,6 +6722,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userClerkId?: StringFieldUpdateOperationsInput | string
     userImg?: StringFieldUpdateOperationsInput | string
+    user?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

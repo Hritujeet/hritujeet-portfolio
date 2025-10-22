@@ -21,6 +21,7 @@ export const createComment = async (comment: string, postId: string) => {
                 blogPostId: postId,
                 userClerkId: user.id,
                 userImg: user.imageUrl,
+                user: user.username || user.fullName || user.emailAddresses[0].emailAddress.split("@")[0] as string,
             },
         });
 
