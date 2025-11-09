@@ -17,7 +17,7 @@ export default async function RootLayout({
 }>) {
     const user = await currentUser();
 
-    if (!user || user.emailAddresses.length <= 0 || !user.emailAddresses[0]) {
+    if (!user || user.emailAddresses.length <= 0 || !user.emailAddresses[0] || user.emailAddresses[0].emailAddress !== process.env.ADMIN) {
         return notFound();
     }
     return (
