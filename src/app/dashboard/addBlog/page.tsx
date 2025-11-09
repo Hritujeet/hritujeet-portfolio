@@ -1,9 +1,10 @@
+import AddBlog from '@/components/admin/AddBlog'
 import React from 'react'
 
-const AddBlog = () => {
+const page = () => {
   return (
-    <div>AddBlog</div>
+    <AddBlog />
   )
 }
 
-export default AddBlog
+export default page

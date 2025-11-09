@@ -1,9 +1,10 @@
+import AddProject from '@/components/admin/AddProject'
 import React from 'react'
 
-const AddProject = () => {
+const page = () => {
   return (
-    <div>AddProject</div>
+    <AddProject />
   )
 }
 
-export default AddProject
+export default page
