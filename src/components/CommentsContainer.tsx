@@ -24,43 +24,46 @@ const CommentsContainer = async ({ postId }: { postId: string }) => {
                     </div>
                 )}
             </div>
-            {comments.length > 0 &&
-                comments.map((comment) => (
-                    <div
-                        key={comment.id}
-                        className="bg-base-200 p-4 rounded-lg"
-                    >
-                        <div className="flex gap-3">
-                            <div className="avatar">
-                                <div className="w-10 h-10 rounded-full">
-                                    <img
-                                        src={comment.userImg}
-                                        alt={comment.user}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="font-semibold">
-                                        {comment.user}
-                                    </span>
-                                    <span className="text-sm text-base-content opacity-60">
-                                        {formatDate(
-                                            comment.createdAt.toLocaleString()
-                                        )}
-                                    </span>
+            <div className="flex flex-col gap-4">
+                {comments.length > 0 &&
+                    comments.map((comment) => (
+                        <div
+                            key={comment.id}
+                            className="bg-base-200 p-4 rounded-lg"
+                        >
+                            <div className="flex gap-3">
+                                <div className="avatar">
+                                    <div className="w-10 h-10 rounded-full">
+                                        <img
+                                            src={comment.userImg}
+                                            alt={comment.user}
+                                        />
+                                    </div>
                                 </div>
 
-                                <p className="text-base-content mb-2">
-                                    {comment.content}
-                                </p>
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="font-semibold">
+                                            {comment.user}
+                                        </span>
+                                        <span className="text-sm text-base-content opacity-60">
+                                            {formatDate(
+                                                comment.createdAt.toLocaleString()
+                                            )}
+                                        </span>
+                                    </div>
+
+                                    <p className="text-base-content mb-2">
+                                        {comment.content}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+            </div>
         </div>
     );
 };
 
+export const dynamic = "force-dynamic";
 export default CommentsContainer;

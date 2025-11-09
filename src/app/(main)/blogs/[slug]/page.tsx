@@ -1,6 +1,7 @@
 // @ts-nocheck
 import CommentsContainer from "@/components/CommentsContainer";
 import PostComment from "@/components/PostComment";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { Metadata } from "next";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
@@ -8,7 +9,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { prisma } from "../../../../../utils/db";
 import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { Suspense } from 'react';
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
@@ -214,14 +215,22 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
             <div className="flex flex-col max-w-5xl mx-auto gap-4 mt-10 mb-5">
                 <SignedIn>
-                    <PostComment postId={blog?.id} />
+                    <PostComment postId={blog?.id} slug={slug} />
                 </SignedIn>
                 <SignedOut>
                     <h1 className="text-3xl font-bold text-white/50 text-center">
                         Sign In to Post Comment
                     </h1>
                 </SignedOut>
-                <CommentsContainer postId={blog?.id} />
+                <Suspense fallback={
+                    <div className="flex flex-col gap-4">
+                        <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                        <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                        <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                    </div>
+                }>
+                    <CommentsContainer postId={blog?.id} />
+                </Suspense>
             </div>
         </section>
     );

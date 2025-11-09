@@ -8,7 +8,7 @@ interface CommentFormData {
     comment: string;
 }
 
-const PostComment = ({ postId }: { postId: string }) => {
+const PostComment = ({ postId, slug }: { postId: string; slug: string }) => {
     const {
         register,
         handleSubmit,
@@ -20,7 +20,7 @@ const PostComment = ({ postId }: { postId: string }) => {
 
     const mutation = useMutation({
         mutationFn: async (data: CommentFormData) => {
-            await createComment(data.comment, postId);
+            await createComment(data.comment, postId, slug);
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["post", postId] });

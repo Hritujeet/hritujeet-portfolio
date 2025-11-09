@@ -1,9 +1,14 @@
 "use server";
 
 import { currentUser } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "../../utils/db";
 
-export const createComment = async (comment: string, postId: string) => {
+export const createComment = async (
+    comment: string,
+    postId: string,
+    slug: string
+) => {
     try {
         const user = await currentUser();
 
@@ -15,17 +20,22 @@ export const createComment = async (comment: string, postId: string) => {
             throw new Error("Comment must be at least 3 characters long");
         }
 
-        const newComment = await prisma.comment.create({
+        await prisma.comment.create({
             data: {
                 content: comment,
                 blogPostId: postId,
                 userClerkId: user.id,
                 userImg: user.imageUrl,
-                user: user.username || user.fullName || user.emailAddresses[0].emailAddress.split("@")[0] as string,
+                user:
+                    user.username ||
+                    user.fullName ||
+                    (user.emailAddresses[0].emailAddress.split(
+                        "@"
+                    )[0] as string),
             },
         });
 
-        console.log(newComment);
+        revalidatePath(`/blogs/${slug}`);
     } catch (error) {
         console.error(error);
         throw new Error("Failed to create comment");
