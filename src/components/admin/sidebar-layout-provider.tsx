@@ -81,7 +81,7 @@ export default function AdminLayout({
                 {/* Toggle button for mobile screens */}
                 <label
                     htmlFor="my-drawer-2"
-                    className="btn btn-primary drawer-button lg:hidden m-4"
+                    className="btn btn-primary btn-soft drawer-button lg:hidden m-4"
                 >
                     <Menu className="h-6 w-6" />
                 </label>
