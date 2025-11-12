@@ -1,3 +1,5 @@
+import z from "zod";
+
 export const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -17,3 +19,9 @@ export const calculateReadingTime = (content: string) => {
     const readingTime = Math.ceil(wordCount / wordsPerMinute);
     return readingTime;
 };
+
+export const projectSchema = z.object({
+    title: z.string().min(4),
+    github: z.url(),
+    description: z.string().min(6),
+});
