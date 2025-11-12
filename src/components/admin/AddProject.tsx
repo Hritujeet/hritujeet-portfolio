@@ -1,6 +1,8 @@
 "use client";
 
+import { addProject } from "@/actions/admin-actions";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,7 +13,7 @@ import { projectSchema } from "../../../utils/utils";
 const AddProject = () => {
     const [techStack, setTechStack] = useState<string[]>([]);
     const [inputVal, setinputVal] = useState("");
-
+    const queryClient = useQueryClient();
     const {
         register,
         reset,
@@ -21,10 +23,26 @@ const AddProject = () => {
         resolver: zodResolver(projectSchema),
     });
 
+    const mutation = useMutation({
+        mutationFn: async (data: z.infer<typeof projectSchema>) => {
+            await addProject(data, techStack);
+        },
+
+        onSuccess: () => {
+            queryClient.invalidateQueries();
+            toast.success("The project has been added succesfully");
+        },
+    });
+
     const myHandler = (data: z.infer<typeof projectSchema>) => {
-        console.log(data);
-        console.log(techStack);
-        reset();
+        if (techStack.length <= 0) {
+            toast.error(
+                "The project should have at least one technology under its tech stack!"
+            );
+        } else {
+            mutation.mutate(data);
+            reset();
+        }
     };
 
     const addStack = () => {

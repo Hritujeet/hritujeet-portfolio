@@ -1,9 +1,16 @@
-"use server"
+"use server";
 
-export const addProject = async () => {
-    
-}
+import z from "zod";
+import { projectSchema } from "../../utils/utils";
 
-export const addBlog = async () => {
+export const addProject = async (
+    data: z.infer<typeof projectSchema>,
+    techStack: string[]
+) => {
+    console.log(data);
+    console.log(techStack);
     
-}
+    
+};
+
+export const addBlog = async () => {};
