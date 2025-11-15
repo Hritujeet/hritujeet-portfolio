@@ -24,13 +24,26 @@ const AddProject = () => {
     });
 
     const mutation = useMutation({
-        mutationFn: async (data: z.infer<typeof projectSchema>) => {
+        mutationFn: async ({
+            data,
+            techStack,
+        }: {
+            data: z.infer<typeof projectSchema>;
+            techStack: string[];
+        }) => {
             await addProject(data, techStack);
         },
 
         onSuccess: () => {
             queryClient.invalidateQueries();
             toast.success("The project has been added succesfully");
+            reset();
+            setTechStack([]);
+        },
+
+        onError: (error: Error) => {
+            console.log(error);
+            toast.error("An error occurred while adding project!");
         },
     });
 
@@ -39,19 +52,16 @@ const AddProject = () => {
             toast.error(
                 "The project should have at least one technology under its tech stack!"
             );
-        } else {
-            mutation.mutate(data);
-            reset();
+            return;
         }
+        mutation.mutate({ data, techStack });
     };
 
     const addStack = () => {
-        let a = techStack;
         if (inputVal.length < 3) {
             toast.error("The tech name should have at least 3 characters.");
         } else {
-            a.push(inputVal);
-            setTechStack(a);
+            setTechStack([...techStack, inputVal]);
             setinputVal("");
         }
     };
@@ -73,8 +83,9 @@ const AddProject = () => {
                         className={`input w-full border outline-none focus:border-accent focus:ring-0 ${
                             errors.errors.title && "border-red-500"
                         }`}
-                        placeholder="Blog Title"
+                        placeholder="Project Title"
                         id="title"
+                        disabled={mutation.isPending}
                         {...register("title")}
                     />
                     {errors.errors.title && (
@@ -94,6 +105,7 @@ const AddProject = () => {
                         }`}
                         placeholder="Github Link"
                         id="github"
+                        disabled={mutation.isPending}
                         {...register("github")}
                     />
                     {errors.errors.github && (
@@ -110,8 +122,9 @@ const AddProject = () => {
                         className={`textarea w-full border outline-none focus:border-accent focus:ring-0 ${
                             errors.errors.description && "border-red-500"
                         }`}
-                        placeholder="Cover Image Link"
+                        placeholder="Project Description"
                         id="desc"
+                        disabled={mutation.isPending}
                         {...register("description")}
                     ></textarea>
                     {errors.errors.description && (
@@ -158,6 +171,7 @@ const AddProject = () => {
                                 placeholder="Enter technology name"
                                 id="tech"
                                 value={inputVal}
+                                disabled={mutation.isPending}
                                 onChange={(e) => {
                                     setinputVal(e.target.value);
                                 }}
@@ -165,7 +179,7 @@ const AddProject = () => {
                             <button
                                 className="btn btn-accent"
                                 type="button"
-                                disabled={inputVal.length < 3}
+                                disabled={inputVal.length < 3 || mutation.isPending}
                                 onClick={() => {
                                     addStack();
                                 }}
@@ -175,8 +189,19 @@ const AddProject = () => {
                         </div>
                     </div>
                 </div>
-                <button type="submit" className="btn btn-accent w-fit">
-                    Add Project
+                <button 
+                    type="submit" 
+                    className="btn btn-accent w-fit"
+                    disabled={mutation.isPending}
+                >
+                    {mutation.isPending ? (
+                        <>
+                            <span className="loading loading-spinner loading-sm"></span>
+                            Adding Project...
+                        </>
+                    ) : (
+                        "Add Project"
+                    )}
                 </button>
             </form>
         </div>
