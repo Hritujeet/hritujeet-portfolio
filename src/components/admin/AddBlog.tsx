@@ -61,6 +61,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         <div className="border-b border-zinc-800 p-2 flex flex-wrap gap-1 bg-zinc-950 sticky top-0 z-10">
             {/* --- Text Styles --- */}
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleBold().run()}
                 className={buttonClass(editor.isActive("bold"))}
                 title="Bold"
@@ -69,6 +70,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleItalic().run()}
                 className={buttonClass(editor.isActive("italic"))}
                 title="Italic"
@@ -77,6 +79,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleUnderline().run()}
                 className={buttonClass(editor.isActive("underline"))}
                 title="Underline"
@@ -85,6 +88,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleStrike().run()}
                 className={buttonClass(editor.isActive("strike"))}
                 title="Strikethrough"
@@ -93,6 +97,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleHighlight().run()}
                 className={buttonClass(editor.isActive("highlight"))}
                 title="Highlight"
@@ -105,6 +110,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             {/* --- Headings --- */}
             {([1, 2, 3] as const).map((level) => (
                 <button
+                    type="button"
                     key={level}
                     onClick={() =>
                         editor.chain().focus().toggleHeading({ level }).run()
@@ -128,6 +134,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
             {/* --- Lists + Code --- */}
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={buttonClass(editor.isActive("bulletList"))}
                 title="Bullet List"
@@ -136,6 +143,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={buttonClass(editor.isActive("orderedList"))}
                 title="Numbered List"
@@ -144,6 +152,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleBlockquote().run()}
                 className={buttonClass(editor.isActive("blockquote"))}
                 title="Blockquote"
@@ -152,6 +161,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleCode().run()}
                 className={buttonClass(editor.isActive("code"))}
                 title="Inline Code"
@@ -160,6 +170,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().toggleCodeBlock().run()}
                 className={buttonClass(editor.isActive("codeBlock"))}
                 title="Code Block"
@@ -171,6 +182,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
             {/* --- Alignment --- */}
             <button
+                type="button"
                 onClick={() =>
                     editor.chain().focus().setTextAlign("left").run()
                 }
@@ -181,6 +193,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() =>
                     editor.chain().focus().setTextAlign("center").run()
                 }
@@ -193,6 +206,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() =>
                     editor.chain().focus().setTextAlign("right").run()
                 }
@@ -203,6 +217,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() =>
                     editor.chain().focus().setTextAlign("justify").run()
                 }
@@ -218,6 +233,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
             {/* --- Link --- */}
             <button
+                type="button"
                 onClick={addLink}
                 className={buttonClass(editor.isActive("link"))}
                 title="Add Link"
@@ -229,6 +245,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
 
             {/* --- Undo / Redo --- */}
             <button
+                type="button"
                 onClick={() => editor.chain().focus().undo().run()}
                 disabled={!editor.can().undo()}
                 className={`p-2 rounded-lg transition-all duration-150 ${
@@ -242,6 +259,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
             </button>
 
             <button
+                type="button"
                 onClick={() => editor.chain().focus().redo().run()}
                 disabled={!editor.can().redo()}
                 className={`p-2 rounded-lg transition-all duration-150 ${
