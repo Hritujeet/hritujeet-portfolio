@@ -32,6 +32,7 @@ import {
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Markdown } from "@tiptap/markdown";
 import z from "zod";
 import { blogSchema } from "../../../utils/utils";
 import Alert from "../Alert";
@@ -266,6 +267,7 @@ const TiptapEditorBlog = ({
             StarterKit,
             Underline,
             Highlight,
+            Markdown,
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
@@ -284,7 +286,7 @@ const TiptapEditorBlog = ({
             },
         },
         onUpdate: ({ editor }) => {
-            setContent(editor.getHTML());
+            setContent(editor.getMarkdown());
         },
     });
 
