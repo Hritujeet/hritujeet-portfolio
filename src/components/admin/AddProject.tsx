@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 import { projectSchema } from "../../../utils/utils";
+import Alert from "../Alert";
 
 const AddProject = () => {
     const [techStack, setTechStack] = useState<string[]>([]);
@@ -89,9 +90,9 @@ const AddProject = () => {
                         {...register("title")}
                     />
                     {errors.errors.title && (
-                        <span className="text-red-500">
-                            Title should have at least 4 characters
-                        </span>
+                        <Alert variant="error">
+                            {errors.errors.title.message}
+                        </Alert>
                     )}
                 </div>
                 <div className="flex flex-col gap-1">
@@ -109,9 +110,9 @@ const AddProject = () => {
                         {...register("github")}
                     />
                     {errors.errors.github && (
-                        <span className="text-red-500">
-                            The link must be a valid one
-                        </span>
+                        <Alert variant="error">
+                            {errors.errors.github.message}
+                        </Alert>
                     )}
                 </div>
                 <div className="flex flex-col gap-1">
@@ -128,9 +129,9 @@ const AddProject = () => {
                         {...register("description")}
                     ></textarea>
                     {errors.errors.description && (
-                        <span className="text-red-500">
-                            Description should have at least 6 characters
-                        </span>
+                        <Alert variant="error">
+                            {errors.errors.description.message}
+                        </Alert>
                     )}
                 </div>
                 <div className="w-full mx-auto p-8">
@@ -179,7 +180,9 @@ const AddProject = () => {
                             <button
                                 className="btn btn-accent"
                                 type="button"
-                                disabled={inputVal.length < 3 || mutation.isPending}
+                                disabled={
+                                    inputVal.length < 3 || mutation.isPending
+                                }
                                 onClick={() => {
                                     addStack();
                                 }}
@@ -189,8 +192,8 @@ const AddProject = () => {
                         </div>
                     </div>
                 </div>
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     className="btn btn-accent w-fit"
                     disabled={mutation.isPending}
                 >

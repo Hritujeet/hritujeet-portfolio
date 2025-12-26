@@ -32,8 +32,9 @@ import {
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import z from "zod";
 import { blogSchema } from "../../../utils/utils";
-import z, { TypeOf } from "zod";
+import Alert from "../Alert";
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
     if (!editor) return null;
@@ -342,9 +343,7 @@ const AddBlog = () => {
                         {...register("title")}
                     />
                     {errors.title && (
-                        <span className="text-red-500">
-                            {errors.title.message}
-                        </span>
+                        <Alert variant="error">{errors.title.message}</Alert>
                     )}
                 </div>
                 <div className="flex flex-col gap-1">
@@ -359,9 +358,7 @@ const AddBlog = () => {
                         {...register("image")}
                     />
                     {errors.image && (
-                        <span className="text-red-500">
-                            {errors.image.message}
-                        </span>
+                        <Alert variant="error">{errors.image.message}</Alert>
                     )}
                 </div>
                 <div className="flex flex-col gap-1">
@@ -375,9 +372,9 @@ const AddBlog = () => {
                         {...register("description")}
                     ></textarea>
                     {errors.description && (
-                        <span className="text-red-500">
+                        <Alert variant="error">
                             {errors.description.message}
-                        </span>
+                        </Alert>
                     )}
                 </div>
                 <TiptapEditorBlog setContent={setContent} />
