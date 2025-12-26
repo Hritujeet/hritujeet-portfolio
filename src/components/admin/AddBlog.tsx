@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import Highlight from "@tiptap/extension-highlight";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
@@ -28,6 +29,11 @@ import {
     Underline as UnderlineIcon,
     Undo,
 } from "lucide-react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { blogSchema } from "../../../utils/utils";
+import z, { TypeOf } from "zod";
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
     if (!editor) return null;
@@ -249,7 +255,11 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
     );
 };
 
-const TiptapEditorBlog = () => {
+const TiptapEditorBlog = ({
+    setContent,
+}: {
+    setContent: Dispatch<SetStateAction<string>>;
+}) => {
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -272,6 +282,9 @@ const TiptapEditorBlog = () => {
                 class: "prose prose-sm sm:prose lg:prose-lg xl:prose-xl focus:outline-none p-4 min-h-[400px]",
             },
         },
+        onUpdate: ({ editor }) => {
+            setContent(editor.getHTML());
+        },
     });
 
     return (
@@ -286,12 +299,37 @@ const TiptapEditorBlog = () => {
 };
 
 const AddBlog = () => {
+    const [content, setContent] = useState<string>("");
+    const {
+        register,
+        reset,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(blogSchema),
+    });
+
+    const submitHandler = (data: z.infer<typeof blogSchema>) => {
+        if (!content || content.length < 10) {
+            toast.error("The content should have at least 10 characters!");
+        }
+        const myData = {
+            title: data.title,
+            description: data.description,
+            img: data.image,
+            content: content,
+        };
+        console.log(myData);
+    };
     return (
         <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-10">
             <h1 className="text-4xl mb-10 font-bold tracking-tight leading-tight">
                 Add Blog 📒
             </h1>
-            <div className="card my-4 p-4 space-y-5 scale-100 hover:scale-100">
+            <form
+                onSubmit={handleSubmit(submitHandler)}
+                className="card my-4 p-4 space-y-5 scale-100 hover:scale-100"
+            >
                 <div className="flex flex-col gap-1">
                     <label htmlFor="title" className="font-bold">
                         Title
@@ -301,7 +339,13 @@ const AddBlog = () => {
                         className="input w-full border outline-none focus:border-accent focus:ring-0"
                         placeholder="Blog Title"
                         id="title"
+                        {...register("title")}
                     />
+                    {errors.title && (
+                        <span className="text-red-500">
+                            {errors.title.message}
+                        </span>
+                    )}
                 </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="cover-img" className="font-bold">
@@ -312,7 +356,13 @@ const AddBlog = () => {
                         className="input w-full border outline-none focus:border-accent focus:ring-0"
                         placeholder="Cover Image Link"
                         id="cover-img"
+                        {...register("image")}
                     />
+                    {errors.image && (
+                        <span className="text-red-500">
+                            {errors.image.message}
+                        </span>
+                    )}
                 </div>
                 <div className="flex flex-col gap-1">
                     <label htmlFor="desc" className="font-bold">
@@ -322,11 +372,19 @@ const AddBlog = () => {
                         className="textarea w-full border outline-none focus:border-accent focus:ring-0"
                         placeholder="Cover Image Link"
                         id="desc"
+                        {...register("description")}
                     ></textarea>
+                    {errors.description && (
+                        <span className="text-red-500">
+                            {errors.description.message}
+                        </span>
+                    )}
                 </div>
-                <TiptapEditorBlog />
-                <button className="btn btn-accent w-fit">Add Blog</button>
-            </div>
+                <TiptapEditorBlog setContent={setContent} />
+                <button type="submit" className="btn btn-accent w-fit">
+                    Add Blog
+                </button>
+            </form>
         </div>
     );
 };
