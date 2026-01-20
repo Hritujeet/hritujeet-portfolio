@@ -1,11 +1,11 @@
-import {NextResponse} from "next/server";
-import {prisma} from "../../../../../utils/db";
+import { NextResponse } from "next/server";
+import { prisma } from "../../../../utils/db";
 
-export async function GET(){
+export async function GET() {
     const posts = await prisma.blogPost.findMany({
         orderBy: {
-            createdAt: "desc"
-        }
+            createdAt: "desc",
+        },
     });
-    return NextResponse.json({msg: "hello", posts})
+    return NextResponse.json({ msg: "hello", posts });
 }

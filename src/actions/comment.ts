@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
-import { prisma } from "../../utils/db";
+import { prisma } from "../utils/db";
 
 export const createComment = async (
     comment: string,

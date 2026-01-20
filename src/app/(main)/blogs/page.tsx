@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import React from "react";
-import { formatDate } from "../../../../utils/utils";
+import { formatDate } from "../../../utils/utils";
 import Link from "next/link";
-import { prisma } from "../../../../utils/db";
+import { prisma } from "../../../utils/db";
 
 const page = async () => {
     const blogs = await prisma.blogPost.findMany({

@@ -2,40 +2,40 @@
 
 import React from "react";
 
+import { postBlog } from "@/actions/post";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Highlight from "@tiptap/extension-highlight";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
+import { Markdown } from "@tiptap/markdown"; // Official TipTap markdown extension
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { Markdown } from "@tiptap/markdown"; // Official TipTap markdown extension
 import {
+    AlignCenter,
+    AlignLeft,
     Bold,
-    Italic,
-    Underline as UnderlineIcon,
-    Strikethrough,
-    Highlighter,
+    Code2,
     Heading1,
     Heading2,
     Heading3,
+    Highlighter,
+    Italic,
+    Link2,
     List,
     ListOrdered,
+    Loader2,
     Quote,
-    Code,
-    Code2,
-    AlignLeft,
-    AlignCenter,
-    AlignRight,
-    AlignJustify,
-    Link2,
-    Undo,
     Redo,
+    Strikethrough,
+    Underline as UnderlineIcon,
+    Undo,
 } from "lucide-react";
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
-import { blogSchema } from "../../../utils/utils"; // Your existing schema
+import { blogSchema } from "../../utils/utils"; // Your existing schema
 import Alert from "../Alert"; // Your existing alert
 
 // --- 1. Clean, Minimalist Toolbar Component ---
@@ -301,7 +301,6 @@ const TiptapEditor = ({
 
 // --- 3. Main Form ---
 const AddBlog = () => {
-    // Extend your schema to include content validation
     const formSchema = blogSchema.extend({
         content: z
             .string()
@@ -310,6 +309,7 @@ const AddBlog = () => {
 
     const {
         register,
+        reset,
         control,
         handleSubmit,
         formState: { errors },
@@ -320,9 +320,24 @@ const AddBlog = () => {
         },
     });
 
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: async (blog: z.infer<typeof formSchema>) => {
+            return await postBlog(blog);
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
+            toast.success(`Blog published! 🚀 Slug: ${data?.slug}`);
+            reset();
+        },
+        onError: (error) => {
+            console.error("Mutation error:", error);
+            toast.error("Failed to publish blog. Check console for details.");
+        },
+    });
+
     const submitHandler = (data: z.infer<typeof formSchema>) => {
-        console.log("Form Submitted:", data);
-        toast.success("Blog ready to ship! 🚀");
+        mutation.mutate(data);
     };
 
     return (
@@ -336,7 +351,11 @@ const AddBlog = () => {
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit(submitHandler)} className="space-y-8">
+            <form
+                onSubmit={handleSubmit(submitHandler)}
+                className="space-y-8"
+                aria-disabled={mutation.isPending}
+            >
                 {/* Meta Data Section */}
                 <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -413,8 +432,13 @@ const AddBlog = () => {
                     <button
                         type="submit"
                         className="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition-colors"
+                        disabled={mutation.isPending}
                     >
-                        Publish Blog
+                        {mutation.isPending ? (
+                            <Loader2 className="animate-spin" />
+                        ) : (
+                            "Publish Blog"
+                        )}
                     </button>
                 </div>
             </form>

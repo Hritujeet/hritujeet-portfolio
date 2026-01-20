@@ -7,7 +7,7 @@ import {
     Twitter,
 } from "lucide-react";
 import type { Metadata } from "next";
-import { prisma } from "../../../../utils/db";
+import { prisma } from "../../../utils/db";
 import ContactForm from "./ContactForm";
 
 type ContactItem = {

@@ -30,4 +30,5 @@ export const blogSchema = z.object({
     title: z.string().min(4),
     description: z.string().min(6),
     image: z.url(),
+    content: z.string().min(6),
 });

@@ -7,8 +7,8 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { prisma } from "../../../../../utils/db";
-import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
+import { prisma } from "../../../../utils/db";
+import { calculateReadingTime, formatDate } from "../../../../utils/utils";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 

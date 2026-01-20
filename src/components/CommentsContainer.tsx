@@ -1,5 +1,5 @@
-import { prisma } from "../../utils/db";
-import { formatDate } from "../../utils/utils";
+import { prisma } from "../utils/db";
+import { formatDate } from "../utils/utils";
 
 const CommentsContainer = async ({ postId }: { postId: string }) => {
     const comments = await prisma.comment.findMany({

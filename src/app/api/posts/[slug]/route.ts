@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "../../../../../utils/db";
+import { prisma } from "../../../../utils/db";
 
 export async function GET(
     request: NextRequest,
@@ -17,13 +17,13 @@ export async function GET(
 
         const post = await prisma.blogPost.findUnique({
             where: {
-                slug
-            }
+                slug,
+            },
         });
 
         return NextResponse.json({
             msg: "This is fetch Post",
-            post
+            post,
         });
     } catch (error) {
         console.error("Database error:", error);

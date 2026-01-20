@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "../../../../utils/db";
+import { prisma } from "../../../utils/db";
 
 type ContactFormData = {
     name: string;

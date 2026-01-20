@@ -1,14 +1,13 @@
 "use client";
 import { useBlogs } from "@/hooks/useBlogs";
 import React from "react";
-import { formatDate } from "../../utils/utils";
+import { formatDate } from "../utils/utils";
 import { BlogPost } from "@prisma/client";
 import Link from "next/link";
 
 const BlogsContainer = () => {
     const { data, isPending, isError } = useBlogs();
     console.log(data);
-    
 
     if (isPending) {
         return (
@@ -36,17 +35,20 @@ const BlogsContainer = () => {
     }
 
     if (isError) {
-        (
-            <div className="flex flex-col items-center justify-center h-56">
-                <h2 className="text-xl font-bold text-red-600">Error loading blogs</h2>
-                <p className="text-gray-500">Please try again later.</p>
-            </div>
-        )
+        <div className="flex flex-col items-center justify-center h-56">
+            <h2 className="text-xl font-bold text-red-600">
+                Error loading blogs
+            </h2>
+            <p className="text-gray-500">Please try again later.</p>
+        </div>;
     }
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {data?.map((blog: BlogPost, idx: number) => (
-                <div key={blog.slug} className="card hover:scale-105 transition-all duration-200 bg-base-100 shadow-xl">
+                <div
+                    key={blog.slug}
+                    className="card hover:scale-105 transition-all duration-200 bg-base-100 shadow-xl"
+                >
                     <figure>
                         <img
                             src={blog.img}

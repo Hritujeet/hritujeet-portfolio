@@ -1,5 +1,5 @@
 import React from "react";
-import { prisma } from "../../utils/db";
+import { prisma } from "../utils/db";
 import { clerkClient } from "@clerk/nextjs/server";
 import Link from "next/link";
 
@@ -12,29 +12,29 @@ const AdminHome = async () => {
     const users = await clerk.users.getCount();
 
     const stats = [
-        { 
-            title: "Total Blogs", 
-            value: blogs, 
+        {
+            title: "Total Blogs",
+            value: blogs,
             icon: "📝",
-            color: "from-blue-500 to-blue-600"
+            color: "from-blue-500 to-blue-600",
         },
-        { 
-            title: "Total Projects", 
-            value: projects, 
+        {
+            title: "Total Projects",
+            value: projects,
             icon: "🚀",
-            color: "from-purple-500 to-purple-600"
+            color: "from-purple-500 to-purple-600",
         },
-        { 
-            title: "Total Comments", 
-            value: comments, 
+        {
+            title: "Total Comments",
+            value: comments,
             icon: "💬",
-            color: "from-green-500 to-green-600"
+            color: "from-green-500 to-green-600",
         },
-        { 
-            title: "Total Users", 
-            value: users, 
+        {
+            title: "Total Users",
+            value: users,
             icon: "👥",
-            color: "from-orange-500 to-orange-600"
+            color: "from-orange-500 to-orange-600",
         },
     ];
 
@@ -44,18 +44,22 @@ const AdminHome = async () => {
                 {/* Header */}
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-                    <p className="text-base-content/60">Welcome back! Here's what's happening.</p>
+                    <p className="text-base-content/60">
+                        Welcome back! Here's what's happening.
+                    </p>
                 </div>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {stats.map((stat, index) => (
-                        <div 
+                        <div
                             key={index}
                             className="bg-base-200 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <div className={`text-4xl bg-gradient-to-br ${stat.color} w-14 h-14 rounded-lg flex items-center justify-center shadow-md`}>
+                                <div
+                                    className={`text-4xl bg-gradient-to-br ${stat.color} w-14 h-14 rounded-lg flex items-center justify-center shadow-md`}
+                                >
                                     {stat.icon}
                                 </div>
                             </div>
@@ -73,11 +77,17 @@ const AdminHome = async () => {
                 <div className="bg-base-200 rounded-xl p-8 shadow-lg">
                     <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Link href="/dashboard/addBlog" className="btn btn-accent btn-lg gap-3 shadow-md hover:shadow-lg transition-all">
+                        <Link
+                            href="/dashboard/addBlog"
+                            className="btn btn-accent btn-lg gap-3 shadow-md hover:shadow-lg transition-all"
+                        >
                             <span className="text-2xl">➕</span>
                             Add New Blog
                         </Link>
-                        <Link href="/dashboard/addProject" className="btn btn-accent btn-lg gap-3 shadow-md hover:shadow-lg transition-all">
+                        <Link
+                            href="/dashboard/addProject"
+                            className="btn btn-accent btn-lg gap-3 shadow-md hover:shadow-lg transition-all"
+                        >
                             <span className="text-2xl">🎯</span>
                             Add New Project
                         </Link>
@@ -85,7 +95,9 @@ const AdminHome = async () => {
                 </div>
 
                 <div className="bg-base-200 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-2xl font-bold mb-4">Task Management Center</h2>
+                    <h2 className="text-2xl font-bold mb-4">
+                        Task Management Center
+                    </h2>
                     <div className="text-base-content/60 text-center py-8">
                         <span className="text-4xl mb-4 block">📊</span>
                         <p>Coming soon...</p>

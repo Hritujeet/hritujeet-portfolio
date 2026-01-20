@@ -1,8 +1,8 @@
 "use server";
 
 import z from "zod";
-import { prisma } from "../../utils/db";
-import { projectSchema } from "../../utils/utils";
+import { prisma } from "../utils/db";
+import { projectSchema } from "../utils/utils";
 
 export const addProject = async (
     data: z.infer<typeof projectSchema>,
