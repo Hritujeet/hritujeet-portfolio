@@ -9,13 +9,18 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { prisma } from "../../../../../utils/db";
 import { calculateReadingTime, formatDate } from "../../../../../utils/utils";
-import { Suspense } from 'react';
+import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
     const blog = await prisma.blogPost.findUnique({
         where: { slug },
     });
+
+    if (!blog?.title) {
+        return notFound();
+    }
 
     return (
         <section className="px-4 sm:px-6 lg:px-8 xl:px-12 py-12 sm:py-16 bg-base-100">
@@ -222,13 +227,15 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                         Sign In to Post Comment
                     </h1>
                 </SignedOut>
-                <Suspense fallback={
-                    <div className="flex flex-col gap-4">
-                        <div className="skeleton h-12 flex-1 rounded-lg"></div>
-                        <div className="skeleton h-12 flex-1 rounded-lg"></div>
-                        <div className="skeleton h-12 flex-1 rounded-lg"></div>
-                    </div>
-                }>
+                <Suspense
+                    fallback={
+                        <div className="flex flex-col gap-4">
+                            <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                            <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                            <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                        </div>
+                    }
+                >
                     <CommentsContainer postId={blog?.id} />
                 </Suspense>
             </div>

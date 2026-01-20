@@ -6,7 +6,9 @@ const Footer = () => {
         <footer className="py-10 mt-20 cursor-default">
             <div className="w-[90vw] max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <span className="text-2xl font-bold mb-2 text-accent tracking-tight">Hritujeet</span>
+                    <span className="text-2xl font-bold mb-2 text-accent tracking-tight">
+                        Hritujeet
+                    </span>
                     <p className="text-sm">Developer. Creator. Explorer.</p>
                 </div>
 
@@ -31,7 +33,7 @@ const Footer = () => {
                         </li>
                         <li>
                             <Link
-                                href="/blogs"
+                                href="/projects"
                                 className="duration-150 hover:text-accent"
                             >
                                 Projects
