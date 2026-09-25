@@ -9,15 +9,19 @@ export const metadata: Metadata = {
         "sign in, login, explore portfolio, Hritujeet Sharma, teenage developer, coding enthusiast, web dev, Next.js, React, JavaScript, tech blogs, software development, coding tutorials, personal blog, tech enthusiast, coding community, web design, frontend development, backend development, full-stack development, open source, tech education, coding resources, developer portfolio, Kota, MIT Aspirant",
 };
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({
     children, 
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" data-theme="forest" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning className="dark">
             <ClerkProvider>
-                <body className="flex flex-col justify-center items-center h-[calc(100vh-1px)] w-screen">
+                <body className={`${inter.className} bg-background text-foreground flex flex-col justify-center items-center h-screen w-screen`}>
                     {children}
                 </body>
             </ClerkProvider>

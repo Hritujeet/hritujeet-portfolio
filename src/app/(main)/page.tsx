@@ -11,8 +11,8 @@ export default function Home() {
                 <Hero />
             </div>
             <HomeAbout />
-            <div className="my-10 space-y-20">
-                <h1 className="my-10 text-4xl font-bold text-center">
+            <div className="my-8 space-y-12">
+                <h1 className="my-8 text-3xl md:text-4xl font-bold text-center tracking-tight text-foreground">
                     Featured Posts
                 </h1>
                 <Featured />

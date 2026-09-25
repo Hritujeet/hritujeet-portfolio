@@ -1,265 +1,184 @@
-"use client"
-import { motion } from "framer-motion"
-import { BookOpen, Code, Coffee, Heart, Lightbulb, Users } from "lucide-react"
-import CTA from "@/components/CTA"
-import Link from "next/link"
+"use client";
 
-type Project = {
-  id: string
-  title: string
-  decription: string
-  link: string
-  techStack: string[]
-}
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
-}
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
+import { BookOpen, Code, Layers, Download, FileText } from "lucide-react";
+import CTA from "@/components/CTA";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 const AboutPage = () => {
-  const skills = [
-    { name: "JavaScript", level: 90 },
-    { name: "React", level: 75 },
-    { name: "Node.js", level: 80 },
-    { name: "Python", level: 95 },
-    { name: "TypeScript", level: 70 },
-    { name: "MongoDB", level: 95 },
-  ]
+    const skills = [
+        { name: "JavaScript / TypeScript", level: 90 },
+        { name: "React / Next.js", level: 90 },
+        { name: "Node.js (MERN / PERN)", level: 85 },
+        { name: "Python", level: 95 },
+        { name: "MongoDB & PostgreSQL", level: 85 },
+        { name: "C++", level: 75 },
+    ];
 
-  const values = [
-    {
-      icon: <Code className="w-6 h-6" />,
-      title: "Clean Code Advocate",
-      description: "I believe in writing code that tells a story - readable, maintainable, and elegant.",
-    },
-    {
-      icon: <Lightbulb className="w-6 h-6" />,
-      title: "Continuous Learner",
-      description: "Technology evolves rapidly, and I'm committed to growing with it, one concept at a time.",
-    },
-    {
-      icon: <Users className="w-6 h-6" />,
-      title: "Early Bird",
-      description:
-        "Started Coding when I was 11. Currently, I am 16 and trying to enhance my skills and push my limits",
-    },
-    {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Problem Solver",
-      description: "Every bug is a puzzle, every feature is an opportunity to create something meaningful.",
-    },
-  ]
+    const stats = [
+        { icon: Code, title: "Experience", content: "5 Years of Programming" },
+        { icon: Layers, title: "Expertise", content: "MERN & PERN Stacks" },
+        { icon: BookOpen, title: "Goal", content: "Quantum Mechanics & Computing" },
+    ];
 
-  const stats = [
-    { icon: Code, title: "Programming Experience", content: "4+ years" },
-    { icon: Coffee, title: "Fuel of Choice", content: "Coffee ☕ (and occasionally tea)" },
-    { icon: BookOpen, title: "Currently Reading", content: "Python for Data Analysis" },
-  ]
+    const fadeInUp = {
+        initial: { opacity: 0, y: 20, filter: "blur(10px)" },
+        animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    };
 
-  return (
-    <div className="min-h-screen bg-base-100">
-      {/* Hero Section */}
-      <motion.div
-        className="hero min-h-[70vh] bg-gradient-to-br from-primary/10 to-accent/10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="hero-content text-center">
-          <motion.div className="max-w-md" variants={fadeInUp} initial="initial" animate="animate">
-            <h1 className="text-5xl font-bold">
-              {"It's me, "}
-              <span className="text-accent">Hritujeet</span>
-            </h1>
-            <p className="py-6">
-              A passionate developer sharing the journey through code, coffee, and countless debugging sessions.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link href="/blogs" className="btn btn-accent">
-                Read Blogs
-              </Link>
-              <Link href="https://github.com/Hritujeet" target="_blank" className="btn btn-outline">
-                Contact
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
+    const staggerContainer = {
+        animate: {
+            transition: {
+                staggerChildren: 0.1,
+            },
+        },
+    };
 
-      <div className="container mx-auto px-8 sm:px-12 md:px-16 lg:px-20 xl:px-32 py-16 space-y-20">
-        {/* Story Section */}
-        <motion.div
-          className="grid lg:grid-cols-2 gap-12 items-center"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <div>
-            <h2 className="text-3xl font-bold mb-6">My Story</h2>
-            <div className="prose prose-lg">
-              <p>
-                My programming journey began with curiosity and a simple Hello, World! that changed everything. What
-                started as tinkering with code has evolved into a passionate pursuit of creating digital solutions that
-                make a difference.
-              </p>
-              <p>
-                Through this platform, I share the real, unfiltered experience of being a developer - the victories, the
-                failures, and those magical moments when everything finally clicks.
-              </p>
-            </div>
-          </div>
+    return (
+        <div className="min-h-screen bg-background text-foreground font-sans">
+            <div className="container mx-auto px-6 sm:px-12 md:px-16 lg:px-20 py-16">
+                {/* Header */}
+                <motion.div 
+                    initial="initial"
+                    animate="animate"
+                    variants={fadeInUp}
+                    className="max-w-3xl mb-16"
+                >
+                    <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+                        About Me.
+                    </h1>
+                    <p className="text-base text-muted-foreground leading-relaxed max-w-2xl">
+                        I began my journey with Python in Class 6, and over the past five years, I've grown from a curious hobbyist into a Full-Stack Developer. I aspire to study physics at the highest level while continuing to build impactful technology.
+                    </p>
+                </motion.div>
 
-          <motion.div
-            className="space-y-4"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {stats.map((stat, index) => (
-              <motion.div key={index} className="card bg-base-200" variants={fadeInUp}>
-                <div className="card-body p-4">
-                  <div className="flex items-center gap-3">
-                    <stat.icon className="w-5 h-5 text-accent" />
-                    <div>
-                      <h3 className="font-semibold">{stat.title}</h3>
-                      <p className="text-sm opacity-70">{stat.content}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Values Section */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl font-bold text-center mb-12">What Drives Me</h2>
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-          >
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                className="card bg-base-200 hover:shadow-lg transition-shadow"
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="card-body">
-                  <div className="text-accent mb-4">{value.icon}</div>
-                  <h3 className="card-title text-lg">{value.title}</h3>
-                  <p className="text-sm opacity-70">{value.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.section>
-
-        {/* Skills Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl font-bold text-center mb-12">Technical Arsenal</h2>
-          <div className="card bg-base-200">
-            <div className="card-body">
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-xl font-bold mb-6">Skills & Proficiency</h3>
-                  <div className="space-y-4">
-                    {skills.map((skill, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <div className="flex justify-between mb-1">
-                          <span className="font-medium">{skill.name}</span>
-                          <span className="text-sm">{skill.level}%</span>
+                {/* Story Section */}
+                <motion.div 
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={staggerContainer}
+                    className="grid lg:grid-cols-3 gap-8 items-start mb-24"
+                >
+                    <motion.div variants={fadeInUp} className="lg:col-span-2 text-muted-foreground max-w-none text-base space-y-6">
+                        <div>
+                            <h2 className="text-xl font-semibold tracking-tight text-foreground mb-3">Technical Background</h2>
+                            <p className="leading-relaxed mb-4">
+                                I have primarily worked with the Next.js, MERN, and PERN stacks, building projects that showcase my understanding of complex systems. From leading the end-to-end development of a digital product catalogue at Garg Pharma, to architecting B2B SaaS workflows as CTO of Unifiée, and re-designing responsive portals as an Intern at IIT Guwahati, I've gained practical, hands-on experience in full-stack architecture.
+                            </p>
                         </div>
-                        <progress className="progress progress-accent w-full" value={skill.level} max="100" />
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+                        
+                        <div>
+                            <h2 className="text-xl font-semibold tracking-tight text-foreground mb-3">Beyond Code</h2>
+                            <p className="leading-relaxed mb-4">
+                                Over time, I've realized that what truly excites me isn't just building software, but understanding the universe itself. Physics has become the subject I naturally gravitate toward. 
+                            </p>
+                            <p className="leading-relaxed mb-4">
+                                The frustration of wrestling with a difficult mechanics or electromagnetism problem is strangely enjoyable because every solution feels like uncovering another piece of reality. That curiosity has led me to pursue physics alongside computer science.
+                            </p>
+                        </div>
 
-                <div>
-                  <h3 className="text-xl font-bold mb-6">Tech Stack</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <span className="font-medium">Frontend: </span>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {["React", "Next.js", "Tailwind CSS", "TypeScript"].map((tech) => (
-                          <span key={tech} className="badge badge-primary">
-                            {tech}
-                          </span>
+                        <div>
+                            <h2 className="text-xl font-semibold tracking-tight text-foreground mb-3">My Goal</h2>
+                            <p className="leading-relaxed">
+                                Physics comes more naturally to me despite the experience I have in the world of programming. My long-term goal is to learn and specialize in quantum mechanics, merging my knowledge of software engineering with my love for physics to contribute meaningfully to the frontier field of quantum computing.
+                            </p>
+                        </div>
+                        
+                        <div className="pt-2 flex flex-wrap gap-4">
+                            <Link href="/resume" className={buttonVariants({ variant: "outline" })}>
+                                <FileText className="w-4 h-4 mr-2" />
+                                View Resume
+                            </Link>
+                            <a href="/Professional%20Profile.pdf" download="Hritujeet_Sharma_Resume.pdf" className={buttonVariants({ variant: "default" })}>
+                                <Download className="w-4 h-4 mr-2" />
+                                Download Resume
+                            </a>
+                        </div>
+                    </motion.div>
+
+                    <motion.div variants={fadeInUp} className="space-y-4">
+                        {stats.map((stat, index) => (
+                            <div key={index} className="p-6 rounded-2xl border bg-card flex items-start gap-4 hover:shadow-sm transition-shadow">
+                                <div className="p-2 bg-primary/10 rounded-lg text-primary">
+                                    <stat.icon className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h3 className="font-semibold text-sm text-foreground">{stat.title}</h3>
+                                    <p className="text-sm text-muted-foreground mt-1">{stat.content}</p>
+                                </div>
+                            </div>
                         ))}
-                      </div>
+                    </motion.div>
+                </motion.div>
+
+                {/* Skills Section */}
+                <motion.div 
+                    initial="initial"
+                    whileInView="animate"
+                    viewport={{ once: true, margin: "-100px" }}
+                    variants={staggerContainer}
+                    className="mb-24"
+                >
+                    <motion.h2 variants={fadeInUp} className="text-xl font-semibold tracking-tight text-foreground mb-8">Technical Proficiency</motion.h2>
+                    <div className="grid md:grid-cols-2 gap-12">
+                        <motion.div variants={fadeInUp}>
+                            <h3 className="text-base font-medium mb-6 text-foreground">Languages & Tools</h3>
+                            <div className="space-y-6">
+                                {skills.map((skill, index) => (
+                                    <div key={index}>
+                                        <div className="flex justify-between mb-2">
+                                            <span className="text-sm font-medium text-foreground">{skill.name}</span>
+                                        </div>
+                                        <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
+                                            <motion.div
+                                                initial={{ width: 0 }}
+                                                whileInView={{ width: `${skill.level}%` }}
+                                                viewport={{ once: true }}
+                                                transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                                                className="bg-primary h-full rounded-full"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        <motion.div variants={fadeInUp}>
+                            <h3 className="text-base font-medium mb-6 text-foreground">Ecosystems</h3>
+                            <div className="space-y-6">
+                                <div className="p-6 rounded-2xl border bg-card">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4 block">Frontend</span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {["React", "Next.js", "Tailwind CSS", "HTML & CSS"].map((tech) => (
+                                            <span key={tech} className="px-3 py-1.5 bg-secondary rounded-lg text-sm font-medium text-foreground">
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                
+                                <div className="p-6 rounded-2xl border bg-card">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4 block">Backend & DB</span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {["Node.js", "Express", "PostgreSQL", "MongoDB", "Prisma"].map((tech) => (
+                                            <span key={tech} className="px-3 py-1.5 bg-secondary rounded-lg text-sm font-medium text-foreground">
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
-                    <div>
-                      <span className="font-medium">Backend: </span>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {["Node.js", "Express", "MongoDB", "PostgreSQL"].map((tech) => (
-                          <span key={tech} className="badge badge-secondary">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <span className="font-medium">Tools: </span>
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {["Git", "Vercel"].map((tech) => (
-                          <span key={tech} className="badge badge-info">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+
+                <CTA />
             </div>
-          </div>
-        </motion.section>
-      </div>
+        </div>
+    );
+};
 
-      {/* CTA Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="px-8 sm:px-12 md:px-16 lg:px-20 xl:px-32 py-16"
-      >
-        <CTA />
-      </motion.div>
-    </div>
-  )
-}
-
-export default AboutPage
+export default AboutPage;

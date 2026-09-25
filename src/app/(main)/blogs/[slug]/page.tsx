@@ -11,6 +11,8 @@ import { prisma } from "../../../../utils/db";
 import { calculateReadingTime, formatDate } from "../../../../utils/utils";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
@@ -23,15 +25,15 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     }
 
     return (
-        <section className="px-4 sm:px-6 lg:px-8 xl:px-12 py-12 sm:py-16 bg-base-100">
+        <section className="px-4 sm:px-6 lg:px-8 xl:px-12 py-12 sm:py-16 bg-background">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-base-content mb-6 text-center leading-tight tracking-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-6 text-center leading-tight tracking-tight">
                     {blog?.title || "Blog Post"}
                 </h1>
             </div>
             <div className="max-w-4xl mx-auto">
                 {/* Featured Image */}
-                <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-12">
+                <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg border border-border/50 mb-12">
                     <Image
                         src={
                             blog?.img ||
@@ -46,19 +48,19 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </div>
 
                 {/* Blog Content Container */}
-                <div className="card transition-none! hover:scale-100! bg-base-100 shadow-sm">
-                    <div className="flex items-center justify-between gap-4 p-6 sm:p-8 mb-8 border-b border-base-200">
+                <Card className="shadow-sm border-border/50">
+                    <div className="flex items-center justify-between gap-4 p-6 sm:p-8 mb-4 border-b border-border/50 bg-muted/20">
                         <div className="flex items-center gap-3">
                             <div>
-                                <p className="font-semibold text-base sm:text-lg text-base-content">
+                                <p className="font-semibold text-base sm:text-lg text-foreground">
                                     Hritujeet
                                 </p>
-                                <p className="text-sm text-base-content/70 font-medium">
+                                <p className="text-sm text-muted-foreground font-medium">
                                     Author
                                 </p>
                             </div>
                         </div>
-                        <div className="flex flex-col text-sm text-base-content/70 text-right">
+                        <div className="flex flex-col text-sm text-muted-foreground text-right">
                             <time className="font-medium">
                                 {formatDate(
                                     blog?.createdAt.toString() as string
@@ -70,20 +72,18 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                             </span>
                         </div>
                     </div>
-                    <div className="card-body p-6 sm:p-8 lg:p-12">
+                    <CardContent className="p-6 sm:p-8 lg:p-12">
                         <article
-                            className="prose max-w-none 
-                            prose-headings:font-bold prose-headings:text-base-content prose-headings:tracking-tight
-                            prose-p:text-base-content prose-p:leading-relaxed prose-p:text-base prose-p:mb-6
+                            className="prose max-w-none dark:prose-invert
+                            prose-headings:font-bold prose-headings:tracking-tight
+                            prose-p:leading-relaxed prose-p:text-base prose-p:mb-6
                             prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
-                            prose-strong:text-base-content prose-strong:font-semibold
-                            prose-code:text-base-content prose-code:font-mono prose-code:text-sm
-                            prose-pre:bg-base-200 prose-pre:rounded-lg
-                            prose-blockquote:text-base-content prose-blockquote:border-primary prose-blockquote:font-medium
-                            prose-li:text-base-content prose-li:leading-relaxed prose-li:mb-2
-                            prose-table:text-base-content
-                            prose-th:font-semibold prose-th:text-base-content
-                            prose-td:text-base-content"
+                            prose-strong:font-semibold
+                            prose-code:font-mono prose-code:text-sm
+                            prose-pre:bg-muted prose-pre:rounded-lg
+                            prose-blockquote:border-primary prose-blockquote:font-medium
+                            prose-li:leading-relaxed prose-li:mb-2
+                            prose-th:font-semibold"
                         >
                             <ReactMarkdown
                                 components={{
@@ -102,7 +102,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                                 style={oneDark}
                                                 language={match[1]}
                                                 PreTag="div"
-                                                className="rounded-lg !my-6 !bg-foreground"
+                                                className="rounded-lg !my-6 !bg-background border border-border"
                                                 {...props}
                                             >
                                                 {String(children).replace(
@@ -112,7 +112,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                             </SyntaxHighlighter>
                                         ) : (
                                             <code
-                                                className={`${className} bg-base-200 px-2 py-1 rounded font-mono text-sm font-medium`}
+                                                className={`${className} bg-muted px-2 py-1 rounded font-mono text-sm font-medium`}
                                                 {...props}
                                             >
                                                 {children}
@@ -120,47 +120,47 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                         );
                                     },
                                     h1: ({ children }) => (
-                                        <h1 className="text-4xl lg:text-5xl font-black mb-8 mt-12 text-base-content border-b-2 border-base-300 pb-4 tracking-tight leading-tight">
+                                        <h1 className="text-4xl lg:text-5xl font-black mb-8 mt-12 border-b pb-4 tracking-tight leading-tight">
                                             {children}
                                         </h1>
                                     ),
                                     h2: ({ children }) => (
-                                        <h2 className="text-2xl lg:text-3xl font-bold mb-6 mt-12 text-base-content tracking-tight leading-tight">
+                                        <h2 className="text-2xl lg:text-3xl font-bold mb-6 mt-12 tracking-tight leading-tight">
                                             {children}
                                         </h2>
                                     ),
                                     h3: ({ children }) => (
-                                        <h3 className="text-xl lg:text-2xl font-bold mb-4 mt-10 text-base-content tracking-tight leading-tight">
+                                        <h3 className="text-xl lg:text-2xl font-bold mb-4 mt-10 tracking-tight leading-tight">
                                             {children}
                                         </h3>
                                     ),
                                     h4: ({ children }) => (
-                                        <h4 className="text-lg lg:text-xl font-semibold mb-3 mt-8 text-base-content tracking-tight">
+                                        <h4 className="text-lg lg:text-xl font-semibold mb-3 mt-8 tracking-tight">
                                             {children}
                                         </h4>
                                     ),
                                     h5: ({ children }) => (
-                                        <h5 className="text-base lg:text-lg font-semibold mb-3 mt-6 text-base-content tracking-tight">
+                                        <h5 className="text-base lg:text-lg font-semibold mb-3 mt-6 tracking-tight">
                                             {children}
                                         </h5>
                                     ),
                                     h6: ({ children }) => (
-                                        <h6 className="text-sm lg:text-base font-semibold mb-2 mt-6 text-base-content/90 uppercase tracking-wide">
+                                        <h6 className="text-sm lg:text-base font-semibold mb-2 mt-6 uppercase tracking-wide opacity-80">
                                             {children}
                                         </h6>
                                     ),
                                     p: ({ children }) => (
-                                        <p className="mb-6 leading-relaxed text-base-content font-normal">
+                                        <p className="mb-6 leading-relaxed font-normal">
                                             {children}
                                         </p>
                                     ),
                                     ul: ({ children }) => (
-                                        <ul className="list-disc list-inside mb-6 space-y-3 text-base-content pl-2 flex flex-col gap-2">
+                                        <ul className="list-disc list-inside mb-6 space-y-3 pl-2 flex flex-col gap-2">
                                             {children}
                                         </ul>
                                     ),
                                     ol: ({ children }) => (
-                                        <ol className="list-decimal list-inside mb-6 space-y-3 text-base-content pl-2 flex flex-col gap-2">
+                                        <ol className="list-decimal list-inside mb-6 space-y-3 pl-2 flex flex-col gap-2">
                                             {children}
                                         </ol>
                                     ),
@@ -172,7 +172,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                     a: ({ href, children }) => (
                                         <a
                                             href={href}
-                                            className="text-primary hover:text-primary-focus font-medium no-underline hover:underline transition-colors duration-200"
+                                            className="text-primary hover:text-primary/80 font-medium no-underline hover:underline transition-colors duration-200"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
@@ -180,32 +180,32 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                         </a>
                                     ),
                                     blockquote: ({ children }) => (
-                                        <blockquote className="border-l-4 border-primary bg-base-200 p-6 my-8 rounded-r-lg font-medium italic">
+                                        <blockquote className="border-l-4 border-primary bg-muted p-6 my-8 rounded-r-lg font-medium italic">
                                             {children}
                                         </blockquote>
                                     ),
                                     hr: () => (
-                                        <hr className="my-12 border-base-300" />
+                                        <hr className="my-12 border-border" />
                                     ),
                                     table: ({ children }) => (
-                                        <div className="overflow-x-auto my-8">
-                                            <table className="table table-zebra w-full">
+                                        <div className="overflow-x-auto my-8 border rounded-lg">
+                                            <table className="w-full text-sm">
                                                 {children}
                                             </table>
                                         </div>
                                     ),
                                     thead: ({ children }) => (
-                                        <thead className="bg-base-200">
+                                        <thead className="bg-muted text-muted-foreground">
                                             {children}
                                         </thead>
                                     ),
                                     th: ({ children }) => (
-                                        <th className="font-bold text-base-content text-left p-4">
+                                        <th className="font-semibold text-left p-4 border-b">
                                             {children}
                                         </th>
                                     ),
                                     td: ({ children }) => (
-                                        <td className="p-4 text-base-content">
+                                        <td className="p-4 border-b">
                                             {children}
                                         </td>
                                     ),
@@ -214,25 +214,29 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                                 {blog?.content || ""}
                             </ReactMarkdown>
                         </article>
-                    </div>
-                </div>
+                    </CardContent>
+                </Card>
             </div>
 
-            <div className="flex flex-col max-w-5xl mx-auto gap-4 mt-10 mb-5">
+            <div className="flex flex-col max-w-4xl mx-auto gap-4 mt-10 mb-5">
                 <SignedIn>
                     <PostComment postId={blog?.id} slug={slug} />
                 </SignedIn>
                 <SignedOut>
-                    <h1 className="text-3xl font-bold text-white/50 text-center">
-                        Sign In to Post Comment
-                    </h1>
+                    <Card className="bg-muted border-dashed border-2 py-8">
+                        <CardContent className="text-center pb-0">
+                            <h2 className="text-2xl font-semibold text-muted-foreground">
+                                Sign In to Post Comment
+                            </h2>
+                        </CardContent>
+                    </Card>
                 </SignedOut>
                 <Suspense
                     fallback={
-                        <div className="flex flex-col gap-4">
-                            <div className="skeleton h-12 flex-1 rounded-lg"></div>
-                            <div className="skeleton h-12 flex-1 rounded-lg"></div>
-                            <div className="skeleton h-12 flex-1 rounded-lg"></div>
+                        <div className="flex flex-col gap-4 mt-8">
+                            <Skeleton className="h-24 w-full rounded-lg" />
+                            <Skeleton className="h-24 w-full rounded-lg" />
+                            <Skeleton className="h-24 w-full rounded-lg" />
                         </div>
                     }
                 >

@@ -2,6 +2,8 @@ import React from "react";
 import { prisma } from "../utils/db";
 import { clerkClient } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const AdminHome = async () => {
     const blogs = await prisma.blogPost.count();
@@ -39,12 +41,12 @@ const AdminHome = async () => {
     ];
 
     return (
-        <div className="min-h-screen bg-base-100 p-6">
+        <div className="min-h-screen bg-background p-6">
             <div className="max-w-7xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="mb-8">
-                    <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-                    <p className="text-base-content/60">
+                    <h1 className="text-4xl font-bold mb-2 text-foreground">Dashboard</h1>
+                    <p className="text-muted-foreground">
                         Welcome back! Here's what's happening.
                     </p>
                 </div>
@@ -52,57 +54,58 @@ const AdminHome = async () => {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {stats.map((stat, index) => (
-                        <div
-                            key={index}
-                            className="bg-base-200 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                        >
-                            <div className="flex items-center justify-between mb-4">
-                                <div
-                                    className={`text-4xl bg-gradient-to-br ${stat.color} w-14 h-14 rounded-lg flex items-center justify-center shadow-md`}
-                                >
-                                    {stat.icon}
+                        <Card key={index} className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                            <CardContent className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div
+                                        className={`text-4xl bg-gradient-to-br ${stat.color} w-14 h-14 rounded-lg flex items-center justify-center shadow-md`}
+                                    >
+                                        {stat.icon}
+                                    </div>
                                 </div>
-                            </div>
-                            <h3 className="text-sm font-medium text-base-content/60 mb-1">
-                                {stat.title}
-                            </h3>
-                            <p className="text-4xl font-bold bg-gradient-to-br from-base-content to-base-content/70 bg-clip-text text-transparent">
-                                {stat.value}
-                            </p>
-                        </div>
+                                <h3 className="text-sm font-medium text-muted-foreground mb-1">
+                                    {stat.title}
+                                </h3>
+                                <p className="text-4xl font-bold text-foreground">
+                                    {stat.value}
+                                </p>
+                            </CardContent>
+                        </Card>
                     ))}
                 </div>
 
                 {/* Quick Actions */}
-                <div className="bg-base-200 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <Link
-                            href="/dashboard/addBlog"
-                            className="btn btn-accent btn-lg gap-3 shadow-md hover:shadow-lg transition-all"
-                        >
-                            <span className="text-2xl">➕</span>
-                            Add New Blog
-                        </Link>
-                        <Link
-                            href="/dashboard/addProject"
-                            className="btn btn-accent btn-lg gap-3 shadow-md hover:shadow-lg transition-all"
-                        >
-                            <span className="text-2xl">🎯</span>
-                            Add New Project
-                        </Link>
-                    </div>
-                </div>
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="text-2xl font-bold">Quick Actions</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                <div className="bg-base-200 rounded-xl p-8 shadow-lg">
-                    <h2 className="text-2xl font-bold mb-4">
-                        Task Management Center
-                    </h2>
-                    <div className="text-base-content/60 text-center py-8">
-                        <span className="text-4xl mb-4 block">📊</span>
-                        <p>Coming soon...</p>
-                    </div>
-                </div>
+                            <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addBlog">
+                                <span className="text-2xl mr-4">➕</span>
+                                Add New Blog
+                            </Link>
+
+                            <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addProject">
+                                <span className="text-2xl mr-4">🎯</span>
+                                Add New Project
+                            </Link>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader>
+                        <CardTitle className="text-2xl font-bold">Task Management Center</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-muted-foreground text-center py-8">
+                            <span className="text-4xl mb-4 block">📊</span>
+                            <p>Coming soon...</p>
+                        </div>
+                    </CardContent>
+                </Card>
             </div>
         </div>
     );

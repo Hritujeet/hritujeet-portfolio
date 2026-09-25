@@ -1,10 +1,14 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { handleContactSubmit } from "./submit-contact";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 type ContactFormData = {
     name: string;
@@ -46,17 +50,13 @@ const ContactForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Name Input */}
-            <div className="form-control">
-                <label htmlFor="name" className="label">
-                    <span className="label-text">Your Name</span>
-                </label>
-                <input
+            <div className="space-y-2">
+                <Label htmlFor="name">Your Name</Label>
+                <Input
                     type="text"
                     id="name"
                     placeholder="Enter your name"
-                    className={`input border shadow-none w-full ${
-                        errors.name ? "input-error" : ""
-                    }`}
+                    className={errors.name ? "border-destructive focus-visible:ring-destructive" : ""}
                     {...register("name", {
                         required: "Name is required",
                         minLength: {
@@ -66,26 +66,20 @@ const ContactForm = () => {
                     })}
                 />
                 {errors.name && (
-                    <label className="label">
-                        <span className="label-text-alt text-error">
-                            {errors.name.message}
-                        </span>
-                    </label>
+                    <Label className="text-sm font-medium text-destructive">
+                        {errors.name.message}
+                    </Label>
                 )}
             </div>
 
             {/* Email Input */}
-            <div className="form-control">
-                <label htmlFor="email" className="label">
-                    <span className="label-text">Your Email</span>
-                </label>
-                <input
+            <div className="space-y-2">
+                <Label htmlFor="email">Your Email</Label>
+                <Input
                     type="email"
                     id="email"
                     placeholder="example@email.com"
-                    className={`input border shadow-none w-full ${
-                        errors.email ? "input-error" : ""
-                    }`}
+                    className={errors.email ? "border-destructive focus-visible:ring-destructive" : ""}
                     {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -95,26 +89,20 @@ const ContactForm = () => {
                     })}
                 />
                 {errors.email && (
-                    <label className="label">
-                        <span className="label-text-alt text-error">
-                            {errors.email.message}
-                        </span>
-                    </label>
+                    <Label className="text-sm font-medium text-destructive">
+                        {errors.email.message}
+                    </Label>
                 )}
             </div>
 
             {/* Phone Input */}
-            <div className="form-control">
-                <label htmlFor="phone" className="label">
-                    <span className="label-text">Your Phone Number</span>
-                </label>
-                <input
+            <div className="space-y-2">
+                <Label htmlFor="phone">Your Phone Number</Label>
+                <Input
                     type="tel"
                     id="phone"
                     placeholder="90xxx xxxxx (IN)"
-                    className={`input border shadow-none w-full ${
-                        errors.phone ? "input-error" : ""
-                    }`}
+                    className={errors.phone ? "border-destructive focus-visible:ring-destructive" : ""}
                     {...register("phone", {
                         required: "Phone number is required",
                         pattern: {
@@ -124,25 +112,19 @@ const ContactForm = () => {
                     })}
                 />
                 {errors.phone && (
-                    <label className="label">
-                        <span className="label-text-alt text-error">
-                            {errors.phone.message}
-                        </span>
-                    </label>
+                    <Label className="text-sm font-medium text-destructive">
+                        {errors.phone.message}
+                    </Label>
                 )}
             </div>
 
             {/* Message Textarea */}
-            <div className="form-control">
-                <label htmlFor="message" className="label">
-                    <span className="label-text">Message</span>
-                </label>
-                <textarea
+            <div className="space-y-2">
+                <Label htmlFor="message">Message</Label>
+                <Textarea
                     id="message"
                     placeholder="Tell me about your project or idea..."
-                    className={`textarea border shadow-none h-24 w-full ${
-                        errors.message ? "textarea-error" : ""
-                    }`}
+                    className={`min-h-[150px] resize-none ${errors.message ? "border-destructive focus-visible:ring-destructive" : ""}`}
                     {...register("message", {
                         required: "Message is required",
                         minLength: {
@@ -150,30 +132,27 @@ const ContactForm = () => {
                             message: "Message must be at least 10 characters",
                         },
                     })}
-                ></textarea>
+                />
                 {errors.message && (
-                    <label className="label">
-                        <span className="label-text-alt text-error">
-                            {errors.message.message}
-                        </span>
-                    </label>
+                    <Label className="text-sm font-medium text-destructive">
+                        {errors.message.message}
+                    </Label>
                 )}
             </div>
 
-            <button
+            <Button
                 type="submit"
+                size="lg"
                 disabled={mutation.isPending}
-                className="btn btn-primary btn-lg w-full text-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="w-full text-base"
             >
                 {mutation.isPending ? (
-                    <span className="loading loading-spinner"></span>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 ) : (
-                    <>
-                        <Send className="w-5 h-5" />
-                        Send Message
-                    </>
+                    <Send className="mr-2 h-5 w-5" />
                 )}
-            </button>
+                {mutation.isPending ? "Sending..." : "Send Message"}
+            </Button>
         </form>
     );
 };

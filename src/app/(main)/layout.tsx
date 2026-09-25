@@ -13,6 +13,10 @@ export const metadata: Metadata = {
         "Hey, there! I am Hritujeet, a web dev enthusiast as a teenage developer. I love to build things and share my knowledge with the world.",
 };
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -24,7 +28,7 @@ export default function RootLayout({
         pathname.split("?")[0]
     }`;
     return (
-        <html lang="en" data-theme="forest">
+        <html lang="en" className="dark">
             <Head>
                 <meta name="robots" content="index, follow" />
                 <link rel="canonical" href={canonicalUrl} />
@@ -35,7 +39,7 @@ export default function RootLayout({
                 />
                 <meta property="og:type" content="website" />
             </Head>
-            <body>
+            <body className={`${inter.className} bg-background text-foreground antialiased`}>
                 <ClerkProvider>
                     <Query>
                         <Navbar />

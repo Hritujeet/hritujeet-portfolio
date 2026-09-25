@@ -3,6 +3,10 @@ import React from "react";
 import { useProjects } from "@/hooks/useProjects"
 import { motion } from "framer-motion"
 import Link from "next/link";
+import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 type Project = {
     id: string;
@@ -13,9 +17,9 @@ type Project = {
 };
 
 const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
+    initial: { opacity: 0, y: 20, filter: "blur(10px)" },
+    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
 };
 
 const staggerContainer = {
@@ -35,33 +39,50 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
         >
-            <h2 className="text-4xl font-bold text-center mb-4">Projects</h2>
-            <p className="text-center opacity-70 mb-10">
-                {"Here's a glimpse of my work in these projects"}
-            </p>
+            <motion.h2 
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight text-foreground"
+            >
+                Selected Work
+            </motion.h2>
+            <motion.p 
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+                className="text-center text-base text-muted-foreground mb-10 max-w-2xl mx-auto"
+            >
+                {"Here's a glimpse of some of my recent projects and experiments."}
+            </motion.p>
 
             {isPending && (
                 <div className="grid md:grid-cols-2 gap-6">
                     {[1, 2].map((i) => (
-                        <div key={i} className="card bg-base-200">
-                            <div className="card-body">
-                                <div className="skeleton h-6 w-3/4 mb-4"></div>
-                                <div className="skeleton h-4 w-full mb-2"></div>
-                                <div className="skeleton h-4 w-2/3 mb-4"></div>
+                        <Card key={i}>
+                            <CardHeader>
+                                <Skeleton className="h-6 w-3/4 mb-2" />
+                                <Skeleton className="h-4 w-full" />
+                            </CardHeader>
+                            <CardContent>
                                 <div className="flex gap-2 mb-4">
-                                    <div className="skeleton h-6 w-16"></div>
-                                    <div className="skeleton h-6 w-20"></div>
-                                    <div className="skeleton h-6 w-14"></div>
+                                    <Skeleton className="h-5 w-16" />
+                                    <Skeleton className="h-5 w-20" />
+                                    <Skeleton className="h-5 w-14" />
                                 </div>
-                                <div className="skeleton h-8 w-24"></div>
-                            </div>
-                        </div>
+                            </CardContent>
+                            <CardFooter>
+                                <Skeleton className="h-9 w-24" />
+                            </CardFooter>
+                        </Card>
                     ))}
                 </div>
             )}
 
             {!isPending && data?.projects?.length === 0 && (
-                <div className="text-center text-2xl font-bold opacity-50">
+                <div className="text-center text-2xl font-bold text-muted-foreground">
                     No Projects Yet
                 </div>
             )}
@@ -77,37 +98,31 @@ const Projects = () => {
                     {data.projects.map((project: Project, index: number) => (
                         <motion.div
                             key={project.id}
-                            className="card bg-base-200 hover:shadow-lg transition-shadow"
                             variants={fadeInUp}
                             whileHover={{ scale: 1.02 }}
                         >
-                            <div className="card-body">
-                                <h3 className="card-title">{project.title}</h3>
-                                <p className="opacity-70">
-                                    {project.decription}
-                                </p>
-                                <div className="flex flex-wrap gap-2 my-4">
-                                    {project.techStack.map(
-                                        (tech, techIndex) => (
-                                            <span
-                                                key={techIndex}
-                                                className="badge badge-outline"
-                                            >
-                                                {tech}
-                                            </span>
-                                        )
-                                    )}
-                                </div>
-                                <div className="card-actions">
-                                    <Link
-                                        href={project.link}
-                                        target="_blank"
-                                        className="btn btn-accent btn-sm"
-                                    >
+                            <Card className="h-full flex flex-col rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border bg-card">
+                                <CardHeader>
+                                    <CardTitle className="text-xl">{project.title}</CardTitle>
+                                    <CardDescription className="text-base">{project.decription}</CardDescription>
+                                </CardHeader>
+                                <CardContent className="flex-grow">
+                                    <div className="flex flex-wrap gap-2">
+                                        {project.techStack.map(
+                                            (tech, techIndex) => (
+                                                <Badge key={techIndex} variant="secondary" className="font-medium bg-secondary/50">
+                                                    {tech}
+                                                </Badge>
+                                            )
+                                        )}
+                                    </div>
+                                </CardContent>
+                                <CardFooter className="pt-4 border-t border-border/50">
+                                    <Link href={project.link} target="_blank" className={buttonVariants({ size: "sm" })}>
                                         View Project
                                     </Link>
-                                </div>
-                            </div>
+                                </CardFooter>
+                            </Card>
                         </motion.div>
                     ))}
                 </motion.div>

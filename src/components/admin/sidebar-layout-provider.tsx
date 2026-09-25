@@ -1,7 +1,10 @@
 "use client";
-import Link from "next/link"; // Import Link for Next.js navigation
-import { Menu, X, LogOut, Globe, Plus } from "lucide-react"; // Example icons
+import Link from "next/link";
+import { Menu, LogOut, Globe, Plus, X } from "lucide-react";
 import { SignOutButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { buttonVariants } from "@/components/ui/button";
 
 // Dummy link data (replace hrefs with your actual routes)
 const mainLinks = [
@@ -12,92 +15,74 @@ const mainLinks = [
 const bottomLinks = [{ href: "/", label: "Go to Site", icon: Globe }];
 
 const SidebarContent = () => (
-    // Sidebar container, always visible on large screens, scrollable
-    <aside className="w-80 min-h-full bg-base-200 p-4 flex flex-col">
+    <div className="flex h-full flex-col bg-muted/10 w-full">
         {/* Title Section */}
-        <Link
-            href={"/dashboard"}
-            className="text-xl font-bold py-4 px-3 mb-4 border-b border-base-300"
-        >
-            Admin Dashboard
-        </Link>
+        <div className="p-6 border-b">
+            <Link href={"/dashboard"} className="text-xl font-bold tracking-tight">
+                Admin Dashboard
+            </Link>
+        </div>
 
         {/* Main Navigation Menu */}
-        <ul className="menu flex-grow">
-            {mainLinks.map((item) => (
-                <li key={item.href}>
-                    {/* 'btn-ghost' is applied to the link for the ghost style */}
-                    <Link
-                        href={item.href}
-                        className="btn btn-ghost justify-start"
-                    >
-                        <item.icon className="h-5 w-5 mr-2" />
-                        {item.label}
+        <div className="flex-1 overflow-auto py-6">
+            <nav className="grid gap-2 px-4">
+                {mainLinks.map((item) => (
+                    <Link key={item.href} className={`${buttonVariants({ variant: "ghost" })} justify-start text-muted-foreground hover:text-foreground`} href={item.href}>
+                        <item.icon className="mr-3 h-5 w-5" />
+                        <span className="text-sm font-medium">{item.label}</span>
                     </Link>
-                </li>
-            ))}
-        </ul>
+                ))}
+            </nav>
+        </div>
 
         {/* Bottom Section: Go to Site & Sign Out */}
-        <div className="border-t border-base-300 pt-4 space-y-2">
+        <div className="p-4 border-t grid gap-3">
             {bottomLinks.map((item) => (
-                <Link
-                    key={item.href}
-                    href={item.href}
-                    className="btn btn-accent btn-ghost w-full justify-start"
-                >
-                    <item.icon className="h-5 w-5 mr-2" />
-                    {item.label}
+                <Link key={item.href} className={`${buttonVariants({ variant: "outline" })} justify-start text-muted-foreground hover:text-foreground`} href={item.href}>
+                    <item.icon className="mr-3 h-5 w-5" />
+                    <span className="text-sm font-medium">{item.label}</span>
                 </Link>
             ))}
 
-            {/* Sign Out Button (using a button for action, not navigation) */}
             <SignOutButton redirectUrl="/sign-in">
-                <span className="btn btn-error btn-ghost w-full justify-start">
-                    <LogOut className="h-5 w-5 mr-2" />
-                    Sign Out
-                </span>
+                <div className={`${buttonVariants({ variant: "destructive" })} justify-start cursor-pointer w-full`}>
+                    <LogOut className="mr-3 h-5 w-5" />
+                    <span className="text-sm font-medium">Sign Out</span>
+                </div>
             </SignOutButton>
         </div>
-    </aside>
+    </div>
 );
 
-// Main Layout Component using DaisyUI's Drawer for mobile
 export default function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    // State to manage the drawer open/close (optional, often handled by CSS/DaisyUI)
-    // const [isOpen, setIsOpen] = useState(false);
-
     return (
-        <div className="drawer lg:drawer-open">
-            {/* Checkbox input for the drawer (controls visibility) */}
-            <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-
-            {/* Main Content Area */}
-            <div className="drawer-content flex flex-col items-start justify-start">
-                {/* Toggle button for mobile screens */}
-                <label
-                    htmlFor="my-drawer-2"
-                    className="btn btn-primary btn-soft drawer-button lg:hidden m-4"
-                >
-                    <Menu className="h-6 w-6" />
-                </label>
-
-                {/* Your Page Content goes here */}
-                <main className="p-4 w-full">{children}</main>
-            </div>
-
-            {/* Sidebar Overlay (Drawer Side) */}
-            <div className="drawer-side z-50">
-                <label
-                    htmlFor="my-drawer-2"
-                    aria-label="close sidebar"
-                    className="drawer-overlay"
-                ></label>
+        <div className="grid min-h-screen w-full md:grid-cols-[280px_1fr] bg-background">
+            <aside className="hidden border-r bg-muted/10 md:block">
                 <SidebarContent />
+            </aside>
+            <div className="flex flex-col flex-1 w-full overflow-hidden">
+                <header className="flex h-14 items-center gap-4 border-b bg-muted/10 px-4 lg:h-[60px] lg:px-6 md:hidden">
+                    <Sheet>
+                        <SheetTrigger className={`${buttonVariants({ variant: "outline" })} cursor-pointer size-10 shrink-0 md:hidden`}>
+                            <Menu className="h-5 w-5" />
+                            <span className="sr-only">Toggle navigation menu</span>
+                        </SheetTrigger>
+                        <SheetContent side="left" className="p-0 w-72">
+                            <SheetTitle className="sr-only">Admin Navigation</SheetTitle>
+                            <SidebarContent />
+                        </SheetContent>
+                    </Sheet>
+                    <Link href="/dashboard" className="font-semibold tracking-tight text-lg">
+                        Dashboard
+                    </Link>
+                </header>
+                <main className="flex-1 p-4 md:p-8 w-full overflow-y-auto">
+                    {children}
+                </main>
             </div>
         </div>
     );

@@ -11,6 +11,10 @@ export const metadata: Metadata = {
     title: "Hritujeet's Admin Dashboard",
 };
 
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
 export default async function RootLayout({
     children,
 }: Readonly<{
@@ -27,8 +31,8 @@ export default async function RootLayout({
         return notFound();
     }
     return (
-        <html lang="en" data-theme="forest">
-            <body>
+        <html lang="en" className="dark">
+            <body className={`${inter.className} bg-background text-foreground antialiased`}>
                 <ClerkProvider>
                     <Query>
                         <Toaster theme="dark" />

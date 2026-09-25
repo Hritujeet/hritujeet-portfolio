@@ -32,6 +32,7 @@ import {
     Underline as UnderlineIcon,
     Undo,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
@@ -429,17 +430,14 @@ const AddBlog = () => {
                 </div>
 
                 <div className="pt-4">
-                    <button
+                    <Button
                         type="submit"
-                        className="px-8 py-3 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition-colors"
+                        size="lg"
                         disabled={mutation.isPending}
                     >
-                        {mutation.isPending ? (
-                            <Loader2 className="animate-spin" />
-                        ) : (
-                            "Publish Blog"
-                        )}
-                    </button>
+                        {mutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        {mutation.isPending ? "Publishing..." : "Publish Blog"}
+                    </Button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,5 @@
 "use client";
+import { buttonVariants } from "@/components/ui/button";
 import { SignIn, useClerk } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { ArrowLeft, Loader2 } from "lucide-react";
@@ -7,13 +8,15 @@ import Link from "next/link";
 const SignInPage = () => {
     const { loaded } = useClerk();
     if (!loaded) {
-        return <Loader2 className="animate-spin h-8 w-8" />;
+        return <Loader2 className="animate-spin h-8 w-8 text-primary" />;
     }
     return (
-        <div className="flex flex-col gap-2">
-            <Link href={"/"} className="btn btn-accent">
-                <ArrowLeft /> Home
-            </Link>
+        <div className="flex flex-col gap-4 items-center justify-center min-h-screen">
+            <div className="w-full max-w-[400px]">
+                <Link className={buttonVariants({ variant: "ghost" })} href={"/"}>
+                    <ArrowLeft className="mr-2 h-4 w-4" /> Home
+                </Link>
+            </div>
             <SignIn
                 appearance={{
                     theme: dark,

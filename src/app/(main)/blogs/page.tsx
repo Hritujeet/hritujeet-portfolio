@@ -3,6 +3,8 @@ import React from "react";
 import { formatDate } from "../../../utils/utils";
 import Link from "next/link";
 import { prisma } from "../../../utils/db";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card";
+import { Button, buttonVariants } from "@/components/ui/button";
 
 const page = async () => {
     const blogs = await prisma.blogPost.findMany({
@@ -12,36 +14,38 @@ const page = async () => {
     });
 
     return (
-        <div className="container mx-auto">
-            <h1 className="text-5xl font-bold my-10 text-center">
-                Read <span className="text-accent">Blogs</span>
+        <div className="container mx-auto pb-16">
+            <h1 className="text-5xl font-extrabold my-12 text-center tracking-tight text-foreground">
+                Read <span className="text-muted-foreground">Blogs</span>
             </h1>
-            <div className="px-8 sm:px-12 md:px-16 lg:px-32 xl:px-40 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {blogs.map((blog, idx) => (
-                    <div key={blog.slug} className="card bg-base-100 shadow-xl">
-                        <figure>
+                    <Card key={blog.slug} className="flex flex-col h-full hover:shadow-md transition-all duration-200 overflow-hidden">
+                        <div className="relative w-full h-48 bg-muted">
                             <img
                                 src={blog.img}
                                 alt={blog.title}
-                                className="object-cover w-full h-48"
+                                className="object-cover w-full h-full"
                             />
-                        </figure>
-                        <div className="card-body">
-                            <h2 className="card-title">{blog.title}</h2>
-                            <p>{blog.description}</p>
-                            <div className="card-actions justify-end items-center">
-                                <span className="text-xs opacity-60">
-                                    {formatDate(blog.createdAt.toString())}
-                                </span>
-                                <Link
-                                    href={`/blogs/${blog.slug}`}
-                                    className="btn btn-accent btn-sm"
-                                >
-                                    Read More
-                                </Link>
-                            </div>
                         </div>
-                    </div>
+                        <CardHeader>
+                            <CardTitle className="line-clamp-2 leading-tight text-xl">{blog.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex-grow">
+                            <CardDescription className="line-clamp-3 text-base-content/70">
+                                {blog.description}
+                            </CardDescription>
+                        </CardContent>
+                        <CardFooter className="flex items-center justify-between mt-auto pt-4 border-t border-border/50">
+                            <span className="text-xs text-muted-foreground font-medium">
+                                {formatDate(blog.createdAt.toString())}
+                            </span>
+
+                            <Link className={buttonVariants({ variant: "default" })} href={`/blogs/${blog.slug}`}>
+                                Read More
+                            </Link>
+                        </CardFooter>
+                    </Card>
                 ))}
             </div>
         </div>

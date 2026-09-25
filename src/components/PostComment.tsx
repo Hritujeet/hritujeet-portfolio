@@ -3,6 +3,10 @@ import { createComment } from "@/actions/comment";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Loader2 } from "lucide-react";
 
 interface CommentFormData {
     comment: string;
@@ -40,12 +44,12 @@ const PostComment = ({ postId, slug }: { postId: string; slug: string }) => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-base-200 p-4 rounded-lg"
+            className="bg-muted p-6 rounded-lg border"
         >
-            <div className="flex flex-col gap-3">
-                <textarea
-                    className={`textarea textarea-bordered w-full min-h-24 resize-none ${
-                        errors.comment ? "textarea-error outline-red-500" : ""
+            <div className="flex flex-col gap-4">
+                <Textarea
+                    className={`min-h-[100px] resize-none ${
+                        errors.comment ? "border-destructive focus-visible:ring-destructive" : ""
                     }`}
                     placeholder="Write your comment..."
                     {...register("comment", {
@@ -58,24 +62,20 @@ const PostComment = ({ postId, slug }: { postId: string; slug: string }) => {
                     })}
                 />
                 {errors.comment && (
-                    <label className="label">
-                        <span className="label-text-alt text-error">
-                            Comment is required and must be at least 3
-                            characters long.
-                        </span>
-                    </label>
+                    <Label className="text-sm font-medium text-destructive">
+                        Comment is required and must be at least 3 characters long.
+                    </Label>
                 )}
                 <div className="flex justify-end">
-                    <button
-                        className="btn btn-primary"
+                    <Button
+                        type="submit"
                         disabled={mutation.isPending}
                     >
-                        {mutation.isPending ? (
-                            <span className="loading loading-spinner"></span>
-                        ) : (
-                            "Post Comment"
+                        {mutation.isPending && (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         )}
-                    </button>
+                        {mutation.isPending ? "Posting..." : "Post Comment"}
+                    </Button>
                 </div>
             </div>
         </form>
