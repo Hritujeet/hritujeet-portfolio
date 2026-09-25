@@ -13,6 +13,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import Script from "next/script";
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
@@ -24,7 +25,27 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         return notFound();
     }
 
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: blog.title,
+        description: blog.description,
+        image: [blog.img || "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&h=630&auto=format&fit=crop"],
+        datePublished: blog.createdAt.toISOString(),
+        author: {
+            "@type": "Person",
+            name: "Hritujeet Sharma",
+            url: "https://hritujeet.com/about",
+        },
+    };
+
     return (
+        <>
+        <Script
+            id={`blog-schema-${blog.id}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <section className="px-4 sm:px-6 lg:px-8 xl:px-12 py-12 sm:py-16 bg-background">
             <div className="max-w-4xl mx-auto">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-6 text-center leading-tight tracking-tight">
@@ -244,6 +265,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </Suspense>
             </div>
         </section>
+        </>
     );
 };
 
