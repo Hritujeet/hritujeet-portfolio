@@ -247,12 +247,45 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     );
 };
 
-export const metadata: Metadata = {
-    title: "Read Blogs | Hritujeet",
-    description:
-        "Read blogs about web development, programming, and more. Stay updated with the latest trends and insights in the tech world. Join our community of developers and enthusiasts.",
-    keywords:
-        "react, nextjs, javascript, web development, programming, blogs, tech trends, developer community, insights",
-};
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const blog = await prisma.blogPost.findUnique({
+        where: { slug },
+        select: { title: true, description: true, img: true, createdAt: true }
+    });
+
+    if (!blog) {
+        return {
+            title: "Blog Not Found | Hritujeet Sharma",
+        };
+    }
+
+    return {
+        title: blog.title,
+        description: blog.description,
+        openGraph: {
+            title: blog.title,
+            description: blog.description,
+            url: `https://hritujeet.com/blogs/${slug}`,
+            type: "article",
+            publishedTime: blog.createdAt.toISOString(),
+            authors: ["Hritujeet Sharma"],
+            images: [
+                {
+                    url: blog.img || "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&h=630&auto=format&fit=crop",
+                    width: 1200,
+                    height: 630,
+                    alt: blog.title,
+                },
+            ],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: blog.title,
+            description: blog.description,
+            images: [blog.img || "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&h=630&auto=format&fit=crop"],
+        },
+    };
+}
 
 export default page;
