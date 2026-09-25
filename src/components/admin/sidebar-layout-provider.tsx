@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Menu, LogOut, Globe, Plus, X } from "lucide-react";
+import { Menu, LogOut, Globe, Plus, X, List, LayoutList } from "lucide-react";
 import { SignOutButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
@@ -10,6 +10,8 @@ import { buttonVariants } from "@/components/ui/button";
 const mainLinks = [
     { href: "/dashboard/addBlog", label: "Add Blog", icon: Plus },
     { href: "/dashboard/addProject", label: "Add Project", icon: Plus },
+    { href: "/dashboard/manageBlogs", label: "Manage Blogs", icon: List },
+    { href: "/dashboard/manageProjects", label: "Manage Projects", icon: LayoutList },
 ];
 
 const bottomLinks = [{ href: "/", label: "Go to Site", icon: Globe }];
