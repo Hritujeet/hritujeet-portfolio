@@ -35,7 +35,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         author: {
             "@type": "Person",
             name: "Hritujeet Sharma",
-            url: "https://hritujeet.com/about",
+            url: "https://hritujeet-portfolio.vercel.app/about",
         },
     };
 
@@ -288,7 +288,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         openGraph: {
             title: blog.title,
             description: blog.description,
-            url: `https://hritujeet.com/blogs/${slug}`,
+            url: `https://hritujeet-portfolio.vercel.app/blogs/${slug}`,
             type: "article",
             publishedTime: blog.createdAt.toISOString(),
             authors: ["Hritujeet Sharma"],

@@ -8,7 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app"),
     title: {
         default: "Hritujeet Sharma | Full-Stack Engineer",
         template: "%s | Hritujeet Sharma",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     openGraph: {
         type: "website",
         locale: "en_US",
-        url: "https://hritujeet.com",
+        url: "https://hritujeet-portfolio.vercel.app",
         title: "Hritujeet Sharma | Full-Stack Engineer",
         description: "Portfolio of Hritujeet Sharma. Teenage full-stack developer, specializing in Next.js, React, Node.js, and modern web architectures.",
         siteName: "Hritujeet Sharma Portfolio",

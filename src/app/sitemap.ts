@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { prisma } from "@/utils/db";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet.com";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app";
 
     // Static Routes
     const routes = ["", "/about", "/projects", "/blogs", "/contact", "/resume"].map((route) => ({
