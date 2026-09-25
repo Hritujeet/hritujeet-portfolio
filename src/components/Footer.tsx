@@ -38,15 +38,15 @@ const Footer = () => {
                     <h3 className="text-sm font-semibold tracking-wider uppercase text-foreground/80 mb-4">Connect</h3>
                     <div className="flex flex-wrap gap-2">
 
-                        <Link className={buttonVariants({ variant: "outline" })} href="https://github.com/Hritujeet" target="_blank" rel="noopener noreferrer">
+                        <Link className={buttonVariants({ variant: "outline" })} href="https://github.com/Hritujeet" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
                             Github
                         </Link>
 
-                        <Link className={buttonVariants({ variant: "outline" })} href="https://www.linkedin.com/in/hritujeet-sharma-797ba7281/" target="_blank" rel="noopener noreferrer">
+                        <Link className={buttonVariants({ variant: "outline" })} href="https://www.linkedin.com/in/hritujeet-sharma-797ba7281/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
                             LinkedIn
                         </Link>
 
-                        <Link className={buttonVariants({ variant: "outline" })} href="https://x.com/HritujeetS93526">
+                        <Link className={buttonVariants({ variant: "outline" })} href="https://x.com/HritujeetS93526" aria-label="Twitter Profile">
                             Twitter
                         </Link>
 

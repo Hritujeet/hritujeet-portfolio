@@ -118,7 +118,7 @@ const Projects = () => {
                                     </div>
                                 </CardContent>
                                 <CardFooter className="pt-4 border-t border-border/50">
-                                    <Link href={project.link} target="_blank" className={buttonVariants({ size: "sm" })}>
+                                    <Link href={project.link} target="_blank" className={buttonVariants({ size: "sm" })} aria-label={`View project: ${project.title}`}>
                                         View Project
                                     </Link>
                                 </CardFooter>

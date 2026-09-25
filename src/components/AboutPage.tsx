@@ -92,7 +92,7 @@ const AboutPage = () => {
                                 <FileText className="w-4 h-4 mr-2" />
                                 View Resume
                             </Link>
-                            <a href="/Professional%20Profile.pdf" download="Hritujeet_Sharma_Resume.pdf" className={buttonVariants({ variant: "default" })}>
+                            <a href="/Professional%20Profile.pdf" download="Hritujeet_Sharma_Resume.pdf" className={buttonVariants({ variant: "default" })} aria-label="Download Resume PDF">
                                 <Download className="w-4 h-4 mr-2" />
                                 Download Resume
                             </a>

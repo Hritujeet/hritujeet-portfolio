@@ -2,7 +2,7 @@
 import { useBlogs } from "@/hooks/useBlogs";
 import React from "react";
 import { formatDate } from "../utils/utils";
-import { BlogPost } from "@prisma/client";
+import { BlogPost } from "@/client/prisma";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter, CardDescription } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -64,6 +64,7 @@ const BlogsContainer = () => {
                             <img
                                 src={blog.img}
                                 alt={blog.title}
+                                loading="lazy"
                                 className="object-cover w-full h-52 group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>
@@ -79,7 +80,7 @@ const BlogsContainer = () => {
                             <span className="text-sm font-medium text-muted-foreground">
                                 {formatDate(blog.createdAt.toString())}
                             </span>
-                            <Link href={`/blogs/${blog.slug}`} className={buttonVariants({ variant: "default", size: "sm" })}>
+                            <Link href={`/blogs/${blog.slug}`} className={buttonVariants({ variant: "default", size: "sm" })} aria-label={`Read more about ${blog.title}`}>
                                 Read More
                             </Link>
                         </CardFooter>

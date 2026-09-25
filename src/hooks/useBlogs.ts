@@ -1,5 +1,5 @@
 "use client"
-import { BlogPost } from "@prisma/client";
+import { BlogPost } from "@/client/prisma";
 import {useQuery} from "@tanstack/react-query";
 
 export const useBlogs = () => {

@@ -12,6 +12,7 @@ const Hero = () => {
                     src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Modern sleek background"
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
                     className="object-cover opacity-20 dark:opacity-30 mix-blend-overlay"
                     priority
                 />
