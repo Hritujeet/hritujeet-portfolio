@@ -33,6 +33,11 @@ export type Comment = $Result.DefaultSelection<Prisma.$CommentPayload>
  * 
  */
 export type Contact = $Result.DefaultSelection<Prisma.$ContactPayload>
+/**
+ * Model Devlog
+ * 
+ */
+export type Devlog = $Result.DefaultSelection<Prisma.$DevlogPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -191,6 +196,16 @@ export class PrismaClient<
     * ```
     */
   get contact(): Prisma.ContactDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.devlog`: Exposes CRUD operations for the **Devlog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Devlogs
+    * const devlogs = await prisma.devlog.findMany()
+    * ```
+    */
+  get devlog(): Prisma.DevlogDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -249,8 +264,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.18.0
-   * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
+   * Prisma Client JS version: 6.14.0
+   * Query Engine version: 717184b7b35ea05dfa71a3236b7af656013e1e49
    */
   export type PrismaVersion = {
     client: string
@@ -263,7 +278,6 @@ export namespace Prisma {
    */
 
 
-  export import Bytes = runtime.Bytes
   export import JsonObject = runtime.JsonObject
   export import JsonArray = runtime.JsonArray
   export import JsonValue = runtime.JsonValue
@@ -635,7 +649,8 @@ export namespace Prisma {
     BlogPost: 'BlogPost',
     Project: 'Project',
     Comment: 'Comment',
-    Contact: 'Contact'
+    Contact: 'Contact',
+    Devlog: 'Devlog'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -654,7 +669,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "blogPost" | "project" | "comment" | "contact"
+      modelProps: "blogPost" | "project" | "comment" | "contact" | "devlog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -954,6 +969,80 @@ export namespace Prisma {
           }
         }
       }
+      Devlog: {
+        payload: Prisma.$DevlogPayload<ExtArgs>
+        fields: Prisma.DevlogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DevlogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DevlogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>
+          }
+          findFirst: {
+            args: Prisma.DevlogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DevlogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>
+          }
+          findMany: {
+            args: Prisma.DevlogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>[]
+          }
+          create: {
+            args: Prisma.DevlogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>
+          }
+          createMany: {
+            args: Prisma.DevlogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DevlogCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>[]
+          }
+          delete: {
+            args: Prisma.DevlogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>
+          }
+          update: {
+            args: Prisma.DevlogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>
+          }
+          deleteMany: {
+            args: Prisma.DevlogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DevlogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DevlogUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>[]
+          }
+          upsert: {
+            args: Prisma.DevlogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DevlogPayload>
+          }
+          aggregate: {
+            args: Prisma.DevlogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDevlog>
+          }
+          groupBy: {
+            args: Prisma.DevlogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DevlogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DevlogCountArgs<ExtArgs>
+            result: $Utils.Optional<DevlogCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1030,10 +1119,6 @@ export namespace Prisma {
       isolationLevel?: Prisma.TransactionIsolationLevel
     }
     /**
-     * Instance of a Driver Adapter, e.g., like one provided by `@prisma/adapter-planetscale`
-     */
-    adapter?: runtime.SqlDriverAdapterFactory | null
-    /**
      * Global configuration for omitting model fields by default.
      * 
      * @example
@@ -1054,6 +1139,7 @@ export namespace Prisma {
     project?: ProjectOmit
     comment?: CommentOmit
     contact?: ContactOmit
+    devlog?: DevlogOmit
   }
 
   /* Types for Logging */
@@ -5443,6 +5529,1001 @@ export namespace Prisma {
 
 
   /**
+   * Model Devlog
+   */
+
+  export type AggregateDevlog = {
+    _count: DevlogCountAggregateOutputType | null
+    _min: DevlogMinAggregateOutputType | null
+    _max: DevlogMaxAggregateOutputType | null
+  }
+
+  export type DevlogMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    content: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DevlogMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    content: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DevlogCountAggregateOutputType = {
+    id: number
+    title: number
+    content: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DevlogMinAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DevlogMaxAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DevlogCountAggregateInputType = {
+    id?: true
+    title?: true
+    content?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DevlogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Devlog to aggregate.
+     */
+    where?: DevlogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Devlogs to fetch.
+     */
+    orderBy?: DevlogOrderByWithRelationInput | DevlogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DevlogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Devlogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Devlogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Devlogs
+    **/
+    _count?: true | DevlogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DevlogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DevlogMaxAggregateInputType
+  }
+
+  export type GetDevlogAggregateType<T extends DevlogAggregateArgs> = {
+        [P in keyof T & keyof AggregateDevlog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDevlog[P]>
+      : GetScalarType<T[P], AggregateDevlog[P]>
+  }
+
+
+
+
+  export type DevlogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DevlogWhereInput
+    orderBy?: DevlogOrderByWithAggregationInput | DevlogOrderByWithAggregationInput[]
+    by: DevlogScalarFieldEnum[] | DevlogScalarFieldEnum
+    having?: DevlogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DevlogCountAggregateInputType | true
+    _min?: DevlogMinAggregateInputType
+    _max?: DevlogMaxAggregateInputType
+  }
+
+  export type DevlogGroupByOutputType = {
+    id: string
+    title: string
+    content: string
+    createdAt: Date
+    updatedAt: Date
+    _count: DevlogCountAggregateOutputType | null
+    _min: DevlogMinAggregateOutputType | null
+    _max: DevlogMaxAggregateOutputType | null
+  }
+
+  type GetDevlogGroupByPayload<T extends DevlogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DevlogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DevlogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DevlogGroupByOutputType[P]>
+            : GetScalarType<T[P], DevlogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DevlogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["devlog"]>
+
+  export type DevlogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["devlog"]>
+
+  export type DevlogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["devlog"]>
+
+  export type DevlogSelectScalar = {
+    id?: boolean
+    title?: boolean
+    content?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DevlogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "createdAt" | "updatedAt", ExtArgs["result"]["devlog"]>
+
+  export type $DevlogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Devlog"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      content: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["devlog"]>
+    composites: {}
+  }
+
+  type DevlogGetPayload<S extends boolean | null | undefined | DevlogDefaultArgs> = $Result.GetResult<Prisma.$DevlogPayload, S>
+
+  type DevlogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DevlogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DevlogCountAggregateInputType | true
+    }
+
+  export interface DevlogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Devlog'], meta: { name: 'Devlog' } }
+    /**
+     * Find zero or one Devlog that matches the filter.
+     * @param {DevlogFindUniqueArgs} args - Arguments to find a Devlog
+     * @example
+     * // Get one Devlog
+     * const devlog = await prisma.devlog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DevlogFindUniqueArgs>(args: SelectSubset<T, DevlogFindUniqueArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Devlog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DevlogFindUniqueOrThrowArgs} args - Arguments to find a Devlog
+     * @example
+     * // Get one Devlog
+     * const devlog = await prisma.devlog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DevlogFindUniqueOrThrowArgs>(args: SelectSubset<T, DevlogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Devlog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogFindFirstArgs} args - Arguments to find a Devlog
+     * @example
+     * // Get one Devlog
+     * const devlog = await prisma.devlog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DevlogFindFirstArgs>(args?: SelectSubset<T, DevlogFindFirstArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Devlog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogFindFirstOrThrowArgs} args - Arguments to find a Devlog
+     * @example
+     * // Get one Devlog
+     * const devlog = await prisma.devlog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DevlogFindFirstOrThrowArgs>(args?: SelectSubset<T, DevlogFindFirstOrThrowArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Devlogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Devlogs
+     * const devlogs = await prisma.devlog.findMany()
+     * 
+     * // Get first 10 Devlogs
+     * const devlogs = await prisma.devlog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const devlogWithIdOnly = await prisma.devlog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DevlogFindManyArgs>(args?: SelectSubset<T, DevlogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Devlog.
+     * @param {DevlogCreateArgs} args - Arguments to create a Devlog.
+     * @example
+     * // Create one Devlog
+     * const Devlog = await prisma.devlog.create({
+     *   data: {
+     *     // ... data to create a Devlog
+     *   }
+     * })
+     * 
+     */
+    create<T extends DevlogCreateArgs>(args: SelectSubset<T, DevlogCreateArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Devlogs.
+     * @param {DevlogCreateManyArgs} args - Arguments to create many Devlogs.
+     * @example
+     * // Create many Devlogs
+     * const devlog = await prisma.devlog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DevlogCreateManyArgs>(args?: SelectSubset<T, DevlogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Devlogs and returns the data saved in the database.
+     * @param {DevlogCreateManyAndReturnArgs} args - Arguments to create many Devlogs.
+     * @example
+     * // Create many Devlogs
+     * const devlog = await prisma.devlog.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Devlogs and only return the `id`
+     * const devlogWithIdOnly = await prisma.devlog.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DevlogCreateManyAndReturnArgs>(args?: SelectSubset<T, DevlogCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Devlog.
+     * @param {DevlogDeleteArgs} args - Arguments to delete one Devlog.
+     * @example
+     * // Delete one Devlog
+     * const Devlog = await prisma.devlog.delete({
+     *   where: {
+     *     // ... filter to delete one Devlog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DevlogDeleteArgs>(args: SelectSubset<T, DevlogDeleteArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Devlog.
+     * @param {DevlogUpdateArgs} args - Arguments to update one Devlog.
+     * @example
+     * // Update one Devlog
+     * const devlog = await prisma.devlog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DevlogUpdateArgs>(args: SelectSubset<T, DevlogUpdateArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Devlogs.
+     * @param {DevlogDeleteManyArgs} args - Arguments to filter Devlogs to delete.
+     * @example
+     * // Delete a few Devlogs
+     * const { count } = await prisma.devlog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DevlogDeleteManyArgs>(args?: SelectSubset<T, DevlogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Devlogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Devlogs
+     * const devlog = await prisma.devlog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DevlogUpdateManyArgs>(args: SelectSubset<T, DevlogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Devlogs and returns the data updated in the database.
+     * @param {DevlogUpdateManyAndReturnArgs} args - Arguments to update many Devlogs.
+     * @example
+     * // Update many Devlogs
+     * const devlog = await prisma.devlog.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Devlogs and only return the `id`
+     * const devlogWithIdOnly = await prisma.devlog.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DevlogUpdateManyAndReturnArgs>(args: SelectSubset<T, DevlogUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Devlog.
+     * @param {DevlogUpsertArgs} args - Arguments to update or create a Devlog.
+     * @example
+     * // Update or create a Devlog
+     * const devlog = await prisma.devlog.upsert({
+     *   create: {
+     *     // ... data to create a Devlog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Devlog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DevlogUpsertArgs>(args: SelectSubset<T, DevlogUpsertArgs<ExtArgs>>): Prisma__DevlogClient<$Result.GetResult<Prisma.$DevlogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Devlogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogCountArgs} args - Arguments to filter Devlogs to count.
+     * @example
+     * // Count the number of Devlogs
+     * const count = await prisma.devlog.count({
+     *   where: {
+     *     // ... the filter for the Devlogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends DevlogCountArgs>(
+      args?: Subset<T, DevlogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DevlogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Devlog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DevlogAggregateArgs>(args: Subset<T, DevlogAggregateArgs>): Prisma.PrismaPromise<GetDevlogAggregateType<T>>
+
+    /**
+     * Group by Devlog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DevlogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DevlogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DevlogGroupByArgs['orderBy'] }
+        : { orderBy?: DevlogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DevlogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDevlogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Devlog model
+   */
+  readonly fields: DevlogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Devlog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DevlogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Devlog model
+   */
+  interface DevlogFieldRefs {
+    readonly id: FieldRef<"Devlog", 'String'>
+    readonly title: FieldRef<"Devlog", 'String'>
+    readonly content: FieldRef<"Devlog", 'String'>
+    readonly createdAt: FieldRef<"Devlog", 'DateTime'>
+    readonly updatedAt: FieldRef<"Devlog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Devlog findUnique
+   */
+  export type DevlogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * Filter, which Devlog to fetch.
+     */
+    where: DevlogWhereUniqueInput
+  }
+
+  /**
+   * Devlog findUniqueOrThrow
+   */
+  export type DevlogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * Filter, which Devlog to fetch.
+     */
+    where: DevlogWhereUniqueInput
+  }
+
+  /**
+   * Devlog findFirst
+   */
+  export type DevlogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * Filter, which Devlog to fetch.
+     */
+    where?: DevlogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Devlogs to fetch.
+     */
+    orderBy?: DevlogOrderByWithRelationInput | DevlogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Devlogs.
+     */
+    cursor?: DevlogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Devlogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Devlogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Devlogs.
+     */
+    distinct?: DevlogScalarFieldEnum | DevlogScalarFieldEnum[]
+  }
+
+  /**
+   * Devlog findFirstOrThrow
+   */
+  export type DevlogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * Filter, which Devlog to fetch.
+     */
+    where?: DevlogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Devlogs to fetch.
+     */
+    orderBy?: DevlogOrderByWithRelationInput | DevlogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Devlogs.
+     */
+    cursor?: DevlogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Devlogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Devlogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Devlogs.
+     */
+    distinct?: DevlogScalarFieldEnum | DevlogScalarFieldEnum[]
+  }
+
+  /**
+   * Devlog findMany
+   */
+  export type DevlogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * Filter, which Devlogs to fetch.
+     */
+    where?: DevlogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Devlogs to fetch.
+     */
+    orderBy?: DevlogOrderByWithRelationInput | DevlogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Devlogs.
+     */
+    cursor?: DevlogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Devlogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Devlogs.
+     */
+    skip?: number
+    distinct?: DevlogScalarFieldEnum | DevlogScalarFieldEnum[]
+  }
+
+  /**
+   * Devlog create
+   */
+  export type DevlogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Devlog.
+     */
+    data: XOR<DevlogCreateInput, DevlogUncheckedCreateInput>
+  }
+
+  /**
+   * Devlog createMany
+   */
+  export type DevlogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Devlogs.
+     */
+    data: DevlogCreateManyInput | DevlogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Devlog createManyAndReturn
+   */
+  export type DevlogCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * The data used to create many Devlogs.
+     */
+    data: DevlogCreateManyInput | DevlogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Devlog update
+   */
+  export type DevlogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Devlog.
+     */
+    data: XOR<DevlogUpdateInput, DevlogUncheckedUpdateInput>
+    /**
+     * Choose, which Devlog to update.
+     */
+    where: DevlogWhereUniqueInput
+  }
+
+  /**
+   * Devlog updateMany
+   */
+  export type DevlogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Devlogs.
+     */
+    data: XOR<DevlogUpdateManyMutationInput, DevlogUncheckedUpdateManyInput>
+    /**
+     * Filter which Devlogs to update
+     */
+    where?: DevlogWhereInput
+    /**
+     * Limit how many Devlogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Devlog updateManyAndReturn
+   */
+  export type DevlogUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * The data used to update Devlogs.
+     */
+    data: XOR<DevlogUpdateManyMutationInput, DevlogUncheckedUpdateManyInput>
+    /**
+     * Filter which Devlogs to update
+     */
+    where?: DevlogWhereInput
+    /**
+     * Limit how many Devlogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Devlog upsert
+   */
+  export type DevlogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Devlog to update in case it exists.
+     */
+    where: DevlogWhereUniqueInput
+    /**
+     * In case the Devlog found by the `where` argument doesn't exist, create a new Devlog with this data.
+     */
+    create: XOR<DevlogCreateInput, DevlogUncheckedCreateInput>
+    /**
+     * In case the Devlog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DevlogUpdateInput, DevlogUncheckedUpdateInput>
+  }
+
+  /**
+   * Devlog delete
+   */
+  export type DevlogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+    /**
+     * Filter which Devlog to delete.
+     */
+    where: DevlogWhereUniqueInput
+  }
+
+  /**
+   * Devlog deleteMany
+   */
+  export type DevlogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Devlogs to delete
+     */
+    where?: DevlogWhereInput
+    /**
+     * Limit how many Devlogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Devlog without action
+   */
+  export type DevlogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Devlog
+     */
+    select?: DevlogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Devlog
+     */
+    omit?: DevlogOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5508,6 +6589,17 @@ export namespace Prisma {
   };
 
   export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+  export const DevlogScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    content: 'content',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DevlogScalarFieldEnum = (typeof DevlogScalarFieldEnum)[keyof typeof DevlogScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5856,6 +6948,58 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Contact"> | Date | string
   }
 
+  export type DevlogWhereInput = {
+    AND?: DevlogWhereInput | DevlogWhereInput[]
+    OR?: DevlogWhereInput[]
+    NOT?: DevlogWhereInput | DevlogWhereInput[]
+    id?: StringFilter<"Devlog"> | string
+    title?: StringFilter<"Devlog"> | string
+    content?: StringFilter<"Devlog"> | string
+    createdAt?: DateTimeFilter<"Devlog"> | Date | string
+    updatedAt?: DateTimeFilter<"Devlog"> | Date | string
+  }
+
+  export type DevlogOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DevlogWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DevlogWhereInput | DevlogWhereInput[]
+    OR?: DevlogWhereInput[]
+    NOT?: DevlogWhereInput | DevlogWhereInput[]
+    title?: StringFilter<"Devlog"> | string
+    content?: StringFilter<"Devlog"> | string
+    createdAt?: DateTimeFilter<"Devlog"> | Date | string
+    updatedAt?: DateTimeFilter<"Devlog"> | Date | string
+  }, "id">
+
+  export type DevlogOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DevlogCountOrderByAggregateInput
+    _max?: DevlogMaxOrderByAggregateInput
+    _min?: DevlogMinOrderByAggregateInput
+  }
+
+  export type DevlogScalarWhereWithAggregatesInput = {
+    AND?: DevlogScalarWhereWithAggregatesInput | DevlogScalarWhereWithAggregatesInput[]
+    OR?: DevlogScalarWhereWithAggregatesInput[]
+    NOT?: DevlogScalarWhereWithAggregatesInput | DevlogScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Devlog"> | string
+    title?: StringWithAggregatesFilter<"Devlog"> | string
+    content?: StringWithAggregatesFilter<"Devlog"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Devlog"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Devlog"> | Date | string
+  }
+
   export type BlogPostCreateInput = {
     id?: string
     title: string
@@ -6153,6 +7297,62 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DevlogCreateInput = {
+    id?: string
+    title: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DevlogUncheckedCreateInput = {
+    id?: string
+    title: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DevlogUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DevlogUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DevlogCreateManyInput = {
+    id?: string
+    title: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DevlogUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DevlogUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6389,6 +7589,30 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     query?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DevlogCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DevlogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DevlogMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
