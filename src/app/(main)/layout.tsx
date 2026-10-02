@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+// @ts-expect-error CSS side-effect imports are handled by Next.js.
 import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -77,7 +78,7 @@ export default function RootLayout({
                         <Navbar />
                         <Toaster theme="dark"/>
                         <NextTopLoader
-                            color="green"
+                            color="gold"
                             height={1.5}
                             showSpinner={false}
                         />
