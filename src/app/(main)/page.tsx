@@ -2,6 +2,7 @@ import CTA from "@/components/CTA";
 import Featured from "@/components/Featured";
 import Hero from "@/components/Hero";
 import HomeAbout from "@/components/HomeAbout";
+import Projects from "@/components/Projects";
 import { Metadata } from "next";
 
 export default function Home() {
@@ -11,11 +12,14 @@ export default function Home() {
                 <Hero />
             </div>
             <HomeAbout />
-            <div className="my-8 space-y-12">
+            <div className="my-24 space-y-12">
                 <h1 className="my-8 text-3xl md:text-4xl font-bold text-center tracking-tight text-foreground">
                     Featured Posts
                 </h1>
                 <Featured />
+            </div>
+            <div className="my-24 space-y-12">
+                <Projects limit={4} />
             </div>
             <CTA />
         </section>
