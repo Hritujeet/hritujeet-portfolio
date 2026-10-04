@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -35,7 +36,20 @@ export default function Home() {
             All articles <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </div>
-        <Featured />
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="h-72 animate-pulse rounded-2xl bg-muted"
+                />
+              ))}
+            </div>
+          }
+        >
+          <Featured />
+        </Suspense>
         <Link
           href="/blogs"
           className={buttonVariants({ variant: "outline", className: "mt-6 w-full rounded-full sm:hidden" })}

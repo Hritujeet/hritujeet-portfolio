@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { cache } from "react";
 import CommentsContainer from "@/components/CommentsContainer";
 import PostComment from "@/components/PostComment";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
@@ -7,7 +8,7 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { prisma } from "../../../../utils/db";
+import { prisma } from "@/utils/db";
 import { calculateReadingTime, formatDate } from "../../../../utils/utils";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
@@ -15,11 +16,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import Script from "next/script";
 
+const getBlogPost = cache((slug: string) =>
+    prisma.blogPost.findUnique({
+        where: { slug },
+    })
+);
+
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
-    const blog = await prisma.blogPost.findUnique({
-        where: { slug },
-    });
+    const blog = await getBlogPost(slug);
 
     if (!blog?.title) {
         return notFound();
@@ -271,10 +276,7 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
-    const blog = await prisma.blogPost.findUnique({
-        where: { slug },
-        select: { title: true, description: true, img: true, createdAt: true }
-    });
+    const blog = await getBlogPost(slug);
 
     if (!blog) {
         return {

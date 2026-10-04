@@ -7,6 +7,13 @@ const page = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    select: {
+      title: true,
+      slug: true,
+      img: true,
+      description: true,
+      createdAt: true,
+    },
   });
 
   return (

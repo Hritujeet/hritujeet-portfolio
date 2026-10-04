@@ -7,12 +7,13 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { LogOut, Menu } from "lucide-react";
 import Link from "next/link";
 
 const Navbar = async () => {
-  const user = await currentUser();
+  const { userId } = await auth();
+  const user = userId ? await currentUser() : null;
   return (
     <div className="sticky top-0 z-30 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center px-4 md:px-8 mx-auto">
@@ -46,7 +47,7 @@ const Navbar = async () => {
 
           <div className="hidden md:flex items-center space-x-2">
             <SignedIn>
-              {user?.emailAddresses[0].emailAddress == process.env.ADMIN && (
+              {user?.emailAddresses[0].emailAddress === process.env.ADMIN && (
                 <Link
                   href={"/dashboard"}
                   className={buttonVariants({ variant: "outline", size: "sm" })}
@@ -105,7 +106,7 @@ const Navbar = async () => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <SignedIn>
-                  {user?.emailAddresses[0].emailAddress ==
+                  {user?.emailAddresses[0].emailAddress ===
                     process.env.ADMIN && (
                     <DropdownMenuItem>
                       <Link href={"/dashboard"} className="w-full">
