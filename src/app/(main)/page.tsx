@@ -6,6 +6,9 @@ import JosephineHome from "@/components/josephine-home";
 import Projects from "@/components/Projects";
 import TechSection from "@/components/tech-section";
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -15,11 +18,30 @@ export default function Home() {
       </section>
       <HomeAbout />
 
-      <section className="my-24 space-y-12">
-        <h1 className="my-8 text-3xl md:text-4xl font-bold text-center tracking-tight text-foreground">
-          Featured Posts
-        </h1>
+      <section id="featured-posts" className="my-24">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              From the journal
+            </p>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Featured writing
+            </h2>
+          </div>
+          <Link
+            href="/blogs"
+            className={buttonVariants({ variant: "ghost", className: "hidden shrink-0 sm:inline-flex" })}
+          >
+            All articles <ArrowUpRight className="ml-1 size-4" />
+          </Link>
+        </div>
         <Featured />
+        <Link
+          href="/blogs"
+          className={buttonVariants({ variant: "outline", className: "mt-6 w-full rounded-full sm:hidden" })}
+        >
+          Explore all articles <ArrowUpRight className="ml-1 size-4" />
+        </Link>
       </section>
       <TechSection />
       <section className="my-24 space-y-12">

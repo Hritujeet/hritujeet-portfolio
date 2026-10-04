@@ -55,27 +55,42 @@ const Projects = ({ limit }: ProjectsProps) => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
         >
-            <motion.h2 
-                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="text-3xl md:text-4xl font-bold text-center mb-4 tracking-tight text-foreground"
-            >
-                Selected Work
-            </motion.h2>
-            <motion.p 
-                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.1 }}
-                className="text-center text-base text-muted-foreground mb-10 max-w-2xl mx-auto"
-            >
-                {"Here's a glimpse of some of my recent projects and experiments."}
-            </motion.p>
+            <div className="mb-8 flex flex-col gap-5 border-b border-border/70 pb-6 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                        What I&apos;ve been building
+                    </p>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+                    >
+                        Selected work
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
+                    >
+                        A selection of products, side projects, and experiments.
+                    </motion.p>
+                </div>
+                {limit && (
+                    <Link
+                        href="/projects"
+                        className={buttonVariants({ variant: "outline", className: "w-fit shrink-0 rounded-full" })}
+                    >
+                        All projects <ArrowUpRight className="ml-1 size-4" />
+                    </Link>
+                )}
+            </div>
 
             {isPending && (
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className={`grid gap-5 ${limit ? "sm:grid-cols-2" : "sm:grid-cols-2 xl:grid-cols-3"}`}>
                     {Array.from({ length: limit ?? 2 }, (_, i) => (
                         <Card key={i}>
                             <CardHeader>
@@ -105,7 +120,7 @@ const Projects = ({ limit }: ProjectsProps) => {
 
             {!isPending && projects?.length > 0 && (
                 <motion.div
-                    className="grid md:grid-cols-2 gap-6"
+                    className={`grid gap-5 ${limit ? "sm:grid-cols-2" : "sm:grid-cols-2 xl:grid-cols-3"}`}
                     variants={staggerContainer}
                     initial="initial"
                     whileInView="animate"
@@ -185,13 +200,6 @@ const Projects = ({ limit }: ProjectsProps) => {
                 </motion.div>
             )}
 
-            {limit && (
-                <div className="mt-8 text-center">
-                    <Link href="/projects" className={buttonVariants({ variant: "outline" })}>
-                        View all projects
-                    </Link>
-                </div>
-            )}
         </motion.section>
     );
 };

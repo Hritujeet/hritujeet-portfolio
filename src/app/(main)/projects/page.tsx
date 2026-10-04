@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 const page = () => {
     return (
-        <div className="px-8 sm:px-12 md:px-20 lg:px-24 xl:px-32 my-10">
+        <main className="container mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
             <Projects />
-        </div>
+        </main>
     );
 };
 
