@@ -10,9 +10,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "prisma": {
-    "seed": "node prisma/seed.mjs"
-  },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
     "@clerk/nextjs": "^6.32.2",

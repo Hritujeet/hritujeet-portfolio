@@ -38,6 +38,12 @@ const Navbar = async () => {
               Projects
             </Link>
             <Link
+              href={"/devlogs"}
+              className="transition-colors hover:text-foreground/80 text-foreground/60"
+            >
+              Devlogs
+            </Link>
+            <Link
               href={"/about"}
               className="transition-colors hover:text-foreground/80 text-foreground/60"
             >
@@ -103,6 +109,11 @@ const Navbar = async () => {
                 <DropdownMenuItem>
                   <Link href={"/projects"} className="w-full">
                     Projects
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={"/devlogs"} className="w-full">
+                    Devlogs
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>

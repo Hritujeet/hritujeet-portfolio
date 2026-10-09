@@ -57,6 +57,50 @@ export default function Home() {
           Explore all articles <ArrowUpRight className="ml-1 size-4" />
         </Link>
       </section>
+      <section id="devlogs" className="my-24">
+        <div className="mb-8 flex items-end justify-between gap-4">
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              In progress
+            </p>
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Latest devlogs
+            </h2>
+          </div>
+          <Link
+            href="/devlogs"
+            className={buttonVariants({
+              variant: "ghost",
+              className: "hidden shrink-0 sm:inline-flex",
+            })}
+          >
+            All devlogs <ArrowUpRight className="ml-1 size-4" />
+          </Link>
+        </div>
+        {/* <Suspense
+          fallback={
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((item) => (
+                <div
+                  key={item}
+                  className="h-48 animate-pulse rounded-2xl bg-muted"
+                />
+              ))}
+            </div>
+          }
+        >
+          <DevlogsGrid limit={3} />
+        </Suspense> */}
+        <Link
+          href="/devlogs"
+          className={buttonVariants({
+            variant: "outline",
+            className: "mt-6 w-full rounded-full sm:hidden",
+          })}
+        >
+          Explore all devlogs <ArrowUpRight className="ml-1 size-4" />
+        </Link>
+      </section>
       <TechSection />
       <section className="my-24 space-y-12">
         <Projects limit={4} />
