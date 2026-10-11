@@ -19,12 +19,12 @@ const page = async () => {
   return (
     <main className="mx-auto min-h-[60vh] max-w-5xl px-5 pb-24 sm:px-8">
       <header className="mx-auto mb-10 mt-12 max-w-3xl border-b border-border pb-7 sm:mb-14 sm:mt-16">
-        <p className="mb-3 text-sm font-medium text-primary">The journal</p>
+        <p className="mb-3 text-sm font-medium text-primary">Field notes</p>
         <h1 className="font-serif text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl">
-          Ideas worth sharing.
+          Things worth a closer look.
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Notes, lessons, and explorations across technology and beyond.
+          Notes from the rabbit holes, questions, and ideas I keep coming back to.
         </p>
       </header>
 
@@ -51,7 +51,7 @@ const page = async () => {
 export const metadata: Metadata = {
   title: "Writing",
   description:
-    "Read blogs about web development, programming, and more. Stay updated with the latest trends and insights in the tech world. Join our community of developers and enthusiasts. react, nextjs, javascript, web development, programming, blogs, tech trends, developer community, insights",
+    "Field notes on technology, software, and the ideas I find worth exploring.",
   keywords:
     "react, nextjs, javascript, web development, programming, blogs, tech trends, developer community, insights",
 };

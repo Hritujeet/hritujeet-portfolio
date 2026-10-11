@@ -17,10 +17,10 @@ const CTA = () => {
         >
             <div className="absolute inset-0 bg-grid-white/[0.02] [mask-image:linear-gradient(0deg,transparent,black)] pointer-events-none" />
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4 z-10">
-                Let's build something together.
+                Have a thought to share?
             </h2>
             <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-8 z-10 leading-relaxed">
-                I'm currently open for new opportunities. Whether you have a project in mind, need a developer for your team, or just want to say hi, my inbox is always open.
+                If something here sparked an idea, raised a question, or just made you want to say hello, I&apos;d be glad to hear from you.
             </p>
             <div className="flex gap-4 z-10">
                 <Link href="/contact" className={`${buttonVariants({ variant: "default", size: "lg" })} rounded-full px-8 h-14 text-base group flex items-center shadow-md`}>

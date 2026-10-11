@@ -10,7 +10,7 @@ const Footer = () => {
                     <span className="text-2xl font-bold tracking-tight mb-2 block">
                         Hritujeet
                     </span>
-                    <p className="text-sm text-muted-foreground">Personal notes on tech, ideas, and things I&apos;m building.</p>
+                    <p className="text-sm text-muted-foreground">Tech notes, half-formed ideas, and things in progress.</p>
                 </div>
 
                 <div className="space-y-4">

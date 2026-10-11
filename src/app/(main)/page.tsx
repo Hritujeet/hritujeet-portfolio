@@ -24,10 +24,10 @@ export default function Home() {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-              From the journal
+              Field notes
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-              Featured writing
+              Recent writing
             </h2>
           </div>
           <Link
@@ -69,10 +69,10 @@ export default function Home() {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-              In progress
+              On the workbench
             </p>
             <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-              Latest devlogs
+              Things in progress
             </h2>
           </div>
           <Link

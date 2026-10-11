@@ -10,12 +10,12 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app"),
     title: {
-        default: "Hritujeet | Personal Tech Website",
+        default: "Hritujeet | Tech Notes & Experiments",
         template: "%s | Hritujeet",
     },
-    description: "A personal corner of the web where Hritujeet shares technology, ideas, writing, and the things he is building.",
+    description: "A personal space for Hritujeet's notes on technology, ideas worth exploring, and things in progress.",
     keywords: [
-        "Hritujeet Sharma", "personal website", "technology", "software development",
+        "Hritujeet Sharma", "personal tech website", "technology", "software development",
         "web development", "programming", "build logs", "Next.js", "React", "TypeScript"
     ],
     authors: [{ name: "Hritujeet Sharma" }],
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_US",
         url: "https://hritujeet-portfolio.vercel.app",
-        title: "Hritujeet | Personal Tech Website",
-        description: "A personal corner of the web for technology, ideas, writing, and things Hritujeet is building.",
+        title: "Hritujeet | Tech Notes & Experiments",
+        description: "A personal space for technology notes, ideas worth exploring, and things in progress.",
         siteName: "Hritujeet Sharma",
         images: [
             {
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: "summary_large_image",
-        title: "Hritujeet | Personal Tech Website",
-        description: "A personal corner of the web for technology, ideas, writing, and things Hritujeet is building.",
+        title: "Hritujeet | Tech Notes & Experiments",
+        description: "A personal space for technology notes, ideas worth exploring, and things in progress.",
         images: ["https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&h=630&auto=format&fit=crop"],
         creator: "@hritujeet",
     },

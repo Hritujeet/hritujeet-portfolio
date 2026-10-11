@@ -58,7 +58,7 @@ const Projects = ({ limit }: ProjectsProps) => {
             <div className="mb-8 flex flex-col gap-5 border-b border-border/70 pb-6 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                     <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                        What I&apos;ve been building
+                        On the workbench
                     </p>
                     <motion.h2
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -67,7 +67,7 @@ const Projects = ({ limit }: ProjectsProps) => {
                         transition={{ duration: 0.8 }}
                         className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
                     >
-                        Selected work
+                        Things taking shape
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
@@ -76,7 +76,7 @@ const Projects = ({ limit }: ProjectsProps) => {
                         transition={{ duration: 0.8, delay: 0.1 }}
                         className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
                     >
-                        A selection of products, side projects, and experiments.
+                        Side projects and experiments, from rough ideas to working things.
                     </motion.p>
                 </div>
                 {limit && (
@@ -114,7 +114,7 @@ const Projects = ({ limit }: ProjectsProps) => {
 
             {!isPending && projects?.length === 0 && (
                 <div className="text-center text-2xl font-bold text-muted-foreground">
-                    No Projects Yet
+                    Nothing on the workbench just yet.
                 </div>
             )}
 
