@@ -3,10 +3,18 @@ import { prisma } from "@/utils/db";
 
 type DevlogsGridProps = {
   limit?: number;
+  compact?: boolean;
 };
 
-export default async function DevlogsGrid({ limit }: DevlogsGridProps) {
+export default async function DevlogsGrid({ limit, compact = false }: DevlogsGridProps) {
   const devlogs = await prisma.devlog.findMany({
+    where: {
+      NOT: {
+        title: {
+          startsWith: "Sample:",
+        },
+      },
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -28,13 +36,15 @@ export default async function DevlogsGrid({ limit }: DevlogsGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
+    <div className="mx-auto max-w-4xl divide-y divide-border/70">
       {devlogs.map((devlog) => (
         <DevlogsCard
           key={devlog.id}
+          id={devlog.id}
           title={devlog.title}
           content={devlog.content}
           createdAt={devlog.createdAt}
+          compact={compact}
         />
       ))}
     </div>

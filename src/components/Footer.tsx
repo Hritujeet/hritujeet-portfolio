@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 const Footer = () => {
     return (
@@ -10,7 +10,7 @@ const Footer = () => {
                     <span className="text-2xl font-bold tracking-tight mb-2 block">
                         Hritujeet
                     </span>
-                    <p className="text-sm text-muted-foreground">Developer. Creator. Explorer.</p>
+                    <p className="text-sm text-muted-foreground">Personal notes on tech, ideas, and things I&apos;m building.</p>
                 </div>
 
                 <div className="space-y-4">
@@ -20,7 +20,10 @@ const Footer = () => {
                             <Link href="/" className="text-muted-foreground transition-colors hover:text-foreground">Home</Link>
                         </li>
                         <li>
-                            <Link href="/blogs" className="text-muted-foreground transition-colors hover:text-foreground">Blogs</Link>
+                            <Link href="/blogs" className="text-muted-foreground transition-colors hover:text-foreground">Writing</Link>
+                        </li>
+                        <li>
+                            <Link href="/devlogs" className="text-muted-foreground transition-colors hover:text-foreground">Devlogs</Link>
                         </li>
                         <li>
                             <Link href="/projects" className="text-muted-foreground transition-colors hover:text-foreground">Projects</Link>

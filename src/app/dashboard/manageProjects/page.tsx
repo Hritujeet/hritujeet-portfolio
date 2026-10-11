@@ -11,7 +11,7 @@ export default async function ManageProjects() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight text-foreground">Manage Projects</h1>
-                    <p className="text-sm text-muted-foreground mt-1">View, update, or delete your portfolio projects.</p>
+                    <p className="text-sm text-muted-foreground mt-1">View, update, or delete the projects shared on your personal website.</p>
                 </div>
                 <a 
                     href="/dashboard/addProject" 

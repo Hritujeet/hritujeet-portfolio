@@ -200,6 +200,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -208,9 +209,9 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/client/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel BlogPost {\n  id          String    @id @default(uuid())\n  title       String\n  img         String\n  slug        String    @unique\n  description String\n  views       Int       @default(0)\n  content     String\n  createdAt   DateTime  @default(now())\n  Comment     Comment[]\n\n  @@index([id, slug])\n}\n\nmodel Project {\n  id         String   @id @default(uuid())\n  title      String\n  decription String\n  link       String\n  techStack  String[]\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt\n}\n\nmodel Comment {\n  id          String   @id @default(uuid())\n  userClerkId String\n  userImg     String\n  user        String\n  blogPost    BlogPost @relation(fields: [blogPostId], references: [id])\n  blogPostId  String\n  content     String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Contact {\n  id        String   @id @default(uuid())\n  name      String\n  email     String\n  phone     String\n  query     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Devlog {\n  id        String   @id @default(uuid())\n  title     String\n  content   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
-  "inlineSchemaHash": "d9bc7cea1445238648989f3302a6d8eacb126424ad9e466ac4a3a3dc814d3a14",
-  "copyEngine": false
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/client/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel BlogPost {\n  id          String    @id @default(uuid())\n  title       String\n  img         String\n  slug        String    @unique\n  description String\n  views       Int       @default(0)\n  content     String\n  createdAt   DateTime  @default(now())\n  Comment     Comment[]\n\n  @@index([id, slug])\n}\n\nmodel Project {\n  id         String   @id @default(uuid())\n  title      String\n  decription String\n  link       String\n  techStack  String[]\n  createdAt  DateTime @default(now())\n  updateAt   DateTime @updatedAt\n}\n\nmodel Comment {\n  id          String   @id @default(uuid())\n  userClerkId String\n  userImg     String\n  user        String\n  blogPost    BlogPost @relation(fields: [blogPostId], references: [id])\n  blogPostId  String\n  content     String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n}\n\nmodel Contact {\n  id        String   @id @default(uuid())\n  name      String\n  email     String\n  phone     String\n  query     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Devlog {\n  id        String   @id @default(uuid())\n  title     String\n  content   String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n",
+  "inlineSchemaHash": "187bd0f39f84daf325d70a74c5f1d6d24d442869c25dd30621a72ff7bf50d54c",
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -247,3 +248,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "src/client/prisma/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "src/client/prisma/schema.prisma")

@@ -10,6 +10,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Suspense } from "react";
+import DevlogsGrid from "@/components/devlogs-grid";
 
 export default function Home() {
   return (
@@ -38,12 +39,19 @@ export default function Home() {
         </div>
         <Suspense
           fallback={
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto max-w-4xl divide-y divide-border">
               {[1, 2, 3].map((item) => (
                 <div
                   key={item}
-                  className="h-72 animate-pulse rounded-2xl bg-muted"
-                />
+                  className="flex animate-pulse items-center gap-8 py-7"
+                >
+                  <div className="flex-1 space-y-3">
+                    <div className="h-3 w-32 rounded bg-muted" />
+                    <div className="h-6 w-3/4 rounded bg-muted" />
+                    <div className="h-4 w-full rounded bg-muted" />
+                  </div>
+                  <div className="size-28 shrink-0 rounded-sm bg-muted sm:size-40" />
+                </div>
               ))}
             </div>
           }
@@ -77,20 +85,21 @@ export default function Home() {
             All devlogs <ArrowUpRight className="ml-1 size-4" />
           </Link>
         </div>
-        {/* <Suspense
+        <Suspense
           fallback={
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3].map((item) => (
-                <div
-                  key={item}
-                  className="h-48 animate-pulse rounded-2xl bg-muted"
-                />
+            <div className="mx-auto max-w-4xl divide-y divide-border">
+              {[1, 2].map((item) => (
+                <div key={item} className="animate-pulse space-y-3 py-7">
+                  <div className="h-3 w-24 rounded bg-muted" />
+                  <div className="h-6 w-2/3 rounded bg-muted" />
+                  <div className="h-4 w-full rounded bg-muted" />
+                </div>
               ))}
             </div>
           }
         >
-          <DevlogsGrid limit={3} />
-        </Suspense> */}
+          <DevlogsGrid limit={2} compact />
+        </Suspense>
         <Link
           href="/devlogs"
           className={buttonVariants({
@@ -111,9 +120,8 @@ export default function Home() {
   );
 }
 export const metadata: Metadata = {
-  title: "Home | Hritujeet",
   description:
-    "Hey, there! I am Hritujeet, a web dev enthusiast as a teenage developer. I love to build things and share my knowledge with the world.",
+    "Hritujeet's personal tech website: writing, ideas, and notes from the things he is building.",
   keywords:
-    "web development, programming, blogs, tech trends, developer community, insights, Hritujeet Sharma, teenage developer, coding enthusiast, web dev, Next.js, React, JavaScript, tech blogs, software development, coding tutorials, personal blog, tech enthusiast, coding community, web design, frontend development, backend development, full-stack development, open source, tech education, coding resources, developer portfolio",
+    "Hritujeet Sharma, personal website, technology, software, programming, web development, build logs, blogs, Next.js, React, JavaScript, open source, personal tech blog",
 };

@@ -27,6 +27,7 @@ const PostComment = ({ postId, slug }: { postId: string; slug: string }) => {
             await createComment(data.comment, postId, slug);
         },
         onSuccess: () => {
+            reset();
             queryClient.invalidateQueries({ queryKey: ["post", postId] });
             toast.success("Comment posted successfully");
         },
@@ -36,22 +37,25 @@ const PostComment = ({ postId, slug }: { postId: string; slug: string }) => {
     });
 
     const onSubmit: SubmitHandler<CommentFormData> = (data) => {
-        console.log(data);
         mutation.mutate(data);
-        reset();
     };
 
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-muted p-6 rounded-lg border"
+            className="mb-8 border-y border-border py-5"
         >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3">
+                <Label htmlFor="comment" className="text-sm font-semibold">
+                    What did you think?
+                </Label>
                 <Textarea
-                    className={`min-h-[100px] resize-none ${
+                    id="comment"
+                    aria-invalid={Boolean(errors.comment)}
+                    className={`min-h-[112px] resize-y rounded-md bg-background text-base ${
                         errors.comment ? "border-destructive focus-visible:ring-destructive" : ""
                     }`}
-                    placeholder="Write your comment..."
+                    placeholder="Share a thoughtful response..."
                     {...register("comment", {
                         required: "Comment is required",
                         minLength: {
@@ -62,19 +66,21 @@ const PostComment = ({ postId, slug }: { postId: string; slug: string }) => {
                     })}
                 />
                 {errors.comment && (
-                    <Label className="text-sm font-medium text-destructive">
-                        Comment is required and must be at least 3 characters long.
-                    </Label>
+                    <p role="alert" className="text-sm font-medium text-destructive">
+                        {errors.comment.message}
+                    </p>
                 )}
-                <div className="flex justify-end">
+                <div className="flex items-center justify-between gap-3">
+                    <p className="text-xs text-muted-foreground">Be kind and keep it constructive.</p>
                     <Button
                         type="submit"
                         disabled={mutation.isPending}
+                        size="sm"
                     >
                         {mutation.isPending && (
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         )}
-                        {mutation.isPending ? "Posting..." : "Post Comment"}
+                        {mutation.isPending ? "Responding..." : "Respond"}
                     </Button>
                 </div>
             </div>

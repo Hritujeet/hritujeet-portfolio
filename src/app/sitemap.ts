@@ -5,7 +5,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app";
 
     // Static Routes
-    const routes = ["", "/about", "/projects", "/blogs", "/contact", "/resume"].map((route) => ({
+    const routes = ["", "/about", "/projects", "/blogs", "/devlogs", "/contact", "/resume"].map((route) => ({
         url: `${baseUrl}${route}`,
         lastModified: new Date().toISOString(),
         changeFrequency: "weekly" as const,
@@ -25,7 +25,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.6,
         }));
 
-        return [...routes, ...blogRoutes];
+        const devlogs = await prisma.devlog.findMany({
+            where: {
+                NOT: {
+                    title: {
+                        startsWith: "Sample:",
+                    },
+                },
+            },
+            select: { id: true, createdAt: true },
+        });
+
+        const devlogRoutes = devlogs.map((devlog) => ({
+            url: `${baseUrl}/devlogs/${devlog.id}`,
+            lastModified: devlog.createdAt.toISOString(),
+            changeFrequency: "monthly" as const,
+            priority: 0.5,
+        }));
+
+        return [...routes, ...blogRoutes, ...devlogRoutes];
     } catch (error) {
         console.error("Error generating sitemap:", error);
         return routes;

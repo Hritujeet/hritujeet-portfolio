@@ -1,67 +1,84 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LogOut, Menu } from "lucide-react";
+import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
 import { buttonVariants } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
-import { auth, currentUser } from "@clerk/nextjs/server";
-import { LogOut, Menu } from "lucide-react";
-import Link from "next/link";
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
-const Navbar = async () => {
-  const { userId } = await auth();
-  const user = userId ? await currentUser() : null;
+const NAV_LINKS = [
+  { href: "/blogs", label: "Writing" },
+  { href: "/projects", label: "Projects" },
+  { href: "/devlogs", label: "Devlogs" },
+  { href: "/about", label: "About" },
+  { href: "/josephine", label: "Josephine" },
+];
+
+const isActivePath = (pathname: string, href: string) =>
+  pathname === href || pathname.startsWith(`${href}/`);
+
+const Navbar = () => {
+  const pathname = usePathname();
+  const { user } = useUser();
+  const [open, setOpen] = useState(false);
+
+  const isAdmin =
+    !!user &&
+    user.primaryEmailAddress?.emailAddress === process.env.NEXT_PUBLIC_ADMIN;
+
+  const close = () => setOpen(false);
+
+  const sheetLinkClass = (active: boolean) =>
+    cn(
+      "rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent",
+      active ? "bg-accent text-foreground" : "text-foreground/60"
+    );
+
   return (
     <div className="sticky top-0 z-30 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center px-4 md:px-8 mx-auto">
         <div className="mr-4 flex">
-          <Link href={"/"} className="mr-6 flex items-center space-x-2">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
             <span className="font-bold tracking-tight">Hritujeet</span>
           </Link>
         </div>
 
         <div className="flex flex-1 items-center justify-end md:justify-between space-x-2 md:space-x-4">
+          {/* Desktop links */}
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href={"/blogs"}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Blogs
-            </Link>
-            <Link
-              href={"/projects"}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Projects
-            </Link>
-            <Link
-              href={"/devlogs"}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Devlogs
-            </Link>
-            <Link
-              href={"/about"}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Profile
-            </Link>
-            <Link
-              href={"/josephine"}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
-            >
-              Josephine
-            </Link>
+            {NAV_LINKS.map(({ href, label }) => {
+              const active = isActivePath(pathname, href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "transition-colors hover:text-foreground/80",
+                    active ? "text-foreground" : "text-foreground/60"
+                  )}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </nav>
 
+          {/* Desktop auth */}
           <div className="hidden md:flex items-center space-x-2">
             <SignedIn>
-              {user?.emailAddresses[0].emailAddress === process.env.ADMIN && (
+              {isAdmin && (
                 <Link
-                  href={"/dashboard"}
+                  href="/dashboard"
                   className={buttonVariants({ variant: "outline", size: "sm" })}
                 >
                   Admin
@@ -78,87 +95,92 @@ const Navbar = async () => {
             </SignedIn>
             <SignedOut>
               <Link
-                href={"/sign-in"}
+                href="/sign-in"
                 className={buttonVariants({ variant: "outline", size: "sm" })}
               >
                 Sign In
               </Link>
-              <Link
-                href={"/sign-up"}
-                className={buttonVariants({ size: "sm" })}
-              >
+              <Link href="/sign-up" className={buttonVariants({ size: "sm" })}>
                 Sign Up
               </Link>
             </SignedOut>
           </div>
 
+          {/* Mobile sheet */}
           <div className="md:hidden">
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                className={buttonVariants({ variant: "outline" })}
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger
+                className={buttonVariants({ variant: "outline", size: "icon" })}
               >
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem>
-                  <Link href={"/blogs"} className="w-full">
-                    Blogs
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/projects"} className="w-full">
-                    Projects
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/devlogs"} className="w-full">
-                    Devlogs
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/about"} className="w-full">
-                    Profile
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/josephine"} className="w-full">
-                    Josephine
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <SignedIn>
-                  {user?.emailAddresses[0].emailAddress ===
-                    process.env.ADMIN && (
-                    <DropdownMenuItem>
-                      <Link href={"/dashboard"} className="w-full">
+              </SheetTrigger>
+
+              <SheetContent side="right" className="w-64">
+                <SheetHeader>
+                  <SheetTitle>Menu</SheetTitle>
+                </SheetHeader>
+
+                <nav className="mt-4 flex flex-col gap-1 px-2">
+                  {NAV_LINKS.map(({ href, label }) => {
+                    const active = isActivePath(pathname, href);
+                    return (
+                      <Link
+                        key={href}
+                        href={href}
+                        onClick={close}
+                        aria-current={active ? "page" : undefined}
+                        className={sheetLinkClass(active)}
+                      >
+                        {label}
+                      </Link>
+                    );
+                  })}
+
+                  <div className="my-2 border-t" />
+
+                  <SignedIn>
+                    {isAdmin && (
+                      <Link
+                        href="/dashboard"
+                        onClick={close}
+                        className={sheetLinkClass(
+                          isActivePath(pathname, "/dashboard")
+                        )}
+                      >
                         Admin
                       </Link>
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem>
+                    )}
                     <SignOutButton redirectUrl="/sign-in">
-                      <div className="flex items-center w-full text-destructive cursor-pointer">
-                        <LogOut className="h-4 w-4 mr-2" />
+                      <button
+                        onClick={close}
+                        className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-destructive hover:bg-accent"
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
                         Sign Out
-                      </div>
+                      </button>
                     </SignOutButton>
-                  </DropdownMenuItem>
-                </SignedIn>
-                <SignedOut>
-                  <DropdownMenuItem>
-                    <Link href={"/sign-in"} className="w-full">
+                  </SignedIn>
+
+                  <SignedOut>
+                    <Link
+                      href="/sign-in"
+                      onClick={close}
+                      className={sheetLinkClass(pathname === "/sign-in")}
+                    >
                       Sign In
                     </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href={"/sign-up"} className="w-full">
+                    <Link
+                      href="/sign-up"
+                      onClick={close}
+                      className={sheetLinkClass(pathname === "/sign-up")}
+                    >
                       Sign Up
                     </Link>
-                  </DropdownMenuItem>
-                </SignedOut>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  </SignedOut>
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import DevlogsGrid from "@/components/devlogs-grid";
 
 export const metadata: Metadata = {
   title: "Josephine — Local-first Windows companion",
@@ -595,7 +596,13 @@ export default function JosephinePage() {
           title="Every update, as it happens."
           description="Follow the latest progress and notes from building Josephine."
         />
-        {/* <DevlogsGrid /> */}
+        <DevlogsGrid limit={3} compact />
+        <Link
+          href="/devlogs"
+          className={buttonVariants({ variant: "outline", className: "mt-6" })}
+        >
+          Read all build updates <ArrowRight className="size-4" />
+        </Link>
       </section>
 
       {/* CTA */}

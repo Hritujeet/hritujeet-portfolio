@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-// @ts-expect-error CSS side-effect imports are handled by Next.js.
 import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -11,14 +10,13 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app"),
     title: {
-        default: "Hritujeet Sharma | Full-Stack Engineer",
-        template: "%s | Hritujeet Sharma",
+        default: "Hritujeet | Personal Tech Website",
+        template: "%s | Hritujeet",
     },
-    description: "Portfolio of Hritujeet Sharma. Teenage full-stack developer, specializing in Next.js, React, Node.js, and modern web architectures. Building impactful digital experiences.",
+    description: "A personal corner of the web where Hritujeet shares technology, ideas, writing, and the things he is building.",
     keywords: [
-        "Hritujeet Sharma", "Full-Stack Developer", "Software Engineer", 
-        "Next.js Developer", "React Developer", "TypeScript", 
-        "Web Development", "Frontend Engineer", "Backend Engineer"
+        "Hritujeet Sharma", "personal website", "technology", "software development",
+        "web development", "programming", "build logs", "Next.js", "React", "TypeScript"
     ],
     authors: [{ name: "Hritujeet Sharma" }],
     creator: "Hritujeet Sharma",
@@ -26,22 +24,22 @@ export const metadata: Metadata = {
         type: "website",
         locale: "en_US",
         url: "https://hritujeet-portfolio.vercel.app",
-        title: "Hritujeet Sharma | Full-Stack Engineer",
-        description: "Portfolio of Hritujeet Sharma. Teenage full-stack developer, specializing in Next.js, React, Node.js, and modern web architectures.",
-        siteName: "Hritujeet Sharma Portfolio",
+        title: "Hritujeet | Personal Tech Website",
+        description: "A personal corner of the web for technology, ideas, writing, and things Hritujeet is building.",
+        siteName: "Hritujeet Sharma",
         images: [
             {
                 url: "https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&h=630&auto=format&fit=crop",
                 width: 1200,
                 height: 630,
-                alt: "Hritujeet Sharma - Full-Stack Engineer",
+                alt: "Hritujeet Sharma's personal website",
             },
         ],
     },
     twitter: {
         card: "summary_large_image",
-        title: "Hritujeet Sharma | Full-Stack Engineer",
-        description: "Portfolio of Hritujeet Sharma. Teenage full-stack developer, specializing in Next.js, React, Node.js, and modern web architectures.",
+        title: "Hritujeet | Personal Tech Website",
+        description: "A personal corner of the web for technology, ideas, writing, and things Hritujeet is building.",
         images: ["https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1200&h=630&auto=format&fit=crop"],
         creator: "@hritujeet",
     },

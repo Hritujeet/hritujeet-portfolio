@@ -1,20 +1,17 @@
-// @ts-nocheck
-import { cache } from "react";
-import CommentsContainer from "@/components/CommentsContainer";
-import PostComment from "@/components/PostComment";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { Metadata } from "next";
+import { cache, Suspense, type CSSProperties } from "react";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Image from "next/image";
+import Script from "next/script";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import oneDark from "react-syntax-highlighter/dist/esm/styles/prism/one-dark";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { prisma } from "@/utils/db";
 import { calculateReadingTime, formatDate } from "../../../../utils/utils";
-import { Suspense } from "react";
-import { notFound } from "next/navigation";
-import { Card, CardContent } from "@/components/ui/card";
+import CommentsContainer from "@/components/CommentsContainer";
+import PostComment from "@/components/PostComment";
 import { Skeleton } from "@/components/ui/skeleton";
-import Script from "next/script";
 
 const getBlogPost = cache((slug: string) =>
     prisma.blogPost.findUnique({
@@ -40,236 +37,182 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         author: {
             "@type": "Person",
             name: "Hritujeet Sharma",
-            url: "https://hritujeet-portfolio.vercel.app/about",
+            url: `${process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app"}/about`,
         },
     };
 
     return (
         <>
-        <Script
-            id={`blog-schema-${blog.id}`}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <section className="px-4 sm:px-6 lg:px-8 xl:px-12 py-12 sm:py-16 bg-background">
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground mb-6 text-center leading-tight tracking-tight">
-                    {blog?.title || "Blog Post"}
-                </h1>
-            </div>
-            <div className="max-w-4xl mx-auto">
-                {/* Featured Image */}
-                <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-lg border border-border/50 mb-12">
+            <Script
+                id={`blog-schema-${blog.id}`}
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
+            <main className="pb-20">
+                <header className="mx-auto max-w-4xl px-5 pb-8 pt-12 sm:px-8 sm:pt-16 lg:pt-20">
+                    <p className="mb-5 text-sm font-medium text-primary">A story from the journal</p>
+                    <h1 className="font-serif text-4xl font-semibold leading-[1.12] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+                        {blog.title}
+                    </h1>
+                    {blog.description && (
+                        <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+                            {blog.description}
+                        </p>
+                    )}
+                    <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 border-b border-border pb-7 text-sm">
+                        <span className="font-semibold text-foreground">Hritujeet Sharma</span>
+                        <span className="text-muted-foreground" aria-hidden="true">·</span>
+                        <time className="text-muted-foreground" dateTime={blog.createdAt.toISOString()}>
+                            {formatDate(blog.createdAt.toString())}
+                        </time>
+                        <span className="text-muted-foreground" aria-hidden="true">·</span>
+                        <span className="text-muted-foreground">
+                            {calculateReadingTime(blog.content || "")} min read
+                        </span>
+                    </div>
+                </header>
+
+                <figure className="relative mx-auto mb-12 aspect-[16/8] w-full max-w-5xl overflow-hidden bg-muted sm:mb-16 sm:rounded-sm">
                     <Image
                         src={
-                            blog?.img ||
+                            blog.img ||
                             "https://img.daisyui.com/images/blog/nexus-dashboard-template-thumbnail.webp"
                         }
-                        alt="Blog featured image"
+                        alt={blog.title}
                         fill
-                        className="object-cover object-top h-full hover:scale-105 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+                        priority
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1024px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-                </div>
+                </figure>
 
-                {/* Blog Content Container */}
-                <Card className="shadow-sm border-border/50">
-                    <div className="flex items-center justify-between gap-4 p-6 sm:p-8 mb-4 border-b border-border/50 bg-muted/20">
-                        <div className="flex items-center gap-3">
-                            <div>
-                                <p className="font-semibold text-base sm:text-lg text-foreground">
-                                    Hritujeet
-                                </p>
-                                <p className="text-sm text-muted-foreground font-medium">
-                                    Author
-                                </p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col text-sm text-muted-foreground text-right">
-                            <time className="font-medium">
-                                {formatDate(
-                                    blog?.createdAt.toString() as string
-                                )}
-                            </time>
-                            <span className="text-xs mt-1">
-                                {calculateReadingTime(blog?.content || "")} min
-                                read
-                            </span>
-                        </div>
-                    </div>
-                    <CardContent className="p-6 sm:p-8 lg:p-12">
-                        <article
-                            className="prose max-w-none dark:prose-invert
-                            prose-headings:font-bold prose-headings:tracking-tight
-                            prose-p:leading-relaxed prose-p:text-base prose-p:mb-6
-                            prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline
-                            prose-strong:font-semibold
-                            prose-code:font-mono prose-code:text-sm
-                            prose-pre:bg-muted prose-pre:rounded-lg
-                            prose-blockquote:border-primary prose-blockquote:font-medium
-                            prose-li:leading-relaxed prose-li:mb-2
-                            prose-th:font-semibold"
-                        >
-                            <ReactMarkdown
-                                components={{
-                                    code({
-                                        node,
-                                        inline,
-                                        className,
-                                        children,
-                                        ...props
-                                    }) {
-                                        const match = /language-(\w+)/.exec(
-                                            className || ""
-                                        );
-                                        return !inline && match ? (
-                                            <SyntaxHighlighter
-                                                style={oneDark}
-                                                language={match[1]}
-                                                PreTag="div"
-                                                className="rounded-lg !my-6 !bg-background border border-border"
-                                                {...props}
-                                            >
-                                                {String(children).replace(
-                                                    /\n$/,
-                                                    ""
-                                                )}
-                                            </SyntaxHighlighter>
-                                        ) : (
-                                            <code
-                                                className={`${className} bg-muted px-2 py-1 rounded font-mono text-sm font-medium`}
-                                                {...props}
-                                            >
-                                                {children}
-                                            </code>
-                                        );
-                                    },
-                                    h1: ({ children }) => (
-                                        <h1 className="text-4xl lg:text-5xl font-black mb-8 mt-12 border-b pb-4 tracking-tight leading-tight">
-                                            {children}
-                                        </h1>
-                                    ),
-                                    h2: ({ children }) => (
-                                        <h2 className="text-2xl lg:text-3xl font-bold mb-6 mt-12 tracking-tight leading-tight">
-                                            {children}
-                                        </h2>
-                                    ),
-                                    h3: ({ children }) => (
-                                        <h3 className="text-xl lg:text-2xl font-bold mb-4 mt-10 tracking-tight leading-tight">
-                                            {children}
-                                        </h3>
-                                    ),
-                                    h4: ({ children }) => (
-                                        <h4 className="text-lg lg:text-xl font-semibold mb-3 mt-8 tracking-tight">
-                                            {children}
-                                        </h4>
-                                    ),
-                                    h5: ({ children }) => (
-                                        <h5 className="text-base lg:text-lg font-semibold mb-3 mt-6 tracking-tight">
-                                            {children}
-                                        </h5>
-                                    ),
-                                    h6: ({ children }) => (
-                                        <h6 className="text-sm lg:text-base font-semibold mb-2 mt-6 uppercase tracking-wide opacity-80">
-                                            {children}
-                                        </h6>
-                                    ),
-                                    p: ({ children }) => (
-                                        <p className="mb-6 leading-relaxed font-normal">
-                                            {children}
-                                        </p>
-                                    ),
-                                    ul: ({ children }) => (
-                                        <ul className="list-disc list-inside mb-6 space-y-3 pl-2 flex flex-col gap-2">
-                                            {children}
-                                        </ul>
-                                    ),
-                                    ol: ({ children }) => (
-                                        <ol className="list-decimal list-inside mb-6 space-y-3 pl-2 flex flex-col gap-2">
-                                            {children}
-                                        </ol>
-                                    ),
-                                    li: ({ children }) => (
-                                        <li className="leading-relaxed flex gap-2 list-decimal">
-                                            {children}
-                                        </li>
-                                    ),
-                                    a: ({ href, children }) => (
-                                        <a
-                                            href={href}
-                                            className="text-primary hover:text-primary/80 font-medium no-underline hover:underline transition-colors duration-200"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                <article className="mx-auto max-w-[680px] px-5 sm:px-8">
+                    <div className="font-serif text-[18px] leading-[1.85] text-foreground sm:text-[20px]">
+                        <ReactMarkdown
+                            components={{
+                                code({ className, children }) {
+                                    const match = /language-(\w+)/.exec(className || "");
+                                    return match ? (
+                                        <SyntaxHighlighter
+                                            style={oneDark as Record<string, CSSProperties>}
+                                            language={match[1]}
+                                            PreTag="div"
+                                            className="!my-8 overflow-x-auto rounded-md border border-border !bg-card !p-5 font-mono text-sm leading-relaxed"
+                                        >
+                                            {String(children).replace(/\n$/, "")}
+                                        </SyntaxHighlighter>
+                                    ) : (
+                                        <code
+                                            className={`${className || ""} rounded bg-muted px-1.5 py-0.5 font-mono text-[0.82em] text-foreground`}
                                         >
                                             {children}
-                                        </a>
-                                    ),
-                                    blockquote: ({ children }) => (
-                                        <blockquote className="border-l-4 border-primary bg-muted p-6 my-8 rounded-r-lg font-medium italic">
-                                            {children}
-                                        </blockquote>
-                                    ),
-                                    hr: () => (
-                                        <hr className="my-12 border-border" />
-                                    ),
-                                    table: ({ children }) => (
-                                        <div className="overflow-x-auto my-8 border rounded-lg">
-                                            <table className="w-full text-sm">
-                                                {children}
-                                            </table>
-                                        </div>
-                                    ),
-                                    thead: ({ children }) => (
-                                        <thead className="bg-muted text-muted-foreground">
-                                            {children}
-                                        </thead>
-                                    ),
-                                    th: ({ children }) => (
-                                        <th className="font-semibold text-left p-4 border-b">
-                                            {children}
-                                        </th>
-                                    ),
-                                    td: ({ children }) => (
-                                        <td className="p-4 border-b">
-                                            {children}
-                                        </td>
-                                    ),
-                                }}
-                            >
-                                {blog?.content || ""}
-                            </ReactMarkdown>
-                        </article>
-                    </CardContent>
-                </Card>
-            </div>
+                                        </code>
+                                    );
+                                },
+                                h1: ({ children }) => (
+                                    <h2 className="mb-5 mt-14 font-sans text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                                        {children}
+                                    </h2>
+                                ),
+                                h2: ({ children }) => (
+                                    <h2 className="mb-4 mt-12 font-sans text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+                                        {children}
+                                    </h2>
+                                ),
+                                h3: ({ children }) => (
+                                    <h3 className="mb-3 mt-10 font-sans text-xl font-semibold leading-tight tracking-tight sm:text-2xl">
+                                        {children}
+                                    </h3>
+                                ),
+                                h4: ({ children }) => (
+                                    <h4 className="mb-3 mt-8 font-sans text-lg font-semibold tracking-tight">
+                                        {children}
+                                    </h4>
+                                ),
+                                h5: ({ children }) => (
+                                    <h5 className="mb-3 mt-7 font-sans text-base font-semibold tracking-tight">
+                                        {children}
+                                    </h5>
+                                ),
+                                h6: ({ children }) => (
+                                    <h6 className="mb-2 mt-6 font-sans text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                                        {children}
+                                    </h6>
+                                ),
+                                p: ({ children }) => <p className="mb-7">{children}</p>,
+                                ul: ({ children }) => (
+                                    <ul className="mb-7 list-disc space-y-2 pl-7">{children}</ul>
+                                ),
+                                ol: ({ children }) => (
+                                    <ol className="mb-7 list-decimal space-y-2 pl-7">{children}</ol>
+                                ),
+                                li: ({ children }) => <li className="pl-1">{children}</li>,
+                                a: ({ href, children }) => (
+                                    <a
+                                        href={href}
+                                        className="text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        {children}
+                                    </a>
+                                ),
+                                blockquote: ({ children }) => (
+                                    <blockquote className="my-9 border-l-2 border-primary pl-6 font-serif text-xl italic text-muted-foreground">
+                                        {children}
+                                    </blockquote>
+                                ),
+                                hr: () => <hr className="my-12 border-border" />,
+                                table: ({ children }) => (
+                                    <div className="my-8 overflow-x-auto rounded-md border border-border">
+                                        <table className="w-full text-left font-sans text-sm">{children}</table>
+                                    </div>
+                                ),
+                                thead: ({ children }) => (
+                                    <thead className="bg-muted text-muted-foreground">{children}</thead>
+                                ),
+                                th: ({ children }) => (
+                                    <th className="border-b border-border p-3 font-semibold">{children}</th>
+                                ),
+                                td: ({ children }) => (
+                                    <td className="border-b border-border p-3">{children}</td>
+                                ),
+                            }}
+                        >
+                            {blog.content || ""}
+                        </ReactMarkdown>
+                    </div>
+                </article>
 
-            <div className="flex flex-col max-w-4xl mx-auto gap-4 mt-10 mb-5">
-                <SignedIn>
-                    <PostComment postId={blog?.id} slug={slug} />
-                </SignedIn>
-                <SignedOut>
-                    <Card className="bg-muted border-dashed border-2 py-8">
-                        <CardContent className="text-center pb-0">
-                            <h2 className="text-2xl font-semibold text-muted-foreground">
-                                Sign In to Post Comment
-                            </h2>
-                        </CardContent>
-                    </Card>
-                </SignedOut>
-                <Suspense
-                    fallback={
-                        <div className="flex flex-col gap-4 mt-8">
-                            <Skeleton className="h-24 w-full rounded-lg" />
-                            <Skeleton className="h-24 w-full rounded-lg" />
-                            <Skeleton className="h-24 w-full rounded-lg" />
-                        </div>
-                    }
+                <section
+                    aria-labelledby="discussion-heading"
+                    className="mx-auto mt-14 max-w-[680px] border-t border-border px-5 pt-10 sm:px-8 sm:pt-12"
                 >
-                    <CommentsContainer postId={blog?.id} />
-                </Suspense>
-            </div>
-        </section>
+                    <h2 id="discussion-heading" className="mb-7 font-serif text-2xl font-semibold tracking-tight">
+                        Join the conversation
+                    </h2>
+                    <SignedIn>
+                        <PostComment postId={blog.id} slug={slug} />
+                    </SignedIn>
+                    <SignedOut>
+                        <div className="mb-8 border-y border-border py-5">
+                            <p className="text-sm text-muted-foreground">
+                                Sign in to share your thoughts on this story.
+                            </p>
+                        </div>
+                    </SignedOut>
+                    <Suspense
+                        fallback={
+                            <div className="mt-8 space-y-6">
+                                <Skeleton className="h-20 w-full" />
+                                <Skeleton className="h-20 w-full" />
+                            </div>
+                        }
+                    >
+                        <CommentsContainer postId={blog.id} />
+                    </Suspense>
+                </section>
+            </main>
         </>
     );
 };
@@ -290,7 +233,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         openGraph: {
             title: blog.title,
             description: blog.description,
-            url: `https://hritujeet-portfolio.vercel.app/blogs/${slug}`,
+            url: `${process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app"}/blogs/${slug}`,
             type: "article",
             publishedTime: blog.createdAt.toISOString(),
             authors: ["Hritujeet Sharma"],

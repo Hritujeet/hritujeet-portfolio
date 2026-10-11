@@ -1,35 +1,78 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+"use client";
+
+import Link from "next/link";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import DevlogContent from "@/components/DevlogContent";
+import { buttonVariants } from "@/components/ui/button";
 import { formatDate } from "@/utils/utils";
+import { ArrowUpRight } from "lucide-react";
 
 type DevlogsCardProps = {
+  id: string;
   title: string;
   content: string;
   createdAt: Date | string;
+  compact?: boolean;
 };
 
 export function DevlogsCard({
+  id,
   title,
   content,
   createdAt,
+  compact = false,
 }: DevlogsCardProps) {
+  const paragraphs = content
+    .replace(/^#{1,6}\s+.*$/gm, "")
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/[*_`]/g, "")
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+
   return (
-    <Card className="h-full border-border/70 bg-card shadow-sm transition-shadow hover:shadow-md">
-      <CardHeader>
-        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+    <article className="border-b border-border/70 py-8 first:pt-0 last:border-b-0">
+      <div className="max-w-3xl">
+        <p className="mb-3 text-xs font-medium text-muted-foreground">
           {formatDate(createdAt.toString())}
         </p>
-        <CardTitle className="line-clamp-2 text-lg font-semibold leading-snug tracking-tight">
+        <h2 className="font-serif text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
           {title}
-        </CardTitle>
-        <CardDescription className="line-clamp-5 whitespace-pre-line text-sm leading-relaxed">
-          {content}
-        </CardDescription>
-      </CardHeader>
-    </Card>
+        </h2>
+        <div className={`mt-4 space-y-4 text-sm leading-7 text-muted-foreground sm:text-base ${compact ? "line-clamp-3" : ""}`}>
+          {(compact ? paragraphs.slice(0, 1) : paragraphs).map((paragraph, index) => (
+            <p key={index}>{paragraph.replace(/^#+\s*/, "").replace(/\*\*/g, "")}</p>
+          ))}
+        </div>
+        <Dialog>
+          <DialogTrigger className="mt-4 inline-flex min-h-10 items-center rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            Read devlog <span className="ml-1" aria-hidden="true">→</span>
+          </DialogTrigger>
+          <DialogContent className="grid max-h-[88dvh] max-w-[min(720px,calc(100%-2rem))] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden border-border bg-background p-0 sm:max-w-[720px]">
+            <DialogHeader className="border-b border-border px-6 py-6 pr-14 sm:px-10">
+              <DialogDescription>{formatDate(createdAt.toString())} · Build log</DialogDescription>
+              <DialogTitle className="font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+                {title}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="overflow-y-auto px-6 py-6 sm:px-10 sm:py-8">
+              <DevlogContent content={content} />
+              <p className="border-t border-border pt-5 text-sm text-muted-foreground">
+                Hritujeet Sharma
+              </p>
+              <Link
+                href={`/devlogs/${id}`}
+                className={buttonVariants({
+                  variant: "link",
+                  className: "mt-3 h-auto px-0",
+                })}
+              >
+                Open as a page <ArrowUpRight className="size-4" />
+              </Link>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </article>
   );
 }

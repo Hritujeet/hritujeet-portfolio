@@ -1,69 +1,182 @@
 "use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+
+const THINGS = ["tools", "side projects", "weird experiments", "things that break"];
+
+const NOW = [
+  {
+    label: "building",
+    text: "Josephine, a companion that lives on my Windows machine",
+    href: "/josephine",
+  },
+  {
+    label: "writing",
+    text: "notes on what I learn while building",
+    href: "/blogs",
+  },
+  {
+    label: "logging",
+    text: "the messy middle of every project",
+    href: "/devlogs",
+  },
+];
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] as const },
+});
+
+const linkBase =
+  "group inline-flex items-center gap-1 transition-colors";
+const arrow =
+  "h-[1em] w-[1em] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5";
 
 const Hero = () => {
-    return (
-        <div className="relative w-full overflow-hidden rounded-3xl mt-6 sm:mt-12 mb-16 border bg-muted/10 shadow-sm">
-            <div className="absolute inset-0 z-0">
-                <Image
-                    src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Modern sleek background"
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-                    className="object-cover opacity-20 dark:opacity-30 mix-blend-overlay"
-                    priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/20" />
-            </div>
+  const [i, setI] = useState(0);
 
-            <div className="relative z-10 py-16 sm:py-24 space-y-6 flex flex-col justify-center items-center min-h-[50vh] max-w-4xl mx-auto text-center px-4">
-                <motion.div 
-                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 bg-background/50 backdrop-blur-md text-xs sm:text-sm font-medium text-foreground shadow-sm"
+  useEffect(() => {
+    const id = setInterval(() => setI((p) => (p + 1) % THINGS.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <section className="relative mt-[clamp(1rem,3vw,3rem)] mb-[clamp(2.5rem,6vw,4rem)] overflow-hidden rounded-[clamp(1.25rem,3vw,1.5rem)] border">
+      {/* dotted paper-like background */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-60 [background-image:radial-gradient(hsl(var(--foreground)/0.12)_1px,transparent_1px)] [background-size:clamp(16px,2vw,22px)_clamp(16px,2vw,22px)] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_75%)]"
+      />
+
+      {/* flex-wrap: columns sit side by side when there's room, stack when not */}
+      <div className="flex flex-wrap items-center gap-[clamp(1.5rem,5vw,3.5rem)] p-[clamp(1.25rem,5vw,4rem)] py-[clamp(2.5rem,8vw,5rem)]">
+        {/* left: the person */}
+        <div className="flex min-w-0 flex-[1_1_22rem] flex-col gap-[clamp(1rem,2.2vw,1.5rem)]">
+          <motion.p
+            {...fade(0)}
+            className="font-mono text-[clamp(0.75rem,1.2vw,0.875rem)] text-muted-foreground"
+          >
+            <span className="text-green-500">~</span> whoami
+          </motion.p>
+
+          <motion.h1
+            {...fade(0.08)}
+            className="text-[clamp(2.75rem,9vw,5.5rem)] font-bold leading-[0.95] tracking-tighter"
+          >
+            Hey, I&apos;m
+            <br />
+            Hritujeet.
+          </motion.h1>
+
+          <motion.div
+            {...fade(0.16)}
+            className="flex flex-wrap items-baseline gap-x-[0.4em] text-[clamp(1.125rem,2.6vw,1.75rem)] text-muted-foreground"
+          >
+            <span>I make</span>
+            {/* all words stacked invisibly so the box fits the longest one */}
+            <span className="inline-grid">
+              {THINGS.map((t) => (
+                <span
+                  key={t}
+                  aria-hidden
+                  className="invisible col-start-1 row-start-1 font-semibold"
                 >
-                    <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                    </span>
-                    Available for opportunities
-                </motion.div>
-                
-                <motion.h1 
-                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground"
+                  {t}
+                </span>
+              ))}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={THINGS[i]}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.25 }}
+                  className="col-start-1 row-start-1 font-semibold text-foreground underline decoration-wavy decoration-foreground/30 underline-offset-4"
                 >
-                    Hi, I'm Hritujeet. <br />
-                    <span className="text-muted-foreground font-medium tracking-tight">Full-Stack Engineer.</span>
-                </motion.h1>
-                
-                <motion.p 
-                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed"
-                >
-                    I build fast, accessible, and scalable digital experiences. With a focus on React, Node.js, and modern web architecture, I craft minimal and highly performant solutions.
-                </motion.p>
-                
-                <motion.div 
-                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                    className="flex flex-wrap gap-4 pt-4 justify-center"
-                >
-                    <Link href="/projects" className={`${buttonVariants({ variant: "default" })} rounded-full px-6`}>View Work</Link>
-                    <Link href="/contact" className={`${buttonVariants({ variant: "outline" })} rounded-full px-6 bg-background/50 backdrop-blur-sm`}>Get in touch</Link>
-                </motion.div>
-            </div>
+                  {THINGS[i]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+          </motion.div>
+
+          <motion.p
+            {...fade(0.24)}
+            className="max-w-[60ch] text-[clamp(0.95rem,1.6vw,1.0625rem)] leading-relaxed text-muted-foreground"
+          >
+            This is my little corner of the internet. No client work, no pitch,
+            just what I&apos;m learning, what I&apos;m building, and the things
+            that went wrong along the way.
+          </motion.p>
+
+          <motion.div
+            {...fade(0.32)}
+            className="flex flex-wrap gap-x-6 gap-y-2 pt-2 text-[clamp(0.875rem,1.4vw,1rem)] font-medium"
+          >
+            <Link
+              href="/blogs"
+              className={`${linkBase} underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground`}
+            >
+              read the blog
+              <ArrowUpRight className={arrow} />
+            </Link>
+            <Link
+              href="/devlogs"
+              className={`${linkBase} text-muted-foreground hover:text-foreground`}
+            >
+              follow the devlogs
+              <ArrowUpRight className={arrow} />
+            </Link>
+            <Link
+              href="/about"
+              className={`${linkBase} text-muted-foreground hover:text-foreground`}
+            >
+              more about me
+              <ArrowUpRight className={arrow} />
+            </Link>
+          </motion.div>
         </div>
-    );
+
+        {/* right: right-now card */}
+        <motion.aside
+          {...fade(0.4)}
+          className="min-w-0 flex-[1_1_16rem] rounded-2xl border bg-background/70 p-[clamp(1rem,2.5vw,1.5rem)] font-mono text-[clamp(0.8rem,1.3vw,0.875rem)] shadow-sm backdrop-blur"
+        >
+          <div className="mb-4 flex items-center justify-between gap-4 text-xs text-muted-foreground">
+            <span className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              right now
+            </span>
+            <span>now.txt</span>
+          </div>
+
+          <ul className="space-y-[clamp(0.75rem,2vw,1rem)]">
+            {NOW.map(({ label, text, href }) => (
+              <li key={label}>
+                <Link href={href} className="group block">
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                    {label}
+                  </span>
+                  <span className="mt-0.5 block font-sans text-foreground/90 transition-colors group-hover:text-foreground">
+                    {text}
+                    <span className="ml-1 inline-block opacity-0 transition-opacity group-hover:opacity-100">
+                      →
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.aside>
+      </div>
+    </section>
+  );
 };
 
 export default Hero;

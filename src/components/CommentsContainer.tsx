@@ -14,50 +14,42 @@ const CommentsContainer = async ({ postId }: { postId: string }) => {
 
     return (
         <div className="py-4">
-            <h3 className="text-xl font-bold tracking-tight mb-6">
-                Comments ({comments.length})
+            <h3 className="mb-5 text-sm font-semibold text-foreground">
+                Responses <span className="ml-1 font-normal text-muted-foreground">{comments.length}</span>
             </h3>
-
-            <div className="space-y-4">
-                {comments.length <= 0 && (
-                    <div className="text-center py-8 text-muted-foreground">
-                        No comments yet. Be the first to comment!
-                    </div>
-                )}
-            </div>
-            <div className="flex flex-col gap-4">
-                {comments.length > 0 &&
-                    comments.map((comment) => (
-                        <div
-                            key={comment.id}
-                            className="bg-muted/50 p-4 rounded-lg border"
-                        >
-                            <div className="flex gap-4">
-                                <Avatar className="h-10 w-10">
-                                    <AvatarImage src={comment.userImg} alt={comment.user} />
-                                    <AvatarFallback>{comment.user.charAt(0).toUpperCase()}</AvatarFallback>
-                                </Avatar>
-
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <span className="font-semibold text-sm">
-                                            {comment.user}
-                                        </span>
-                                        <span className="text-xs text-muted-foreground">
-                                            {formatDate(
-                                                comment.createdAt.toLocaleString()
-                                            )}
-                                        </span>
-                                    </div>
-
-                                    <p className="text-sm text-foreground/90 leading-relaxed">
-                                        {comment.content}
-                                    </p>
+            {comments.length === 0 ? (
+                <p className="border-y border-border py-6 text-sm text-muted-foreground">
+                    No responses yet. Start the conversation.
+                </p>
+            ) : (
+                <div className="divide-y divide-border">
+                    {comments.map((comment) => (
+                        <article key={comment.id} className="flex gap-3 py-5 first:pt-2">
+                            <Avatar className="h-9 w-9 shrink-0">
+                                <AvatarImage src={comment.userImg} alt={comment.user} />
+                                <AvatarFallback>
+                                    {comment.user.charAt(0).toUpperCase()}
+                                </AvatarFallback>
+                            </Avatar>
+                            <div className="min-w-0 flex-1">
+                                <div className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+                                    <span className="font-semibold text-foreground">{comment.user}</span>
+                                    <span className="text-muted-foreground" aria-hidden="true">·</span>
+                                    <time
+                                        className="text-xs text-muted-foreground"
+                                        dateTime={comment.createdAt.toISOString()}
+                                    >
+                                        {formatDate(comment.createdAt.toString())}
+                                    </time>
                                 </div>
+                                <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-foreground/90">
+                                    {comment.content}
+                                </p>
                             </div>
-                        </div>
+                        </article>
                     ))}
-            </div>
+                </div>
+            )}
         </div>
     );
 };
