@@ -4,6 +4,71 @@ import z from "zod";
 import { prisma } from "../utils/db";
 import { projectSchema } from "../utils/utils";
 import { revalidatePath } from "next/cache";
+import { currentUser } from "@clerk/nextjs/server";
+import { isAdminEmail } from "@/utils/admin";
+
+const devlogSchema = z.object({
+    title: z.string().trim().min(1).max(200),
+    content: z.string().trim().min(1),
+});
+
+const requireAdmin = async () => {
+    const user = await currentUser();
+
+    if (
+        !user ||
+        !user.emailAddresses.some(({ emailAddress }) =>
+            isAdminEmail(emailAddress, process.env.ADMIN)
+        )
+    ) {
+        throw new Error("Unauthorized");
+    }
+};
+
+export const addDevlog = async (data: z.infer<typeof devlogSchema>) => {
+    await requireAdmin();
+    const validatedData = devlogSchema.parse(data);
+
+    const devlog = await prisma.devlog.create({
+        data: validatedData,
+    });
+
+    revalidatePath("/dashboard");
+    revalidatePath("/dashboard/manageDevlogs");
+    revalidatePath("/devlogs");
+
+    return devlog.id;
+};
+
+export const updateDevlog = async (
+    id: string,
+    data: z.infer<typeof devlogSchema>
+) => {
+    await requireAdmin();
+    const validatedData = devlogSchema.parse(data);
+
+    await prisma.devlog.update({
+        where: { id },
+        data: validatedData,
+    });
+
+    revalidatePath("/dashboard/manageDevlogs");
+    revalidatePath("/devlogs");
+    revalidatePath(`/devlogs/${id}`);
+};
+
+export const deleteDevlog = async (id: string) => {
+    await requireAdmin();
+
+    await prisma.devlog.delete({
+        where: { id },
+    });
+
+    revalidatePath("/dashboard");
+    revalidatePath("/dashboard/manageDevlogs");
+    revalidatePath("/devlogs");
+    revalidatePath(`/devlogs/${id}`);
+};
 
 export const addProject = async (
     data: z.infer<typeof projectSchema>,

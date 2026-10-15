@@ -8,6 +8,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 const AdminHome = async () => {
     const blogs = await prisma.blogPost.count();
     const projects = await prisma.project.count();
+    const devlogs = await prisma.devlog.count();
     const comments = await prisma.comment.count();
 
     const clerk = await clerkClient();
@@ -25,6 +26,12 @@ const AdminHome = async () => {
             value: projects,
             icon: "🚀",
             color: "from-purple-500 to-purple-600",
+        },
+        {
+            title: "Total Devlogs",
+            value: devlogs,
+            icon: "📓",
+            color: "from-cyan-500 to-cyan-600",
         },
         {
             title: "Total Comments",
@@ -52,7 +59,7 @@ const AdminHome = async () => {
                 </div>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                     {stats.map((stat, index) => (
                         <Card key={index} className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                             <CardContent className="p-6">
@@ -80,7 +87,7 @@ const AdminHome = async () => {
                         <CardTitle className="text-2xl font-bold">Quick Actions</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                             <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addBlog">
                                 <span className="text-2xl mr-4">➕</span>
@@ -90,6 +97,11 @@ const AdminHome = async () => {
                             <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addProject">
                                 <span className="text-2xl mr-4">🎯</span>
                                 Add New Project
+                            </Link>
+
+                            <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addDevlog">
+                                <span className="text-2xl mr-4">📓</span>
+                                Add New Devlog
                             </Link>
                         </div>
                     </CardContent>

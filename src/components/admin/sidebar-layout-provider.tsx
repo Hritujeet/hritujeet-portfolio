@@ -10,8 +10,10 @@ import { buttonVariants } from "@/components/ui/button";
 const mainLinks = [
     { href: "/dashboard/addBlog", label: "Add Blog", icon: Plus },
     { href: "/dashboard/addProject", label: "Add Project", icon: Plus },
+    { href: "/dashboard/addDevlog", label: "Add Devlog", icon: Plus },
     { href: "/dashboard/manageBlogs", label: "Manage Blogs", icon: List },
     { href: "/dashboard/manageProjects", label: "Manage Projects", icon: LayoutList },
+    { href: "/dashboard/manageDevlogs", label: "Manage Devlogs", icon: List },
 ];
 
 const bottomLinks = [{ href: "/", label: "Go to Site", icon: Globe }];
