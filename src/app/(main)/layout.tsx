@@ -6,6 +6,8 @@ import NextTopLoader from "nextjs-toploader";
 import Query from "@/providers/Query";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { currentUser } from "@clerk/nextjs/server";
+import { isAdminEmail } from "@/utils/admin";
 
 export const metadata: Metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://hritujeet-portfolio.vercel.app"),
@@ -60,11 +62,18 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"], display: 'swap' });
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const user = await currentUser();
+    const isAdmin = Boolean(
+        user?.emailAddresses.some(({ emailAddress }) =>
+            isAdminEmail(emailAddress, process.env.ADMIN)
+        )
+    );
+
     return (
         <html lang="en" className="dark">
             <head>
@@ -73,7 +82,7 @@ export default function RootLayout({
             <body className={`${inter.className} bg-background text-foreground antialiased`}>
                 <ClerkProvider>
                     <Query>
-                        <Navbar />
+                        <Navbar isAdmin={isAdmin} />
                         <Toaster theme="dark"/>
                         <NextTopLoader
                             color="gold"

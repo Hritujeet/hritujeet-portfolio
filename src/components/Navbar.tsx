@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, Menu } from "lucide-react";
-import { SignedIn, SignedOut, SignOutButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignOutButton } from "@clerk/nextjs";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -26,14 +26,9 @@ const NAV_LINKS = [
 const isActivePath = (pathname: string, href: string) =>
   pathname === href || pathname.startsWith(`${href}/`);
 
-const Navbar = () => {
+const Navbar = ({ isAdmin }: { isAdmin: boolean }) => {
   const pathname = usePathname();
-  const { user } = useUser();
   const [open, setOpen] = useState(false);
-
-  const isAdmin =
-    !!user &&
-    user.primaryEmailAddress?.emailAddress === process.env.NEXT_PUBLIC_ADMIN;
 
   const close = () => setOpen(false);
 

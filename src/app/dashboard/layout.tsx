@@ -5,6 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Toaster } from "sonner";
+import { isAdminEmail } from "@/utils/admin";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -24,9 +25,9 @@ export default async function RootLayout({
 
     if (
         !user ||
-        user.emailAddresses.length <= 0 ||
-        !user.emailAddresses[0] ||
-        user.emailAddresses[0].emailAddress !== process.env.ADMIN
+        !user.emailAddresses.some(({ emailAddress }) =>
+            isAdminEmail(emailAddress, process.env.ADMIN)
+        )
     ) {
         return notFound();
     }
