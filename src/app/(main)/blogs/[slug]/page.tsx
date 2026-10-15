@@ -8,20 +8,43 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import oneDark from "react-syntax-highlighter/dist/esm/styles/prism/one-dark";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { prisma } from "@/utils/db";
+import type { BlogPost } from "@/client/prisma";
+import { withPrismaRetry } from "@/lib/prismaRetry";
 import { calculateReadingTime, formatDate } from "../../../../utils/utils";
 import CommentsContainer from "@/components/CommentsContainer";
 import PostComment from "@/components/PostComment";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const getBlogPost = cache((slug: string) =>
-    prisma.blogPost.findUnique({
-        where: { slug },
-    })
+    withPrismaRetry(() =>
+        prisma.blogPost.findUnique({
+            where: { slug },
+        })
+    )
 );
 
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const { slug } = await params;
-    const blog = await getBlogPost(slug);
+    let blog: BlogPost | null = null;
+    let dbError = false;
+
+    try {
+        blog = await getBlogPost(slug);
+    } catch (error) {
+        console.error("[blog/slug] Failed to fetch blog post after retries:", error);
+        dbError = true;
+    }
+
+    if (dbError) {
+        return (
+            <main className="mx-auto max-w-4xl px-5 py-24 text-center sm:px-8">
+                <p className="text-lg font-medium text-foreground">Article temporarily unavailable</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                    We&apos;re experiencing a database outage. Please try again in a few minutes.
+                </p>
+            </main>
+        );
+    }
 
     if (!blog?.title) {
         return notFound();

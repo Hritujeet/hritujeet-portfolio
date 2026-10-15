@@ -45,7 +45,7 @@ const staggerContainer = {
 };
 
 const Projects = ({ limit }: ProjectsProps) => {
-    const { data, isPending } = useProjects();
+    const { data, isPending, isError } = useProjects();
     const projects = limit ? data?.projects?.slice(0, limit) : data?.projects;
 
     return (
@@ -88,6 +88,12 @@ const Projects = ({ limit }: ProjectsProps) => {
                     </Link>
                 )}
             </div>
+
+            {isError && (
+                <div className="py-8 text-center text-sm text-muted-foreground">
+                    Projects are temporarily unavailable — check back in a moment.
+                </div>
+            )}
 
             {isPending && (
                 <div className={`grid gap-5 ${limit ? "sm:grid-cols-2" : "sm:grid-cols-2 xl:grid-cols-3"}`}>
