@@ -44,19 +44,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative mt-[clamp(1rem,3vw,3rem)] mb-[clamp(2.5rem,6vw,4rem)] overflow-hidden rounded-[clamp(1.25rem,3vw,1.75rem)] border">
-      {/* dotted background, fading out toward the bottom right */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 opacity-60 [background-image:radial-gradient(hsl(var(--foreground)/0.12)_1px,transparent_1px)] [background-size:clamp(16px,2vw,22px)_clamp(16px,2vw,22px)] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_75%)]"
-      />
-      {/* faint "bat-signal" glow, top right */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(circle_at_90%_0%,hsl(var(--foreground)/0.09),transparent_50%)]"
-      />
-
-      <div className="flex flex-wrap items-center gap-[clamp(1.5rem,5vw,3.5rem)] px-[clamp(1.25rem,5vw,4rem)] py-[clamp(2.5rem,8vw,5rem)]">
+    <section className="relative mt-8 mb-16 overflow-hidden border-y py-12 sm:py-16">
+      <div className="flex flex-wrap items-center gap-8">
         {/* left: the person */}
         <div className="flex min-w-0 flex-[1_1_22rem] flex-col gap-[clamp(1rem,2.2vw,1.5rem)]">
           <motion.p
@@ -145,12 +134,11 @@ const Hero = () => {
         {/* right: right-now card */}
         <motion.aside
           {...fade(0.4)}
-          className="min-w-0 flex-[1_1_16rem] rounded-2xl border bg-background/70 p-[clamp(1rem,2.5vw,1.5rem)] font-mono text-[clamp(0.8rem,1.3vw,0.875rem)] shadow-sm backdrop-blur"
+          className="min-w-0 flex-[1_1_16rem] rounded-lg border bg-card p-5 font-mono text-sm"
         >
           <div className="mb-4 flex items-center justify-between gap-4 text-xs text-muted-foreground">
             <span className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
               </span>
               right now

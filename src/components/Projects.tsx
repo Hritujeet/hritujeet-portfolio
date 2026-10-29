@@ -31,9 +31,9 @@ type ProjectsProps = {
 };
 
 const fadeInUp = {
-    initial: { opacity: 0, y: 20, filter: "blur(10px)" },
-    animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 0.2 },
 };
 
 const staggerContainer = {
@@ -61,8 +61,8 @@ const Projects = ({ limit }: ProjectsProps) => {
                         On the workbench
                     </p>
                     <motion.h2
-                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                         className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
@@ -70,8 +70,8 @@ const Projects = ({ limit }: ProjectsProps) => {
                         Things taking shape
                     </motion.h2>
                     <motion.p
-                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.1 }}
                         className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base"
@@ -136,7 +136,6 @@ const Projects = ({ limit }: ProjectsProps) => {
                         <motion.div
                             key={project.id}
                             variants={fadeInUp}
-                            whileHover={{ scale: 1.02 }}
                         >
                             <Dialog>
                                 <DialogTrigger
@@ -144,7 +143,7 @@ const Projects = ({ limit }: ProjectsProps) => {
                                         <button
                                             type="button"
                                             aria-label={`View details for ${project.title}`}
-                                            className="group flex h-full min-h-56 w-full flex-col justify-between gap-8 overflow-hidden rounded-2xl border border-border/70 bg-card p-6 text-left text-sm text-card-foreground shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-accent/20 hover:shadow-lg hover:shadow-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                                            className="group flex h-full min-h-56 w-full flex-col justify-between gap-8 overflow-hidden rounded-xl border bg-card p-6 text-left text-sm text-card-foreground transition-colors duration-200 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2"
                                         />
                                     }
                                 >
@@ -152,8 +151,8 @@ const Projects = ({ limit }: ProjectsProps) => {
                                         <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                                             Project {String(index + 1).padStart(2, "0")}
                                         </span>
-                                        <span className="flex size-9 items-center justify-center rounded-full border border-border/70 text-muted-foreground transition-all duration-300 group-hover:border-primary/30 group-hover:bg-primary group-hover:text-primary-foreground">
-                                            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                        <span className="flex size-9 items-center justify-center rounded-lg border text-muted-foreground transition-colors duration-200 group-hover:border-primary/40 group-hover:text-primary">
+                                            <ArrowUpRight className="size-4" />
                                         </span>
                                     </span>
                                     <span className="flex w-full flex-col gap-3">

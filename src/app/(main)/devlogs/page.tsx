@@ -19,7 +19,7 @@ const DevlogsPage = () => {
       </header>
 
       <div className="mx-auto max-w-4xl">
-        <DevlogsGrid />
+        <DevlogsGrid showContent={false} />
       </div>
     </main>
   );

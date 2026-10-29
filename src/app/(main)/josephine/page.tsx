@@ -261,15 +261,12 @@ export default function JosephinePage() {
   return (
     <main className="container mx-auto flex w-full max-w-7xl flex-col gap-20 px-5 pb-24 pt-10 sm:gap-28 sm:px-8 sm:pt-16 lg:px-12">
       {/* HERO */}
-      <section className="relative isolate overflow-hidden rounded-[2rem] border border-border/70 bg-gradient-to-br from-card via-card to-primary/10 p-6 shadow-sm sm:p-10 lg:p-16">
-        <div className="pointer-events-none absolute -right-24 -top-24 -z-10 size-80 rounded-full bg-primary/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-32 left-1/3 -z-10 size-72 rounded-full bg-sky-500/10 blur-3xl" />
+      <section className="relative isolate overflow-hidden rounded-xl border bg-card p-6 sm:p-10 lg:p-16">
 
         <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-16">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold tracking-wide text-primary">
               <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" />
                 <span className="relative inline-flex size-2 rounded-full bg-primary" />
               </span>
               PERSONAL PROJECT · IN DEVELOPMENT
@@ -277,7 +274,7 @@ export default function JosephinePage() {
 
             <h1 className="mt-6 text-5xl font-bold tracking-[-0.05em] text-foreground sm:text-6xl lg:text-7xl">
               Meet{" "}
-              <span className="bg-gradient-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent">
+              <span className="text-primary">
                 Josephine.
               </span>
             </h1>
@@ -303,7 +300,7 @@ export default function JosephinePage() {
             </div>
           </div>
 
-          <dl className="grid divide-y divide-border/70 rounded-2xl border border-border/70 bg-background/50 backdrop-blur-sm sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:grid-cols-1 lg:divide-x-0 lg:divide-y">
+          <dl className="grid divide-y rounded-xl border bg-background sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:grid-cols-1 lg:divide-x-0 lg:divide-y">
             {heroStats.map(([label, value]) => (
               <div key={label} className="flex flex-col gap-1 p-4">
                 <dt className="text-[10px] font-semibold tracking-[0.16em] text-primary">
@@ -329,7 +326,7 @@ export default function JosephinePage() {
           {principles.map(({ icon, title, description }, index) => (
             <article
               key={title}
-              className="group flex h-full flex-col rounded-2xl border border-border/70 bg-card/70 p-6 transition-all hover:-translate-y-1 hover:border-primary/30 hover:bg-card"
+              className="group flex h-full flex-col rounded-xl border bg-card p-6 transition-colors hover:border-primary/40"
             >
               <div className="mb-8 flex items-center justify-between">
                 <IconBadge icon={icon} />
@@ -356,7 +353,7 @@ export default function JosephinePage() {
           {capabilities.map(({ icon, label, title, description, tags }) => (
             <article
               key={label}
-              className="flex h-full flex-col rounded-2xl border border-border/70 bg-card/60 p-6 sm:p-8"
+              className="flex h-full flex-col rounded-xl border bg-card p-6 sm:p-8"
             >
               <div className="mb-6 flex items-center justify-between">
                 <IconBadge
@@ -389,7 +386,7 @@ export default function JosephinePage() {
       {/* ARCHITECTURE */}
       <section
         id="architecture"
-        className="scroll-mt-24 rounded-3xl border border-border/70 bg-muted/20 p-6 sm:p-8 lg:p-12"
+        className="scroll-mt-24 rounded-xl border bg-muted/20 p-6 sm:p-8 lg:p-12"
       >
         <SectionHeader
           eyebrow="Under the hood"
@@ -407,9 +404,9 @@ export default function JosephinePage() {
                   isLast ? "sm:col-span-2 lg:col-span-1" : ""
                 }`}
               >
-                <div className="w-full rounded-2xl border border-border/70 bg-card p-5">
+                <div className="w-full rounded-xl border bg-card p-5">
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <span className="flex size-10 items-center justify-center rounded-md bg-primary/10 text-primary">
                       <Icon className="size-4" />
                     </span>
                     <span className="font-mono text-xs text-muted-foreground/60">
@@ -471,7 +468,7 @@ export default function JosephinePage() {
           {modules.map(({ icon: Icon, title, detail, tech }) => (
             <article
               key={title}
-              className="flex h-full flex-col rounded-2xl border border-border/70 bg-card/60 p-6"
+              className="flex h-full flex-col rounded-xl border bg-card p-6"
             >
               <div className="mb-5 flex size-10 items-center justify-center rounded-xl bg-muted text-foreground">
                 <Icon className="size-4" />
@@ -490,7 +487,7 @@ export default function JosephinePage() {
 
       {/* HARDWARE + STACK */}
       <section className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr] lg:gap-6">
-        <div className="flex flex-col rounded-3xl border border-border/70 bg-gradient-to-br from-primary/10 via-card to-card p-6 sm:p-8">
+        <div className="flex flex-col rounded-xl border bg-card p-6 sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
             Made for modest hardware
           </p>
@@ -510,7 +507,7 @@ export default function JosephinePage() {
             ].map(({ icon: Icon, label }) => (
               <span
                 key={label}
-                className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-2 text-xs font-medium"
+                className="inline-flex items-center gap-2 rounded-md border bg-background px-3 py-2 text-xs font-medium"
               >
                 <Icon className="size-3.5 text-primary" />
                 {label}
@@ -519,7 +516,7 @@ export default function JosephinePage() {
           </div>
         </div>
 
-        <div className="flex flex-col rounded-3xl border border-border/70 bg-card/60 p-6 sm:p-8">
+        <div className="flex flex-col rounded-xl border bg-card p-6 sm:p-8">
           <div className="mb-6 flex items-center gap-3">
             <Layers3 className="size-5 text-primary" />
             <h2 className="text-xl font-semibold tracking-tight">
@@ -530,7 +527,7 @@ export default function JosephinePage() {
             {stack.map((item) => (
               <span
                 key={item}
-                className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-xs font-medium text-foreground/80 sm:text-sm"
+                className="rounded-md border bg-background px-3 py-1.5 text-xs font-medium text-foreground/80 sm:text-sm"
               >
                 {item}
               </span>
@@ -560,10 +557,10 @@ export default function JosephinePage() {
             return (
               <li
                 key={number}
-                className={`flex h-full flex-col rounded-2xl border p-5 ${
+                className={`flex h-full flex-col rounded-xl border p-5 ${
                   isCurrent
                     ? "border-primary/30 bg-primary/5"
-                    : "border-border/70 bg-card/50"
+                    : "border-border bg-card"
                 } ${isLast ? "md:col-span-2 xl:col-span-1" : ""}`}
               >
                 <div className="mb-7 flex items-center justify-between">
@@ -606,7 +603,7 @@ export default function JosephinePage() {
       </section>
 
       {/* CTA */}
-      <section className="relative isolate overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 via-card to-card px-6 py-12 text-center sm:px-10 sm:py-16">
+      <section className="relative isolate overflow-hidden rounded-xl border bg-muted/30 px-6 py-12 text-center sm:px-10 sm:py-16">
         <Sparkles className="mx-auto mb-4 size-6 text-primary" />
         <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
           Less assistant theater. More getting things done.

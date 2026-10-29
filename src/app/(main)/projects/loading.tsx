@@ -18,11 +18,11 @@ export default function Loading() {
                 {[1, 2, 3, 4, 5, 6].map((i) => (
                     <div
                         key={i}
-                        className="flex min-h-56 flex-col justify-between gap-8 rounded-2xl border border-border/70 bg-card p-6"
+                        className="flex min-h-56 flex-col justify-between gap-8 rounded-xl border bg-card p-6"
                     >
                         <div className="flex items-start justify-between">
                             <Skeleton className="h-3 w-20" />
-                            <Skeleton className="size-9 rounded-full" />
+                            <Skeleton className="size-9 rounded-lg" />
                         </div>
                         <div className="space-y-3">
                             <Skeleton className="h-6 w-3/4" />

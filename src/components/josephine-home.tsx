@@ -46,8 +46,7 @@ const JosephineHome = () => {
       variants={containerVariants}
       className="my-24"
     >
-      <motion.div variants={itemVariants} className="relative isolate overflow-hidden rounded-3xl border border-border/70 bg-card p-5 shadow-sm sm:p-8 lg:p-10">
-        <div className="pointer-events-none absolute -right-20 -top-24 -z-10 size-64 rounded-full bg-primary/10 blur-3xl" />
+      <motion.div variants={itemVariants} className="relative isolate overflow-hidden rounded-xl border bg-card p-5 sm:p-8 lg:p-10">
         <div className="mb-8 max-w-2xl sm:mb-10">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-primary">
             Flagship Passion Project
@@ -69,13 +68,12 @@ const JosephineHome = () => {
             <motion.article
               key={title}
               variants={itemVariants}
-              whileHover={{ y: -4 }}
-              className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-background/70 p-5 shadow-sm transition-all duration-300 hover:border-primary/30 hover:bg-background hover:shadow-lg hover:shadow-primary/5 sm:p-6 ${
+              className={`group relative flex h-full flex-col overflow-hidden rounded-xl border bg-background p-5 transition-colors duration-200 hover:border-primary/40 sm:p-6 ${
                 index === 2 ? "sm:col-span-2 lg:col-span-1" : ""
               }`}
             >
               <div className="mb-6 flex items-center justify-between">
-                <span className="flex size-11 items-center justify-center rounded-xl border border-primary/15 bg-primary/10 text-primary">
+                <span className="flex size-11 items-center justify-center rounded-md border bg-primary/10 text-primary">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 <span className="font-mono text-xs font-medium tracking-widest text-muted-foreground/60">

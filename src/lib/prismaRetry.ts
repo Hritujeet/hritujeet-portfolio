@@ -40,9 +40,9 @@ export async function withPrismaRetry<T>(
         throw err;
       }
 
-      const delay = baseDelayMs * Math.pow(2, attempt - 1); // 400 ? 800 ? 1600 ms
+      const delay = baseDelayMs * Math.pow(2, attempt - 1); // 400 -> 800 -> 1600 ms
       console.warn(
-        `[PrismaRetry] Attempt ${attempt}/${maxAttempts} failed — retrying in ${delay}ms. Code: ${code || "n/a"}`
+        `[PrismaRetry] Attempt ${attempt}/${maxAttempts} failed; retrying in ${delay}ms. Code: ${code || "n/a"}`
       );
       await new Promise((resolve) => setTimeout(resolve, delay));
     }

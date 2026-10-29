@@ -1,29 +1,30 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 
-const loading = () => {
+const Loading = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32 min-h-[50vh] py-16">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Card key={i} className="flex flex-col h-full overflow-hidden">
-                    <Skeleton className="h-48 w-full rounded-none" />
-                    <CardHeader>
-                        <Skeleton className="h-6 w-3/4 mb-2" />
-                        <Skeleton className="h-6 w-1/2" />
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                        <Skeleton className="h-4 w-full" />
-                        <Skeleton className="h-4 w-full" />
-                        <Skeleton className="h-4 w-4/5" />
-                    </CardContent>
-                    <CardFooter className="mt-auto justify-between border-t border-border/50 pt-4">
-                        <Skeleton className="h-4 w-24" />
-                        <Skeleton className="h-9 w-24" />
-                    </CardFooter>
-                </Card>
-            ))}
-        </div>
+        <main className="mx-auto min-h-[60vh] max-w-5xl px-5 pb-24 sm:px-8">
+            <header className="mx-auto mb-10 mt-12 max-w-3xl border-b border-border pb-7 sm:mb-14 sm:mt-16">
+                <Skeleton className="mb-3 h-4 w-20" />
+                <Skeleton className="h-10 w-full max-w-lg sm:h-12" />
+                <Skeleton className="mt-4 h-5 w-full max-w-xl" />
+            </header>
+
+            <div className="mx-auto max-w-3xl divide-y divide-border/70">
+                {[1, 2, 3, 4, 5].map((i) => (
+                    <article key={i} className="grid grid-cols-[minmax(0,1fr)_6rem] items-center gap-5 py-7 first:pt-0 sm:grid-cols-[minmax(0,1fr)_11rem] sm:gap-8 sm:py-8">
+                        <div className="space-y-3">
+                            <Skeleton className="h-4 w-40" />
+                            <Skeleton className="h-6 w-4/5 sm:h-7" />
+                            <Skeleton className="h-4 w-full" />
+                            <Skeleton className="h-4 w-3/4" />
+                            <Skeleton className="mt-4 h-4 w-24" />
+                        </div>
+                        <Skeleton className="aspect-square w-full rounded-sm" />
+                    </article>
+                ))}
+            </div>
+        </main>
     );
 };
 
-export default loading;
+export default Loading;

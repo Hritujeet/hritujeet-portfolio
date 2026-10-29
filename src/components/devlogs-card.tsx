@@ -13,6 +13,7 @@ type DevlogsCardProps = {
   content: string;
   createdAt: Date | string;
   compact?: boolean;
+  showContent?: boolean;
 };
 
 export function DevlogsCard({
@@ -21,6 +22,7 @@ export function DevlogsCard({
   content,
   createdAt,
   compact = false,
+  showContent = true,
 }: DevlogsCardProps) {
   const paragraphs = content
     .replace(/^#{1,6}\s+.*$/gm, "")
@@ -36,22 +38,24 @@ export function DevlogsCard({
         <p className="mb-3 text-xs font-medium text-muted-foreground">
           {formatDate(createdAt.toString())}
         </p>
-        <h2 className="font-serif text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
+        <h2 className="text-2xl font-semibold leading-tight tracking-tight text-foreground sm:text-3xl">
           {title}
         </h2>
-        <div className={`mt-4 space-y-4 text-sm leading-7 text-muted-foreground sm:text-base ${compact ? "line-clamp-3" : ""}`}>
-          {(compact ? paragraphs.slice(0, 1) : paragraphs).map((paragraph, index) => (
-            <p key={index}>{paragraph.replace(/^#+\s*/, "").replace(/\*\*/g, "")}</p>
-          ))}
-        </div>
+        {showContent && (
+          <div className={`mt-4 space-y-4 text-sm leading-7 text-muted-foreground sm:text-base ${compact ? "line-clamp-3" : ""}`}>
+            {(compact ? paragraphs.slice(0, 1) : paragraphs).map((paragraph, index) => (
+              <p key={index}>{paragraph.replace(/^#+\s*/, "").replace(/\*\*/g, "")}</p>
+            ))}
+          </div>
+        )}
         <Dialog>
-          <DialogTrigger className="mt-4 inline-flex min-h-10 items-center rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <DialogTrigger className={`${showContent ? "mt-4" : "mt-3"} inline-flex min-h-10 items-center rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30`}>
             Read devlog <span className="ml-1" aria-hidden="true">→</span>
           </DialogTrigger>
           <DialogContent className="grid max-h-[88dvh] max-w-[min(720px,calc(100%-2rem))] grid-rows-[auto_minmax(0,1fr)] gap-0 overflow-hidden border-border bg-background p-0 sm:max-w-[720px]">
             <DialogHeader className="border-b border-border px-6 py-6 pr-14 sm:px-10">
               <DialogDescription>{formatDate(createdAt.toString())} · Build log</DialogDescription>
-              <DialogTitle className="font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+              <DialogTitle className="text-2xl font-semibold leading-tight sm:text-3xl">
                 {title}
               </DialogTitle>
             </DialogHeader>

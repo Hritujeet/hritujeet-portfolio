@@ -51,7 +51,7 @@ const TechSection = ({ contactHref = "#contact" }: TechSectionProps) => {
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
             variants={staggerVariants}
-            className="rounded-2xl border border-border bg-card p-5 sm:rounded-3xl sm:p-8 lg:p-12"
+            className="rounded-lg border bg-card p-5 sm:p-8 lg:p-12"
         >
             <motion.div variants={staggerVariants} className="grid items-center gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
                 {/* Copy: first on mobile, right column on desktop */}
@@ -102,7 +102,7 @@ const TechSection = ({ contactHref = "#contact" }: TechSectionProps) => {
                             <motion.li
                                 key={item}
                                 variants={revealVariants}
-                                className="rounded-full border border-border bg-background px-3 py-1 text-[13px] text-foreground/80 hover:border-primary/40 hover:text-foreground motion-safe:transition-colors"
+                                className="rounded-md border border-border bg-background px-3 py-1 text-[13px] text-foreground/80 hover:border-primary hover:text-foreground motion-safe:transition-colors"
                             >
                                 {item}
                             </motion.li>

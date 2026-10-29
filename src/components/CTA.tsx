@@ -13,17 +13,16 @@ const CTA = () => {
             whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full rounded-[2.5rem] border bg-gradient-to-b from-muted/50 to-muted/20 p-8 md:p-16 my-16 flex flex-col items-center text-center overflow-hidden relative shadow-sm"
+            className="my-16 flex w-full flex-col items-center overflow-hidden rounded-lg border bg-muted/30 p-8 text-center md:p-16"
         >
-            <div className="absolute inset-0 bg-grid-white/[0.02] [mask-image:linear-gradient(0deg,transparent,black)] pointer-events-none" />
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4 z-10">
+            <h2 className="z-10 mb-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">
                 Have a thought to share?
             </h2>
-            <p className="text-base md:text-lg text-muted-foreground max-w-2xl mb-8 z-10 leading-relaxed">
+            <p className="z-10 mb-8 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
                 If something here sparked an idea, raised a question, or just made you want to say hello, I&apos;d be glad to hear from you.
             </p>
             <div className="flex gap-4 z-10">
-                <Link href="/contact" className={`${buttonVariants({ variant: "default", size: "lg" })} rounded-full px-8 h-14 text-base group flex items-center shadow-md`}>
+                <Link href="/contact" className={`${buttonVariants({ variant: "default", size: "lg" })} px-8 text-base`}>
                     Send a message 
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>

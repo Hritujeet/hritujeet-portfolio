@@ -5,9 +5,14 @@ import { withPrismaRetry } from "@/lib/prismaRetry";
 type DevlogsGridProps = {
   limit?: number;
   compact?: boolean;
+  showContent?: boolean;
 };
 
-export default async function DevlogsGrid({ limit, compact = false }: DevlogsGridProps) {
+export default async function DevlogsGrid({
+  limit,
+  compact = false,
+  showContent = true,
+}: DevlogsGridProps) {
   let devlogs: Array<{ id: string; title: string; content: string; createdAt: Date }> = [];
   let dbError = false;
 
@@ -60,6 +65,7 @@ export default async function DevlogsGrid({ limit, compact = false }: DevlogsGri
           content={devlog.content}
           createdAt={devlog.createdAt}
           compact={compact}
+          showContent={showContent}
         />
       ))}
     </div>

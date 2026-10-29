@@ -41,7 +41,7 @@ const BlogCard = ({ title, slug, img, description, createdAt }: BlogCardProps) =
                     alt=""
                     fill
                     sizes="(max-width: 640px) 96px, 176px"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover"
                 />
             </div>
         </Link>

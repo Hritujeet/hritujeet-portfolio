@@ -3,7 +3,8 @@ import { prisma } from "../utils/db";
 import { clerkClient } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { BookOpen, FolderKanban, MessageSquare, NotebookPen, Plus, Users } from "lucide-react";
 
 const AdminHome = async () => {
     const blogs = await prisma.blogPost.count();
@@ -18,32 +19,27 @@ const AdminHome = async () => {
         {
             title: "Total Blogs",
             value: blogs,
-            icon: "📝",
-            color: "from-blue-500 to-blue-600",
+            icon: BookOpen,
         },
         {
             title: "Total Projects",
             value: projects,
-            icon: "🚀",
-            color: "from-purple-500 to-purple-600",
+            icon: FolderKanban,
         },
         {
             title: "Total Devlogs",
             value: devlogs,
-            icon: "📓",
-            color: "from-cyan-500 to-cyan-600",
+            icon: NotebookPen,
         },
         {
             title: "Total Comments",
             value: comments,
-            icon: "💬",
-            color: "from-green-500 to-green-600",
+            icon: MessageSquare,
         },
         {
             title: "Total Users",
             value: users,
-            icon: "👥",
-            color: "from-orange-500 to-orange-600",
+            icon: Users,
         },
     ];
 
@@ -61,13 +57,13 @@ const AdminHome = async () => {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                     {stats.map((stat, index) => (
-                        <Card key={index} className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                        <Card key={index} className="transition-colors hover:border-primary/40">
                             <CardContent className="p-6">
                                 <div className="flex items-center justify-between mb-4">
                                     <div
-                                        className={`text-4xl bg-gradient-to-br ${stat.color} w-14 h-14 rounded-lg flex items-center justify-center shadow-md`}
+                                        className="flex size-12 items-center justify-center rounded-md border bg-muted text-primary"
                                     >
-                                        {stat.icon}
+                                        <stat.icon className="size-5" aria-hidden="true" />
                                     </div>
                                 </div>
                                 <h3 className="text-sm font-medium text-muted-foreground mb-1">
@@ -90,17 +86,17 @@ const AdminHome = async () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                             <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addBlog">
-                                <span className="text-2xl mr-4">➕</span>
+                                <Plus className="mr-4 size-5" />
                                 Add New Blog
                             </Link>
 
                             <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addProject">
-                                <span className="text-2xl mr-4">🎯</span>
+                                <Plus className="mr-4 size-5" />
                                 Add New Project
                             </Link>
 
                             <Link className={buttonVariants({ variant: "outline" })} href="/dashboard/addDevlog">
-                                <span className="text-2xl mr-4">📓</span>
+                                <Plus className="mr-4 size-5" />
                                 Add New Devlog
                             </Link>
                         </div>
@@ -113,7 +109,7 @@ const AdminHome = async () => {
                     </CardHeader>
                     <CardContent>
                         <div className="text-muted-foreground text-center py-8">
-                            <span className="text-4xl mb-4 block">📊</span>
+                            <NotebookPen className="mx-auto mb-4 size-8" />
                             <p>Coming soon...</p>
                         </div>
                     </CardContent>

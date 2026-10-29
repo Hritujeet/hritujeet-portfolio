@@ -9,9 +9,9 @@ const ResumePage = () => {
         <div className="min-h-screen bg-background text-foreground font-sans py-16">
             <div className="container mx-auto px-6 sm:px-12 max-w-5xl">
                 <motion.div 
-                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2 }}
                     className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6"
                 >
                     <div>
@@ -41,10 +41,10 @@ const ResumePage = () => {
                 </motion.div>
 
                 <motion.div 
-                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full h-[75vh] rounded-2xl border bg-card overflow-hidden shadow-sm"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.2, delay: 0.1 }}
+                    className="h-[75vh] w-full overflow-hidden rounded-lg border bg-card"
                 >
                     <iframe 
                         src="/Professional%20Profile.pdf#toolbar=0" 

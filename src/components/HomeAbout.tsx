@@ -47,10 +47,10 @@ const HomeAbout = () => (
             </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <motion.div
                 variants={itemVariants}
-                className="group relative overflow-hidden rounded-2xl border border-border/70 bg-card p-6 shadow-sm transition-colors hover:bg-accent/30 sm:p-7 md:col-span-2"
+                className="group relative overflow-hidden rounded-xl border bg-card p-6 transition-colors hover:border-primary/40 sm:p-7"
             >
                 <div className="mb-8 flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Code2 className="size-5" />
@@ -67,7 +67,7 @@ const HomeAbout = () => (
 
             <motion.div
                 variants={itemVariants}
-                className="relative overflow-hidden rounded-2xl border border-border/70 bg-muted/40 p-6 transition-colors hover:bg-muted/70 sm:p-7 md:col-span-2"
+                className="relative overflow-hidden rounded-xl border bg-muted/40 p-6 transition-colors hover:border-primary/40 sm:p-7"
             >
                 <div className="mb-8 flex size-10 items-center justify-center rounded-xl bg-background text-foreground shadow-sm">
                     <Atom className="size-5" />
@@ -83,7 +83,7 @@ const HomeAbout = () => (
 
             <motion.div
                 variants={itemVariants}
-                className="relative self-start overflow-hidden rounded-2xl border border-border/70 bg-card p-4 shadow-sm transition-colors hover:bg-accent/20 sm:p-5 col-span-full"
+                className="relative self-start overflow-hidden rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 sm:p-5 md:col-span-2"
             >
                 <div className="relative flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
