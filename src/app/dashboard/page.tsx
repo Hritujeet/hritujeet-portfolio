@@ -1,66 +1,48 @@
-import AdminHome from "@/components/AdminHome";
-import React, { Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import Link from "next/link"
+import { clerkClient } from "@clerk/nextjs/server"
+import { FolderPlus, NotebookPen, PenLine } from "lucide-react"
+import { prisma } from "@/utils/db"
+import { SectionCards } from "@/components/section-cards"
+import { buttonVariants } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-const AdminDashboard = () => {
-    return (
-        <div>
-            <Suspense
-                fallback={
-                    <div className="min-h-screen bg-background p-6">
-                        <div className="max-w-7xl mx-auto space-y-8">
-                            {/* Header Skeleton */}
-                            <div className="mb-8">
-                                <Skeleton className="h-10 w-48 mb-2" />
-                                <Skeleton className="h-4 w-72" />
-                            </div>
+export default async function DashboardPage() {
+  const [blogs, projects, devlogs, comments] = await Promise.all([
+    prisma.blogPost.count(),
+    prisma.project.count(),
+    prisma.devlog.count(),
+    prisma.comment.count(),
+  ])
+  const users = await (await clerkClient()).users.getCount()
 
-                            {/* Stats Grid Skeleton */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <Card key={i}>
-                                        <CardContent className="p-6">
-                                            <div className="flex items-center justify-between mb-4">
-                                                <Skeleton className="w-14 h-14 rounded-lg" />
-                                            </div>
-                                            <Skeleton className="h-4 w-24 mb-2" />
-                                            <Skeleton className="h-10 w-16" />
-                                        </CardContent>
-                                    </Card>
-                                ))}
-                            </div>
+  const actions = [
+    { href: "/dashboard/addBlog", label: "Add blog", icon: PenLine },
+    { href: "/dashboard/addProject", label: "Add project", icon: FolderPlus },
+    { href: "/dashboard/addDevlog", label: "Add devlog", icon: NotebookPen },
+  ]
 
-                            {/* Quick Actions Skeleton */}
-                            <Card>
-                                <CardContent className="p-8">
-                                    <Skeleton className="h-8 w-40 mb-6" />
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <Skeleton className="h-16 w-full rounded-lg" />
-                                        <Skeleton className="h-16 w-full rounded-lg" />
-                                    </div>
-                                </CardContent>
-                            </Card>
-
-                            {/* Recent Activity Skeleton */}
-                            <Card>
-                                <CardContent className="p-8">
-                                    <Skeleton className="h-8 w-48 mb-4" />
-                                    <div className="space-y-3">
-                                        <Skeleton className="h-12 w-full" />
-                                        <Skeleton className="h-12 w-full" />
-                                        <Skeleton className="h-12 w-full" />
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    </div>
-                }
-            >
-                <AdminHome />
-            </Suspense>
-        </div>
-    );
-};
-
-export default AdminDashboard;
+  return (
+    <div className="flex flex-1 flex-col gap-6">
+      <div className="px-4 lg:px-6">
+        <p className="text-sm text-muted-foreground">Content overview</p>
+        <h1 className="mt-1 text-2xl font-semibold tracking-tight">Welcome back</h1>
+      </div>
+      <SectionCards stats={{ blogs, projects, devlogs, comments, users }} />
+      <div className="px-4 lg:px-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick actions</CardTitle>
+          </CardHeader>
+          <CardContent className="grid gap-3 sm:grid-cols-3">
+            {actions.map(({ href, label, icon: Icon }) => (
+              <Link key={href} href={href} className={buttonVariants({ variant: "outline", className: "justify-start" })}>
+                <Icon className="mr-2 size-4" />
+                {label}
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}

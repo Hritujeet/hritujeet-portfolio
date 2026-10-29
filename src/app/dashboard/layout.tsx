@@ -37,7 +37,15 @@ export default async function RootLayout({
                 <ClerkProvider>
                     <Query>
                         <Toaster theme="dark" />
-                        <AdminLayout>{children}</AdminLayout>
+                        <AdminLayout
+                            user={{
+                                name: user.firstName || user.username || "Admin",
+                                email: user.primaryEmailAddress?.emailAddress || "",
+                                avatar: user.imageUrl,
+                            }}
+                        >
+                            {children}
+                        </AdminLayout>
                     </Query>
                 </ClerkProvider>
             </body>
