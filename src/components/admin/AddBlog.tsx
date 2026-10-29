@@ -320,8 +320,8 @@ const AddBlog = () => {
     };
 
     return (
-        <div className="mx-auto max-w-5xl px-4 py-12">
-            <div className="mb-10 flex items-center justify-between">
+        <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+            <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                         Create New Story ✍️
@@ -337,7 +337,7 @@ const AddBlog = () => {
             </div>
 
             <form onSubmit={handleSubmit(submitHandler)} className="space-y-8" aria-disabled={mutation.isPending}>
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)]">
                     <div className="space-y-2">
                         <div className="flex items-center justify-between">
                             <Label htmlFor="title" className="text-foreground">
@@ -369,7 +369,7 @@ const AddBlog = () => {
                                 rows={6}
                                 placeholder="A quick summary of your post..."
                                 disabled={mutation.isPending}
-                                className="bg-card resize-none"
+                                className="min-h-36 resize-none bg-card"
                             />
                             {errors.description && <Alert variant="error">{errors.description.message}</Alert>}
                         </div>
@@ -405,7 +405,7 @@ const AddBlog = () => {
                     {errors.content && <Alert variant="error">{errors.content.message}</Alert>}
                 </div>
 
-                <div className="flex items-center justify-end gap-3 pt-2">
+                <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:items-center sm:justify-end">
                     <Button type="button" variant="ghost" onClick={() => reset()} disabled={mutation.isPending || isUploadingImage}>
                         Reset
                     </Button>

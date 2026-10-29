@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 
 import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
@@ -15,7 +16,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { BookOpenIcon, CommandIcon, FolderIcon, LayoutDashboardIcon, ListIcon, NotebookPenIcon, PlusIcon } from "lucide-react"
+import { BookOpenIcon, CommandIcon, FolderIcon, LayoutDashboardIcon, NotebookPenIcon, PlusIcon } from "lucide-react"
 
 const data = {
   navMain: [
@@ -69,7 +70,7 @@ export function AppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:p-1.5!" render={<a href="/dashboard" />}>
+            <SidebarMenuButton className="data-[slot=sidebar-menu-button]:p-1.5!" render={<Link href="/dashboard" />}>
               <CommandIcon className="size-5!" />
               <span className="text-base font-semibold">Hritujeet</span>
             </SidebarMenuButton>

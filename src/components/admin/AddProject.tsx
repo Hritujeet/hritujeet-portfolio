@@ -72,12 +72,12 @@ const AddProject = () => {
         }
     };
     return (
-        <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 md:py-10 max-w-4xl mx-auto">
-            <h1 className="text-4xl mb-10 font-bold tracking-tight leading-tight text-foreground">
+        <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+            <h1 className="mb-8 text-3xl font-bold leading-tight tracking-tight text-foreground sm:mb-10 sm:text-4xl">
                 Add Project 👨‍💻
             </h1>
             <Card className="my-4 pt-6">
-                <CardContent>
+                <CardContent className="p-6 sm:p-8 lg:p-10">
                     <form
                         onSubmit={handleSubmit(myHandler)}
                         className="space-y-6"
@@ -157,7 +157,7 @@ const AddProject = () => {
                                     )}
                                 </div>
 
-                                <div className="flex w-full gap-3 items-center">
+                                <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
                                     <Input
                                         type="text"
                                         placeholder="Enter technology name"

@@ -31,15 +31,15 @@ export default function AddDevlog() {
     };
 
     return (
-        <div className="mx-auto max-w-4xl space-y-6 py-8">
-            <div>
-                <h1 className="text-3xl font-bold tracking-tight">Add Devlog</h1>
+        <div className="mx-auto w-full max-w-5xl space-y-6 px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+            <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Add Devlog</h1>
                 <p className="mt-1 text-sm text-muted-foreground">
                     Write a progress update using Markdown.
                 </p>
             </div>
             <Card>
-                <CardContent className="pt-6">
+                <CardContent className="p-6 sm:p-8 lg:p-10">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-2">
                             <Label htmlFor="devlog-title">Title</Label>
@@ -60,7 +60,7 @@ export default function AddDevlog() {
                                     <TabsTrigger value="write">Write</TabsTrigger>
                                     <TabsTrigger value="preview">Preview</TabsTrigger>
                                 </TabsList>
-                                <TabsContent value="write">
+                                <TabsContent value="write" className="mt-4">
                                     <Textarea
                                         id="devlog-content"
                                         value={content}
@@ -71,7 +71,7 @@ export default function AddDevlog() {
                                         className="min-h-[360px] font-mono"
                                     />
                                 </TabsContent>
-                                <TabsContent value="preview">
+                                <TabsContent value="preview" className="mt-4">
                                     <article className="prose prose-sm min-h-[360px] max-w-none rounded-md border p-4 dark:prose-invert">
                                         {content ? (
                                             <ReactMarkdown>{content}</ReactMarkdown>
